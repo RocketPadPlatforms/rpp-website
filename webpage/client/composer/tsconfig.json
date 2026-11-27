@@ -6,7 +6,7 @@
   "compilerOptions": {
     "target": "ES2023",
     // Array.prototype.toReversed() in ui/Canvas.tsx needs the ES2023 lib.
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "lib": ["ES2023", "DOM"],
 
     "module": "preserve",
     "moduleResolution": "bundler",
@@ -28,9 +28,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "__fixtures__"]
+  "include": ["**/*.ts", "**/*.tsx"]
 }

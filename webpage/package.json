@@ -3,10 +3,6 @@
   "version": "0.2.6",
   "private": true,
   "description": "The Rocket Pad Platforms website",
-  "main": "dist/app.js",
-  "engines": {
-    "node": ">=24"
-  },
   "scripts": {
     "clean": "rm -rf dist",
     "tsc": "tsc",
@@ -17,23 +13,16 @@
     "build:composer": "vite build",
     "build": "run-s clean tsc build:composer copy-assets",
     "start": "node dist/app.js",
-    "prod:start": "run-s build start",
     "dev": "run-s tsc build:composer && run-p dev:tsc dev:composer dev:start",
-    "dev:debug": "run-s tsc build:composer && run-p dev:tsc dev:composer dev:start:debug",
     "dev:tsc": "tsc --watch --preserveWatchOutput",
     "dev:composer": "vite build --watch",
     "dev:start": "APP_ROOT=. node --watch --env-file-if-exists=.env dist/app.js",
-    "dev:start:debug": "APP_ROOT=. node --watch --env-file-if-exists=.env --inspect=0.0.0.0:9229 dist/app.js",
     "lint": "oxlint src tools client",
-    "lint:fix": "oxlint src tools client --fix",
     "format": "cd .. && prettier --write .",
     "format:check": "cd .. && prettier --check .",
     "pretest": "npm run build:composer",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "vitest run"
   },
-  "keywords": [],
-  "author": "",
   "license": "UNLICENSED",
   "dependencies": {
     "compression": "^1.8.2",

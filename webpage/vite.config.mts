@@ -5,15 +5,10 @@ import tailwindcss from "@tailwindcss/vite";
 // default in a future major, will not resolve an extensionless specifier here.
 import { loadPlatform } from "./client/composer/data/loader.ts";
 
-// Vite bundles this config together with its local imports before running it,
-// using bundler-style resolution - which is why importing the loader directly
-// works here despite its extensionless relative imports.
-
 // The platform catalog is declarative YAML under platform/. It is baked into a
-// single static JSON at build time, exactly as the old Bun build.ts did, so the
-// browser never parses YAML and the server needs no route behind it. A
-// malformed catalog now fails the build rather than the page: loadPlatform
-// throws ValidationError.
+// single static JSON at build time, so the browser never parses YAML and the
+// server needs no route behind it. A malformed catalog fails the build rather
+// than the page: loadPlatform throws ValidationError.
 function bakePlatform(): Plugin {
   // npm always runs scripts with the package directory as cwd, and this config
   // sets `root` to the composer instead - so resolve against cwd, not root.
