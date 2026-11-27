@@ -26,6 +26,8 @@
     "dev:start:debug": "APP_ROOT=. node --watch --inspect=0.0.0.0:9229 dist/app.js",
     "lint": "oxlint src tools client",
     "lint:fix": "oxlint src tools client --fix",
+    "format": "cd .. && prettier --write .",
+    "format:check": "cd .. && prettier --check .",
     "pretest": "npm run build:composer",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -58,6 +60,7 @@
     "js-yaml": "^5.4.3",
     "npm-run-all2": "^9.0.3",
     "oxlint": "^1.88.0",
+    "prettier": "3.10.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "rimraf": "^6.1.3",
