@@ -1,6 +1,0 @@
-kind: Component
-id: compute.wrong
-name: Wrong
-layer: kubernetes
-type: cloud
-description: Component whose layer field does not match its directory

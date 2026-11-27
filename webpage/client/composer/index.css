@@ -113,7 +113,7 @@ body {
   }
 }
 
-/* ── Composer canvas animations (D120) + blueprint card (D123) ── */
+/* ── Composer canvas animations (D120) ── */
 @keyframes rppSnapLand {
   0% {
     transform: scale(0.7) translateY(-20px);
@@ -130,38 +130,6 @@ body {
   }
   100% {
     transform: scale(1) translateY(0);
-  }
-}
-@keyframes rppMagGlow {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(119, 173, 120, 0);
-  }
-  50% {
-    box-shadow: 0 0 12px 4px rgba(119, 173, 120, 0.25);
-  }
-}
-@keyframes rppFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes rppChipPop {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  70% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
   }
 }
 
@@ -205,24 +173,10 @@ body {
   border-color: rgba(119, 198, 192, 0.4) !important;
 }
 
-.rpp-chip {
-  animation: rppChipPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-.rpp-fade-in {
-  animation: rppFadeIn 0.3s ease;
-}
-
 .rpp-scroll::-webkit-scrollbar {
   width: 5px;
 }
 .rpp-scroll::-webkit-scrollbar-thumb {
-  background: #2a4060;
-  border-radius: 3px;
-}
-.rpp-scroll-dark::-webkit-scrollbar {
-  width: 5px;
-}
-.rpp-scroll-dark::-webkit-scrollbar-thumb {
   background: #2a4060;
   border-radius: 3px;
 }

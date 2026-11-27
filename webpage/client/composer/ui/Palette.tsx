@@ -5,17 +5,10 @@ import { RPP, LAYER_COLORS, FONTS } from "./theme";
 
 interface PaletteProps {
   composer: ComposerState;
-  onDragStart?: (id: string) => void;
-  onDragEnd?: () => void;
   onWorkloadClick?: (id: string) => void;
 }
 
-export function Palette({
-  composer,
-  onDragStart,
-  onDragEnd,
-  onWorkloadClick,
-}: PaletteProps) {
+export function Palette({ composer, onWorkloadClick }: PaletteProps) {
   const {
     platform,
     selection,
@@ -151,9 +144,7 @@ export function Palette({
                             onDragStart={(e) => {
                               e.dataTransfer.setData("text/plain", comp.id);
                               e.dataTransfer.effectAllowed = "move";
-                              onDragStart?.(comp.id);
                             }}
-                            onDragEnd={() => onDragEnd?.()}
                             onClick={() => {
                               if (!disabled) activate();
                             }}
