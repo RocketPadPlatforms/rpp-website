@@ -1,6 +1,6 @@
 apiVersion: v2
 name: rocketpadplatforms-website
-description: A Helm chart for Kubernetes
+description: Helm chart for the Rocket Pad Platforms website
 type: application
 version: 0.1.0
 appVersion: "0.1.0"
