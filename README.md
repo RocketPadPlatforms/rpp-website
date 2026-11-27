@@ -1,7 +1,7 @@
-# rocketpadplatforms.de
+# rpp-website
 
-The Rocket Pad Platforms website: an Express + TypeScript server rendering
-Handlebars templates, deployed to Kubernetes.
+The Rocket Pad Platforms website at `rocketpadplatforms.de`: an Express +
+TypeScript server rendering Handlebars templates, deployed to Kubernetes.
 
 The homepage is a single scrolling story with anchored sections - `#pillars`,
 `#modules`, `#product`, `#consultancy`, `#team`, `#contact` - plus an FAQ,
@@ -80,9 +80,9 @@ The visual system - the "cosmos" look - lives entirely in
 | `--color-rakete`    | `#efefef` | neutral surface          |
 | `--color-platform`  | `#b5c2d3` | structure, borders       |
 
-Components reference the semantic aliases (`--color-primary`, `--color-accent`,
-`--color-border`, `--t1`/`--t2`/`--t3`), never the raw values, so the palette can
-be retuned in one place.
+Components reference the aliases defined on `.cm-root` (`--teal`, `--coral`,
+`--t1`/`--t2`/`--t3`, `--line`), which point at the palette tokens, never the
+raw values, so the palette can be retuned in one place.
 
 Fonts (Josefin Sans, Open Sans, JetBrains Mono, Raleway) are self-hosted from
 `webpage/assets/fonts/`. Nothing is loaded from a third party, which is both a
@@ -94,10 +94,7 @@ the test suite.
 ## The platform composer
 
 The interactive composer at `/composer` is a React 19 SPA that lives in this
-repository and is served by this app. It used to be a separate project deployed
-to Vercel and embedded as a third-party iframe; that meant an external origin in
-the CSP, a Google Fonts request, and a second deploy target that could break on
-its own. All three are gone.
+repository and is served by this app.
 
 | Path                       | What it is                                                              |
 | -------------------------- | ----------------------------------------------------------------------- |
@@ -151,7 +148,8 @@ what the composer itself could have produced.
 
 ## Run in development
 
-Requires Node 24 (see `webpage/.nvmrc`). Either run it directly:
+Requires Node 24 (the exact version is in `webpage/.nvmrc`), or open the
+repository in its devcontainer:
 
 ```
 cd webpage
@@ -162,16 +160,8 @@ npm run dev
 The site is then on localhost:8080. `npm run dev` compiles once, then watches:
 `tsc --watch` recompiles TypeScript and `node --watch` restarts the server.
 Views and stylesheets are read straight from the working tree, so editing them
-needs no rebuild - just a browser refresh.
-
-Or in a container:
-
-```
-cd webpage
-docker compose -f docker-compose.dev.yml up -d
-```
-
-That serves the page on localhost:8100 and exposes the Node inspector on 9229.
+needs no rebuild - just a browser refresh. A `webpage/.env` file is read if it
+exists; see `example.env` for the variables.
 
 ## Editing content
 
@@ -182,27 +172,34 @@ absolute (`/de#pillars`), because the layout is also used by the subpages.
 
 ## Checks
 
-Run from `webpage/`. CI runs the same four in the `verify` stage, before the
+Run from `webpage/`. CI runs the same checks in the `verify` job, before the
 image is built.
 
 ```
-npm run lint        # oxlint over src, tools and client
-npm run typecheck   # tsc --noEmit for both the server and the composer
-npm run build       # clean -> tsc -> vite build -> copy-assets, output in dist/
-npm test            # vitest: server route/regression suite + composer suite
+npm run format:check  # prettier over the whole repository (npm run format fixes)
+npm run lint          # oxlint over src, tools and client
+npm run typecheck     # tsc --noEmit for both the server and the composer
+npm run build         # clean -> tsc -> vite build -> copy-assets, output in dist/
+npm test              # vitest: server route/regression suite + composer suite
 ```
 
 ## Run in production
 
-The image is deployed to Kubernetes with the chart in `chart/`. To build and run
-it locally:
+GitHub Actions builds the image, scans it with Trivy and pushes it as
+`ghcr.io/rocketpadplatforms/rpp-website:<7-character commit hash>`. It is
+deployed to Kubernetes by hand with the chart in `chart/`, through a private
+gitops repository. To build and run it locally:
 
 ```
 cd webpage
-docker build -t rocketpadplatforms-website .
-docker run --rm -p 8080:8080 --env-file .env rocketpadplatforms-website
+docker build -t rpp-website .
+docker run --rm -p 8080:8080 rpp-website
 ```
 
 The container runs as the unprivileged `node` user, serves `/healthz`
 for the Kubernetes probes, and shuts down on SIGTERM without dropping in-flight
 requests. See `example.env` for the supported environment variables.
+
+## License
+
+Copyright Rocket Pad Platforms GmbH. All rights reserved; see `LICENSE`.
