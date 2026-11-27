@@ -1,0 +1,6 @@
+kind: Component
+id: additional.psql-operator
+name: Psql Operator
+layer: additional
+type: database
+description: PostgreSQL Kubernetes operator

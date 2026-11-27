@@ -1,0 +1,6 @@
+kind: Component
+id: workload.workload
+name: Custom Workload
+layer: workload
+type: service
+description: Your own application or service, deployed via GitOps

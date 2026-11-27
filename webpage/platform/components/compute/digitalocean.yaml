@@ -1,0 +1,9 @@
+kind: Component
+id: compute.digitalocean
+name: DigitalOcean
+layer: compute
+type: cloud
+description: DigitalOcean Cloud
+rules:
+  excludes: [kubernetes.eks, kubernetes.gke]
+  suggests: [kubernetes.doks]

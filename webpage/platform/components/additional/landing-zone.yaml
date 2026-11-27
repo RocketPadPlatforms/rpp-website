@@ -1,0 +1,6 @@
+kind: Component
+id: additional.landing-zone
+name: Landing Zone
+layer: additional
+type: infrastructure
+description: Pre-configured cloud landing zone

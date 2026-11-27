@@ -1,0 +1,20 @@
+# Without this file `COPY ./ /app` uploads the whole working tree to the build
+# daemon - including the host node_modules (which then overwrote the image's own)
+# and the real .env with live credentials.
+node_modules
+dist
+.git
+.gitignore
+.env
+.env.*
+!example.env
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+*.md
+.vscode
+test
+vitest.config.mts
+client/**/__fixtures__
+client/**/*.test.ts
+client/**/*.test.tsx

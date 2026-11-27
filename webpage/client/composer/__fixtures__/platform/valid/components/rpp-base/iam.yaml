@@ -1,0 +1,7 @@
+kind: Component
+id: rpp-base.iam
+name: Identity & Access Mgmt
+layer: rpp-base
+type: core
+description: Centralized identity and access management
+core: true

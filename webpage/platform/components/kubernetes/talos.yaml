@@ -1,0 +1,9 @@
+kind: Component
+id: kubernetes.talos
+name: Talos Linux
+layer: kubernetes
+type: self-managed
+description: Immutable, minimal Linux built for Kubernetes
+rules:
+  suggests: [providers.metal-lb]
+  excludes: [providers.cloud-lb, providers.cloud-storage]

@@ -1,0 +1,6 @@
+kind: Component
+id: providers.metal-lb
+name: MetalLB
+layer: providers
+type: networking
+description: Load balancer for bare-metal and self-hosted clusters

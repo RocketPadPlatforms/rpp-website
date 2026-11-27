@@ -1,0 +1,6 @@
+kind: Component
+id: BADID
+name: Bad
+layer: compute
+type: cloud
+description: Bad component with invalid ID format

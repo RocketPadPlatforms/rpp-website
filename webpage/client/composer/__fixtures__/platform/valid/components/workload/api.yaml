@@ -1,0 +1,6 @@
+kind: Component
+id: workload.api
+name: API
+layer: workload
+type: service
+description: API service workload

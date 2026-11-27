@@ -1,0 +1,6 @@
+kind: Component
+id: providers.ceph
+name: Ceph
+layer: providers
+type: storage
+description: Unified distributed storage system

@@ -1,0 +1,6 @@
+kind: Component
+id: providers.cloud-lb
+name: Cloud LB
+layer: providers
+type: networking
+description: Cloud-native load balancer

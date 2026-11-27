@@ -1,0 +1,23 @@
+services:
+  server-side-landingpages-dev:
+    build:
+        context: .
+        dockerfile: Dockerfile.dev
+    image: server-side-landingpages-dev
+    container_name: server-side-landingpages-dev
+    volumes:
+      - ./src:/app/src
+      # The composer's source and its declarative catalogue, so editing either
+      # is picked up by the `vite build --watch` that npm run dev starts.
+      - ./client:/app/client
+      - ./platform:/app/platform
+      - ./views:/app/views
+      - ./assets:/app/assets
+      - /app/node_modules
+    restart: always
+    environment:
+      NODE_ENV: development
+      APP_ROOT: /app
+    ports:
+      - 8100:8080
+      - 9229:9229

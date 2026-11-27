@@ -1,0 +1,5 @@
+{
+  "//": "Marks the client tree as ESM, which it is. webpage/package.json has no \"type\", so Node and Vite would otherwise classify these .ts files as CommonJS and fall back to syntax detection - which Vite warns about when it loads data/loader.ts through vite.config.mts. This does not affect ../src, which is the CommonJS server build, and declares no workspace.",
+  "type": "module",
+  "private": true
+}

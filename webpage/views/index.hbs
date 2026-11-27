@@ -1,0 +1,468 @@
+{{!-- Copy lives in src/locales/<lang>.json under home.*. The terminal output
+in the hero stays English in both languages: it imitates real CLI output. --}}
+<header class="cm-hero">
+    <div class="cm-planet"><span class="cm-orbit"></span><span class="cm-moon"></span></div> <span
+        class="cm-eyebrow">{{t "home.hero.eyebrow"}}</span>
+    <div class="cm-headline">
+        <h1>{{t "home.hero.titleLine"}}<br><span class="cm-glow">{{t "home.hero.titleGlow"}}</span></h1><span class="cm-launch"
+            aria-hidden="true"><span class="cm-launch-smoke"></span><span class="cm-launch-fly"><span
+                    class="cm-launch-rocket"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path
+                            d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                        <path
+                            d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                    </svg></span></span></span>
+    </div>
+    <p class="cm-slogan">{{t "home.hero.slogan"}}</p>
+    <p class="cm-lead">{{t "home.hero.lead"}}</p>
+    <div class="cm-actions"> <a href="mailto:hello@rpp.gmbh" class="cm-btn solid">{{t "home.hero.ctaCall"}}</a> <a
+            href="#product" class="cm-btn ghost">{{t "home.hero.ctaExplore"}}</a> </div>
+    <p class="cm-footnote">{{t "home.hero.footnote"}}</p>
+    <!-- ONE-COMMAND DEPLOY TERMINAL — the "prove" moment -->
+    <div class="cm-term-wrap" lang="en">
+        <div class="cm-term">
+            <div class="cm-tbar"> <span class="cm-tdot r"></span><span class="cm-tdot y"></span><span
+                    class="cm-tdot g"></span> <span class="cm-tlabel">sovereign-cluster — bash</span> </div>
+            <div class="cm-tbody"> <span class="cm-tl"><span class="cm-prompt">❯</span> <span class="cm-cmd">git clone
+                        github.com/rocketpadplatforms/iac-examples &amp;&amp; cd scp</span></span><span class="cm-tl"><span
+                        class="cm-prompt">❯</span> <span class="cm-cmd">tofu apply
+                        hetzner</span></span><span class="cm-tl out accent">→ Provisioning provider infrastructure</span><span
+                    class="cm-tl out muted">→ Bootstrapping Kubernetes cluster</span><span
+                    class="cm-tl out muted">→ Syncing platform modules with GitOps</span><span class="cm-tl out ok">✓
+                    Cluster healthy. 12/12 modules synced and running.</span><span class="cm-tl out ok">✓ Sovereignty achieved. 🚀 →
+                    https://platform.your-co.eu</span> <span class="cm-tl"><span class="cm-prompt">❯</span> <span
+                        class="cm-cursor"></span></span> </div>
+        </div>
+    </div>
+    <div class="cm-rocket"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+        </svg><span class="cm-trail"></span></div>
+</header> <!-- OUTCOMES -->
+<section class="cm-sec">
+    <div class="cm-head center"> <span class="cm-kick">{{t "home.outcomes.kick"}}</span>
+        <h2>{{t "home.outcomes.title"}}</h2>
+    </div>
+    <div class="cm-grid c4">
+        <article class="cm-card reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="8" cy="8" r="6" />
+                    <path d="M18.09 10.37A6 6 0 1 1 10.34 18" />
+                    <path d="M7 6h1v4" />
+                    <path d="m16.71 13.88.7.71-2.82 2.82" />
+                </svg></div>
+            <h3>{{t "home.outcomes.costsTitle"}}</h3>
+            <p>{{t "home.outcomes.costsBody"}}</p>
+        </article>
+        <article class="cm-card reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path
+                        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                    <path d="m9 12 2 2 4-4" />
+                </svg></div>
+            <h3>{{t "home.outcomes.euTitle"}}</h3>
+            <p>{{t "home.outcomes.euBody"}}</p>
+        </article>
+        <article class="cm-card reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect width="18" height="11" x="3" y="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0 1 9.9-1" />
+                </svg></div>
+            <h3>{{t "home.outcomes.freedomTitle"}}</h3>
+            <p>{{t "home.outcomes.freedomBody"}}</p>
+        </article>
+        <article class="cm-card reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg></div>
+            <h3>{{t "home.outcomes.teamTitle"}}</h3>
+            <p>{{t "home.outcomes.teamBody"}}</p>
+        </article>
+    </div>
+</section> <!-- PILLARS — icon-left rows (a deliberate break from the card grids) -->
+<section id="pillars" class="cm-sec">
+    <div class="cm-head center"> <span class="cm-kick">{{t "home.pillars.kick"}}</span>
+        <h2>{{t "home.pillars.title"}}</h2>
+        <p class="cm-sub">{{t "home.pillars.sub"}}</p>
+    </div>
+    <div class="cm-plist">
+        <article class="cm-prow reveal">
+            <div class="cm-ico sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 3v12" />
+                    <circle cx="18" cy="6" r="3" />
+                    <circle cx="6" cy="18" r="3" />
+                    <path d="M18 9a9 9 0 0 1-9 9" />
+                </svg></div>
+            <div>
+                <h3>{{t "home.pillars.gitopsTitle"}}</h3>
+                <p>{{t "home.pillars.gitopsBody"}}</p>
+            </div>
+        </article>
+        <article class="cm-prow reveal">
+            <div class="cm-ico sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                </svg></div>
+            <div>
+                <h3>{{t "home.pillars.anywhereTitle"}}</h3>
+                <p>{{t "home.pillars.anywhereBody"}}</p>
+            </div>
+        </article>
+        <article class="cm-prow reveal">
+            <div class="cm-ico sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="7.2" />
+                    <circle cx="12" cy="12" r="2.6" />
+                    <path
+                        d="M12 2.2v2.6M12 19.2v2.6M2.2 12h2.6M19.2 12h2.6M5.1 5.1l1.8 1.8M17.1 17.1l1.8 1.8M18.9 5.1l-1.8 1.8M6.9 17.1l-1.8 1.8" />
+                </svg></div>
+            <div>
+                <h3>{{t "home.pillars.k8sTitle"}}</h3>
+                <p>{{t "home.pillars.k8sBody"}}</p>
+            </div>
+        </article>
+        <article class="cm-prow reveal">
+            <div class="cm-ico sm">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="4" y="7" width="16" height="12" rx="3" />
+                    <path d="M12 3v4" />
+                    <circle cx="12" cy="2" r="1" />
+                    <path d="M2 13h2M20 13h2" />
+                    <circle cx="9" cy="11" r="1" fill="currentColor" />
+                    <circle cx="15" cy="11" r="1" fill="currentColor" />
+                    <path d="M9 14.5a3 3 0 0 0 6 0" />
+                </svg>
+            </div>
+            <div>
+                <h3>{{t "home.pillars.aiTitle"}}</h3>
+                <p>{{t "home.pillars.aiBody"}}</p>
+            </div>
+        </article>
+        <article class="cm-prow reveal">
+            <div class="cm-ico sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path
+                        d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                    <path d="m3.3 7 8.7 5 8.7-5" />
+                    <path d="M12 22V12" />
+                </svg></div>
+            <div>
+                <h3>{{t "home.pillars.containersTitle"}}</h3>
+                <p>{{t "home.pillars.containersBody"}}</p>
+            </div>
+        </article>
+        <article class="cm-prow reveal">
+            <div class="cm-ico sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path
+                        d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+                </svg></div>
+            <div>
+                <h3>{{t "home.pillars.liveTitle"}}</h3>
+                <p>{{t "home.pillars.liveBody"}}</p>
+            </div>
+        </article>
+        <article class="cm-prow reveal">
+            <div class="cm-ico sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m15.5 7.5 3 3L22 7l-3-3" />
+                    <path d="m21 2-9.6 9.6" />
+                    <circle cx="7.5" cy="15.5" r="5.5" />
+                </svg></div>
+            <div>
+                <h3>{{t "home.pillars.ssoTitle"}}</h3>
+                <p>{{t "home.pillars.ssoBody"}}</p>
+            </div>
+        </article>
+    </div>
+</section> <!-- COMPOSE YOUR PLATFORM -->
+<section id="modules" class="cm-sec">
+    <div class="cm-head center"> <span class="cm-kick">{{t "home.modules.kick"}}</span>
+        <h2>{{t "home.modules.titleLine"}}<br><span class="cm-glow">{{t "home.modules.titleGlow"}}</span></h2> {{!-- temporarily hidden with the
+        compose-from-description feature
+        <span class="cm-hook">or describe it in plain words — the composer builds it for you</span>
+        --}}
+        <p class="cm-sub">{{t "home.modules.sub"}}</p>
+    </div>
+    <div class="cm-composer-wrap">
+        <div class="cm-composer">
+            <div class="cm-cbar"> <span class="cm-tdot r"></span><span class="cm-tdot y"></span><span
+                    class="cm-tdot g"></span> <span class="cm-curl">rocketpadplatforms.de/composer</span> <a
+                    class="cm-cext" href="/composer" target="_blank" rel="noopener"
+                    aria-label="{{t "home.modules.openTab"}}">↗</a> </div>
+            <div class="cm-cstage" data-embed="/composer"> <img class="cm-cshot"
+                    src="/assets/img/composer-preview.webp" alt="{{t "home.modules.previewAlt"}}" loading="lazy"> <button
+                    type="button" class="cm-cplay"> <svg width="13"
+                        height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M8 5.5v13l10.5-6.5z" fill="currentColor" stroke="none" />
+                    </svg><span>{{t "home.modules.launch"}}</span> </button> </div>
+        </div>
+    </div>
+    <ul class="cm-mod-points">
+        <li><strong>{{t "home.modules.coreTitle"}}</strong> — {{t "home.modules.coreBody"}}</li>
+        <li><strong>{{t "home.modules.optionalTitle"}}</strong> — {{t "home.modules.optionalBody"}}</li>
+        <li><strong>{{t "home.modules.scaleTitle"}}</strong> — {{t "home.modules.scaleBody"}}</li>
+        <li><strong>{{t "home.modules.complianceTitle"}}</strong> — {{t "home.modules.complianceBody"}}</li>
+    </ul>
+    <div class="cm-actions center cm-mt-36"> <a href="/composer" class="cm-btn solid">{{t "home.modules.open"}}</a> <a href="https://docs.rpp.gmbh/docs/modules"
+            class="cm-btn ghost">{{t "home.modules.docs"}}</a> </div>
+</section> <!-- PRODUCT DEEP-DIVE (flight systems) -->
+<section id="product" class="cm-sec">
+    <div class="cm-feature">
+        <div class="cm-fcopy"> <span class="cm-kick">{{t "home.product.kick"}}</span>
+            <h2>{{t "home.product.titleLine"}}<br><span class="cm-glow">{{t "home.product.titleGlow"}}</span></h2>
+            <p class="cm-sub">{{t "home.product.sub"}}</p>
+            <ul class="cm-feat">
+                <li><strong>{{t "home.product.providerTitle"}}</strong> — {{t "home.product.providerBody"}}</li>
+                <li><strong>{{t "home.product.gitopsTitle"}}</strong> — {{t "home.product.gitopsBody"}}</li>
+                <li><strong>{{t "home.product.aiTitle"}}</strong> — {{t "home.product.aiBody"}}</li>
+                <li><strong>{{t "home.product.batteriesTitle"}}</strong> — {{t "home.product.batteriesBody"}}</li>
+                <li><strong>{{t "home.product.modularTitle"}}</strong> — {{t "home.product.modularBody"}}</li>
+            </ul>
+            <div class="cm-targets">
+                <span>Hetzner</span><span>OVH</span><span>AWS</span><span>Azure</span><span>GCP</span><span>VMware</span><span>{{t "home.product.bareMetal"}}</span><span>{{t "home.product.yours"}}</span></div>
+            <div class="cm-actions cm-mt-24"> <a href="https://docs.rpp.gmbh/docs/overview"
+                    class="cm-btn solid">{{t "home.product.docs"}}</a> <a href="https://github.com/RocketPadPlatforms"
+                    class="cm-btn ghost">GitHub</a> </div>
+        </div>
+        <div class="cm-stack">
+            <div class="cm-stack-lbl">{{t "home.product.stackLabel"}}</div>
+            <div class="cm-srow"><span class="cm-sref">L6</span><span class="cm-sico"><svg width="15" height="15"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <path d="m15.5 7.5 3 3L22 7l-3-3" />
+                        <path d="m21 2-9.6 9.6" />
+                        <circle cx="7.5" cy="15.5" r="5.5" />
+                    </svg></span><span class="cm-slbl">{{t "home.product.stackIam"}}</span></div>
+            <div class="cm-srow"><span class="cm-sref">L5</span><span class="cm-sico"><svg width="15" height="15"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                        <path d="M2 12h20" />
+                    </svg></span><span class="cm-slbl">{{t "home.product.stackIngress"}}</span></div>
+            <div class="cm-srow"><span class="cm-sref">L4</span><span class="cm-sico"><svg width="15" height="15"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="7.2" />
+                        <circle cx="12" cy="12" r="2.6" />
+                        <path
+                            d="M12 2.2v2.6M12 19.2v2.6M2.2 12h2.6M19.2 12h2.6M5.1 5.1l1.8 1.8M17.1 17.1l1.8 1.8M18.9 5.1l-1.8 1.8M6.9 17.1l-1.8 1.8" />
+                    </svg></span><span class="cm-slbl">{{t "home.product.stackK8s"}}</span></div>
+            <div class="cm-srow"><span class="cm-sref">L3</span><span class="cm-sico"><svg width="15" height="15"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <path d="M6 3v12" />
+                        <circle cx="18" cy="6" r="3" />
+                        <circle cx="6" cy="18" r="3" />
+                        <path d="M18 9a9 9 0 0 1-9 9" />
+                    </svg></span><span class="cm-slbl">{{t "home.product.stackGitops"}}</span></div>
+            <div class="cm-srow"><span class="cm-sref">L2</span><span class="cm-sico"><svg width="15" height="15"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <ellipse cx="12" cy="5" rx="9" ry="3" />
+                        <path d="M3 5v14a9 3 0 0 0 18 0V5" />
+                        <path d="M3 12a9 3 0 0 0 18 0" />
+                    </svg></span><span class="cm-slbl">{{t "home.product.stackStorage"}}</span></div>
+            <div class="cm-srow"><span class="cm-sref">L1</span><span class="cm-sico"><svg width="15" height="15"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                        <path d="m19 9-5 5-4-4-3 3" />
+                    </svg></span><span class="cm-slbl">{{t "home.product.stackObs"}}</span></div>
+        </div>
+    </div>
+</section> <!-- CONSULTANCY -->
+<section id="consultancy" class="cm-sec">
+    <div class="cm-head center"> <span class="cm-kick">{{t "home.consultancy.kick"}}</span>
+        <h2>{{t "home.consultancy.title"}}</h2>
+        <p class="cm-sub">{{t "home.consultancy.sub"}}</p>
+    </div>
+    <div class="cm-modes">
+        <article class="cm-mode reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3.2" />
+                    <path
+                        d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1" />
+                </svg></div>
+            <div>
+                <h3>{{t "home.consultancy.runTitle"}}</h3>
+                <p>{{t "home.consultancy.runBody"}}</p>
+            </div>
+        </article>
+        <article class="cm-mode reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M16 7h6v6" />
+                    <path d="m22 7-8.5 8.5-5-5L2 17" />
+                </svg></div>
+            <div>
+                <h3>{{t "home.consultancy.empowerTitle"}}</h3>
+                <p>{{t "home.consultancy.empowerBody"}}</p>
+            </div>
+        </article>
+    </div>
+    <div class="cm-grid">
+        <article class="cm-card svc reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="7.2" />
+                    <circle cx="12" cy="12" r="2.6" />
+                    <path
+                        d="M12 2.2v2.6M12 19.2v2.6M2.2 12h2.6M19.2 12h2.6M5.1 5.1l1.8 1.8M17.1 17.1l1.8 1.8M18.9 5.1l-1.8 1.8M6.9 17.1l-1.8 1.8" />
+                </svg></div>
+            <h3>{{t "home.consultancy.k8sTitle"}}</h3>
+            <p>{{t "home.consultancy.k8sBody"}}</p>
+            <div class="cm-tags">
+                <span>K8s</span><span>GitOps</span><span>ArgoCD</span><span>Operators</span><span>Agent ready</span></div>
+        </article>
+        <article class="cm-card svc reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 22h18" />
+                    <path d="M6 18v-7M10 18v-7M14 18v-7M18 18v-7" />
+                    <path d="M11.12 2.2a2 2 0 0 1 1.76 0l7.87 3.85c.47.23.31.95-.22.95H3.47c-.53 0-.69-.72-.22-.95z" />
+                </svg></div>
+            <h3>{{t "home.consultancy.hostingTitle"}}</h3>
+            <p>{{t "home.consultancy.hostingBody"}}</p>
+            <div class="cm-tags"><span>On-Premise</span><span>{{t "home.compliance.gdpr"}}</span><span>Bare Metal</span>
+            </div>
+        </article>
+        <article class="cm-card svc reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 13v8" />
+                    <path d="M4 14.9A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.24" />
+                    <path d="m8 17 4-4 4 4" />
+                </svg></div>
+            <h3>{{t "home.consultancy.cloudTitle"}}</h3>
+            <p>{{t "home.consultancy.cloudBody"}}</p>
+            <div class="cm-tags">
+                <span>Hetzner</span><span>Proxmox</span><span>Multicloud</span><span>IaC</span></div>
+        </article>
+        <article class="cm-card svc reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path
+                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                </svg></div>
+            <h3>{{t "home.consultancy.platformTitle"}}</h3>
+            <p>{{t "home.consultancy.platformBody"}}</p>
+            <div class="cm-tags"><span>Backstage</span><span>Prometheus</span><span>Keycloak</span><span>IAM</span></div>
+        </article>
+        <article class="cm-card svc reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path
+                        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                    <path d="m9 12 2 2 4-4" />
+                </svg></div>
+            <h3>{{t "home.consultancy.securityTitle"}}</h3>
+            <p>{{t "home.consultancy.securityBody"}}</p>
+            <div class="cm-tags"><span>Zero Trust</span><span>Open Source</span><span>{{t "home.consultancy.signedCommits"}}</span><span>IaC</span></div>
+        </article>
+        <article class="cm-card svc reveal">
+            <div class="cm-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path
+                        d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z" />
+                    <path d="M22 10v6" />
+                    <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+                </svg></div>
+            <h3>{{t "home.consultancy.migrationTitle"}}</h3>
+            <p>{{t "home.consultancy.migrationBody"}}</p>
+            <div class="cm-tags"><span>{{t "home.consultancy.tagContainerize"}}</span><span>{{t "home.consultancy.tagReplatform"}}</span><span>{{t "home.consultancy.tagWorkshops"}}</span><span>IaC</span>
+            </div>
+        </article>
+    </div>
+    <div class="cm-actions center cm-mt-40"> <a href="#contact" class="cm-btn solid">{{t "home.consultancy.cta"}}</a> </div>
+</section> <!-- TEAM -->
+<section id="team" class="cm-sec">
+    <div class="cm-head center"> <span class="cm-kick">{{t "home.team.kick"}}</span>
+        <h2>{{t "home.team.title"}}</h2>
+        <p class="cm-sub">{{t "home.team.sub"}}</p>
+    </div>
+    <div class="cm-team">
+        <article class="cm-member reveal">
+            <div class="cm-av" aria-hidden="true">KM</div>
+            <h3 class="cm-mname">Kilian Mehringer</h3>
+            <div class="cm-mrole">{{t "home.team.kilianRole"}}</div>
+            <p>{{t "home.team.kilianBio"}}</p>
+        </article>
+        <article class="cm-member reveal">
+            <div class="cm-av" aria-hidden="true">AW</div>
+            <h3 class="cm-mname">Alexander Weidemann</h3>
+            <div class="cm-mrole">{{t "home.team.alexanderRole"}}</div>
+            <p>{{t "home.team.alexanderBio"}}</p>
+        </article>
+    </div>
+</section> <!-- WHY RPP — numbered strip (no cards; another layout break) -->
+<section class="cm-sec">
+    <div class="cm-head center"> <span class="cm-kick">{{t "home.why.kick"}}</span>
+        <h2>{{t "home.why.titleLine"}}<br><span class="cm-glow">{{t "home.why.titleGlow"}}</span></h2>
+    </div>
+    <div class="cm-wgrid">
+        <article class="cm-witem reveal"> <span class="cm-wnum">01</span>
+            <h3>{{t "home.why.defaultsTitle"}}</h3>
+            <p>{{t "home.why.defaultsBody"}}</p>
+        </article>
+        <article class="cm-witem reveal"> <span class="cm-wnum">02</span>
+            <h3>{{t "home.why.engineersTitle"}}</h3>
+            <p>{{t "home.why.engineersBody"}}</p>
+        </article>
+        <article class="cm-witem reveal"> <span class="cm-wnum">03</span>
+            <h3>{{t "home.why.investTitle"}}</h3>
+            <p>{{t "home.why.investBody"}}</p>
+        </article>
+        <article class="cm-witem reveal"> <span class="cm-wnum">04</span>
+            <h3>{{t "home.why.knowledgeTitle"}}</h3>
+            <p>{{t "home.why.knowledgeBody"}}</p>
+        </article>
+    </div>
+</section> <!-- COMPLIANCE STRIP -->
+<section class="cm-sec">
+    <div class="cm-head center"> <span class="cm-kick">{{t "home.compliance.kick"}}</span>
+        <h2>{{t "home.compliance.title"}}</h2>
+        <p class="cm-sub">{{t "home.compliance.sub"}}</p>
+    </div>
+    <div class="cm-bb-label">{{t "home.compliance.label"}}</div>
+    <div class="cm-comp-grid">
+        <div class="cm-comp reveal"> <span class="cm-cbadge-lg">{{t "home.compliance.gdpr"}}</span> <span class="cm-clbl">{{t "home.compliance.gdprBody"}}</span> </div>
+        <div class="cm-comp reveal"> <span class="cm-cbadge-lg">NIS2</span> <span class="cm-clbl">{{t "home.compliance.nis2Body"}}</span> </div>
+        <div class="cm-comp reveal"> <span class="cm-cbadge-lg">BSI</span> <span class="cm-clbl">{{t "home.compliance.bsiBody"}}</span> </div>
+        <div class="cm-comp reveal"> <span class="cm-cbadge-lg">ISO 27001</span> <span class="cm-clbl">{{t "home.compliance.isoBody"}}</span> </div>
+    </div>
+</section> <!-- FINAL CTA -->
+<section id="contact" class="cm-cta"> <span class="cm-cta-rkt"><svg width="46" height="46" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+        </svg></span> <span class="cm-kick">{{t "home.contact.kick"}}</span>
+    <h2>{{t "home.contact.title"}}</h2>
+    <p>{{t "home.contact.body"}}</p>
+    <div class="cm-actions center"> <a href="mailto:hello@rpp.gmbh" class="cm-btn solid">{{t "home.contact.ctaCall"}}</a> <a
+            href="https://docs.rpp.gmbh/docs/overview" class="cm-btn ghost">{{t "home.contact.docs"}}</a> </div>
+    <p class="cm-mailline">{{t "home.contact.mail"}} <a href="mailto:hello@rpp.gmbh">hello@rpp.gmbh</a></p>
+    <p class="cm-mailline cm-mail-faq"><a href="{{faqPath}}">{{t "home.contact.faq"}}</a></p>
+</section>

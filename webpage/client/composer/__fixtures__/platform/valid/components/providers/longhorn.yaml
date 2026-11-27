@@ -1,0 +1,6 @@
+kind: Component
+id: providers.longhorn
+name: Longhorn
+layer: providers
+type: storage
+description: Cloud-native distributed block storage

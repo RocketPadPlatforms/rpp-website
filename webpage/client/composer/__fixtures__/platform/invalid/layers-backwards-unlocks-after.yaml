@@ -1,0 +1,36 @@
+kind: Layer
+id: compute
+name: Compute Layer
+position: 0
+select: single
+---
+kind: Layer
+id: kubernetes
+name: Kubernetes Layer
+position: 1
+select: single
+---
+kind: Layer
+id: providers
+name: Provider Modules
+position: 2
+select: multi
+unlocksAfter: workload
+---
+kind: Layer
+id: rpp-base
+name: RPP Base
+position: 3
+select: multi
+---
+kind: Layer
+id: additional
+name: Additional Modules
+position: 4
+select: multi
+---
+kind: Layer
+id: workload
+name: Custom Workload
+position: 5
+select: multi

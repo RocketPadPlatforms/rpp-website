@@ -1,0 +1,381 @@
+:root{--color-universum: #0d304f;--color-universum-rgb: 13, 48, 79;--color-zuendung: #e8736d;--color-zuendung-rgb: 232, 115, 109;--color-rakete: #efefef;--color-rakete-rgb: 239, 239, 239;--color-hue: #77c6c0;--color-hue-rgb: 119, 198, 192;--color-platform: #b5c2d3;--color-platform-rgb: 181, 194, 211;--color-primary: var(--color-hue);--color-secondary: var(--color-universum);--color-accent: var(--color-zuendung);--color-surface: var(--color-rakete);--color-muted: var(--color-platform);--color-text: var(--color-universum);--color-text-inverse: #ffffff;--color-link: var(--color-hue);--color-link-hover: #5dada7;--color-border: var(--color-platform);--color-dark-bg: #3d3d3d;--color-dark-bg-deep: var(--color-universum);--font-heading: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;--font-body: "Open Sans", "Helvetica Neue", Arial, sans-serif;--font-mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;--letter-caps: .15em;--radius-sm: .25rem;--radius-md: .5rem;--radius-lg: .75rem;--radius-xl: 1rem;--radius-2xl: 1.5rem;--radius-full: 9999px;--shadow-md: 0 4px 6px rgba(13, 48, 79, .08);--shadow-lg: 0 10px 20px rgba(13, 48, 79, .1);--shadow-xl: 0 20px 40px rgba(13, 48, 79, .12);--container: 1240px}@font-face{font-family:Josefin Sans;font-style:normal;font-weight:100 700;font-display:swap;src:url(/assets/fonts/josefin-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Open Sans;font-style:normal;font-weight:300 800;font-display:swap;src:url(/assets/fonts/open-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:JetBrains Mono;font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/jetbrains-mono-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}*,*:before,*:after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{font-family:var(--font-body);background:var(--color-universum);color:var(--color-text-inverse);overflow-x:hidden;min-height:100vh}img,svg{display:block;max-width:100%}a{color:inherit}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}.cm-root{--bg: #030712;--teal: var(--color-hue);--coral: var(--color-zuendung);--t1: #eaf1fb;--t2: #9fb0cc;--t3: #7d8fb5;--line: rgba(159, 176, 204, .16);--glass: rgba(255, 255, 255, .035);position:relative;background:var(--bg);color:var(--t1);font-family:var(--font-body);line-height:1.65;overflow:hidden;--pad: clamp(20px, 5vw, 64px)}.cm-sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(640px 640px at 94% -10%,rgba(119,198,192,.2),transparent 68%),radial-gradient(580px 580px at -8% 40%,rgba(232,115,109,.16),transparent 68%),radial-gradient(520px 520px at 56% 112%,rgba(99,116,154,.16),transparent 68%)}.cm-stars{position:absolute;inset:0;background-repeat:repeat;opacity:.62;background-image:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 70%,#fff,transparent),radial-gradient(1px 1px at 60% 40%,#fff,transparent),radial-gradient(1px 1px at 80% 80%,#fff,transparent),radial-gradient(1px 1px at 90% 10%,#fff,transparent),radial-gradient(1px 1px at 45% 90%,#fff,transparent),radial-gradient(1.4px 1.4px at 25% 35%,rgba(119,198,192,.9),transparent),radial-gradient(1.4px 1.4px at 65% 15%,#fff,transparent),radial-gradient(1.4px 1.4px at 85% 55%,#fff,transparent),radial-gradient(1.4px 1.4px at 15% 75%,rgba(232,115,109,.8),transparent),radial-gradient(2px 2px at 40% 25%,#fff,transparent),radial-gradient(2px 2px at 75% 65%,rgba(119,198,192,.9),transparent),radial-gradient(2px 2px at 20% 55%,#fff,transparent);background-size:300px 300px,300px 300px,300px 300px,300px 300px,300px 300px,300px 300px,480px 480px,480px 480px,480px 480px,480px 480px,700px 700px,700px 700px,700px 700px}.cm-root>:not(.cm-sky){position:relative;z-index:1}.cm-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:var(--container);margin:0 auto;padding:22px var(--pad);z-index:10}.cm-logo{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-heading);font-weight:700;font-size:19px;color:var(--t1);text-decoration:none;letter-spacing:.08em}.cm-logo-mark{display:inline-flex;color:var(--teal)}.cm-logo-mark.sm{color:var(--t3)}.cm-links{display:flex;gap:28px}.cm-links a{font-size:14px;color:var(--t2);text-decoration:none;transition:color .2s}.cm-links a:hover{color:var(--t1)}.cm-pill{font-family:var(--font-heading);font-weight:600;font-size:14px;color:var(--bg);text-decoration:none;background:var(--teal);padding:10px 24px;border-radius:var(--radius-full);box-shadow:0 6px 18px #77c6c038;transition:transform .2s}.cm-pill:hover{transform:translateY(-2px)}.cm-mnav{display:none;position:relative}.cm-mnav summary{list-style:none;cursor:pointer;display:flex;padding:6px;color:var(--t1)}.cm-mnav summary::-webkit-details-marker{display:none}.cm-mpanel{position:absolute;right:0;top:calc(100% + 10px);min-width:210px;z-index:60;display:flex;flex-direction:column;gap:2px;padding:10px;background:#060b19f7;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:0 20px 50px #0000008c}.cm-mpanel a{font-size:15px;color:var(--t2);text-decoration:none;padding:10px 12px;border-radius:var(--radius-md)}.cm-mpanel a:hover{color:var(--t1);background:var(--glass)}.cm-mpanel .cm-mcta{margin-top:6px;text-align:center;font-family:var(--font-heading);font-weight:600;color:var(--bg);background:var(--teal);border-radius:var(--radius-full)}.cm-hero{position:relative;max-width:960px;margin:0 auto;text-align:center;padding:clamp(60px,10vw,130px) var(--pad) clamp(60px,9vw,120px)}.cm-planet{position:absolute;top:4%;right:4%;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#1a3a5c,#0a1c30 70%);box-shadow:inset -14px -10px 30px #0009,0 0 40px #77c6c040}.cm-orbit{position:absolute;top:50%;left:50%;width:210px;height:210px;transform:translate(-50%,-50%) rotate(-18deg);border:1px solid rgba(119,198,192,.3);border-radius:50%}.cm-moon{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--coral);box-shadow:0 0 12px var(--coral);transform:rotate(-35deg) translate(105px)}.cm-eyebrow{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--teal);letter-spacing:.14em;border:1px solid var(--line);background:var(--glass);padding:7px 16px;border-radius:var(--radius-full);margin-bottom:28px}.cm-hero h1{font-family:var(--font-heading);font-weight:700;font-size:clamp(42px,6.8vw,86px);line-height:1.04;letter-spacing:.01em}.cm-glow{color:var(--teal);text-shadow:0 0 18px rgba(119,198,192,.28)}.cm-slogan{font-family:var(--font-mono);font-size:13px;color:var(--coral);letter-spacing:.16em;text-transform:uppercase;margin-top:22px}.cm-lead{font-size:clamp(17px,2vw,20px);color:var(--t2);line-height:1.7;max-width:620px;margin:18px auto 36px}.cm-actions{display:flex;gap:14px;flex-wrap:wrap}.cm-hero .cm-actions,.cm-actions.center{justify-content:center}.cm-btn{font-family:var(--font-heading);font-weight:600;font-size:15px;text-decoration:none;padding:14px 28px;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:8px;transition:transform .2s,border-color .2s}.cm-btn.solid{color:var(--bg);background:var(--teal);box-shadow:0 10px 30px #77c6c040}.cm-btn.solid:hover{transform:translateY(-2px)}.cm-btn.ghost{color:var(--t1);border:1px solid var(--line);background:var(--glass)}.cm-btn.ghost:hover{transform:translateY(-2px);border-color:var(--teal)}.cm-footnote{font-family:var(--font-mono);font-size:12px;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;margin-top:30px}.cm-rocket{margin-top:48px;color:var(--coral);position:relative;display:inline-block;transition:transform .3s ease}.cm-rocket:hover{transform:translateY(-8px)}.cm-trail{position:absolute;left:50%;top:calc(100% + 6px);width:2px;height:60px;transform:translate(-50%);background:linear-gradient(180deg,rgba(232,115,109,.7),transparent)}.cm-term-wrap{position:relative;max-width:680px;margin:48px auto 0;text-align:left}.cm-term-wrap:before{content:"";position:absolute;inset:-34px;border-radius:40px;z-index:-1;background:radial-gradient(60% 60% at 50% 50%,rgba(119,198,192,.3),rgba(232,115,109,.16) 46%,transparent 72%)}.cm-term{border:1px solid var(--line);border-radius:var(--radius-xl);overflow:hidden;background:#060b19f0;box-shadow:0 30px 80px #0009}.cm-tbar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line);background:#ffffff08}.cm-tdot{width:11px;height:11px;border-radius:50%}.cm-tdot.r{background:#ff5f57}.cm-tdot.y{background:#febc2e}.cm-tdot.g{background:#28c840}.cm-tlabel{font-family:var(--font-mono);font-size:12px;color:var(--t3);margin-left:10px;letter-spacing:.04em}.cm-tbody{padding:20px 22px;font-family:var(--font-mono);font-size:12.5px;line-height:1.95;min-height:260px}.cm-tl{display:block}.cm-prompt{color:var(--teal)}.cm-cmd{color:var(--t1)}.cm-tl.out{color:var(--t2)}.cm-tl.out.accent{color:var(--coral)}.cm-tl.out.ok{color:var(--teal)}.cm-tl.out.muted{color:var(--t2)}.cm-cursor{display:inline-block;width:8px;height:14px;background:var(--teal);vertical-align:middle}.cm-sec{max-width:var(--container);margin:0 auto;padding:clamp(56px,8vw,100px) var(--pad)}.cm-head{max-width:660px;margin:0 auto 48px}.cm-head.center{text-align:center}.cm-kick{font-family:var(--font-mono);font-size:12px;color:var(--coral);letter-spacing:.16em;text-transform:uppercase}.cm-head h2{font-family:var(--font-heading);font-weight:700;font-size:clamp(30px,4.2vw,52px);line-height:1.08;letter-spacing:.01em;margin:14px 0 16px}.cm-sub{color:var(--t2);font-size:16px;line-height:1.7;margin:0 auto}.cm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.cm-grid.c4{grid-template-columns:repeat(4,1fr)}.cm-card{position:relative;padding:30px 26px;border:1px solid var(--line);border-radius:var(--radius-2xl);background:var(--glass);transition:transform .3s,border-color .3s}.cm-card:after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 20px 50px #77c6c01f;opacity:0;transition:opacity .3s;z-index:-1;pointer-events:none}.cm-card:hover{transform:translateY(-5px);border-color:var(--teal)}.cm-card:hover:after{opacity:1}.cm-ico{width:52px;height:52px;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:var(--teal);margin-bottom:18px;background:linear-gradient(135deg,#77c6c033,#e8736d26)}.cm-card h3{font-family:var(--font-heading);font-weight:600;font-size:19px;letter-spacing:.02em;margin-bottom:10px}.cm-card p{color:var(--t2);font-size:14px;line-height:1.7}.cm-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}.cm-tags span{font-family:var(--font-mono);font-size:11px;color:var(--t2);border:1px solid var(--line);padding:3px 9px;border-radius:var(--radius-full)}.cm-plist{display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;max-width:1080px;margin:0 auto}.cm-prow{display:flex;gap:18px;align-items:flex-start;padding:22px 4px;border-bottom:1px solid var(--line)}.cm-prow .cm-ico{margin-bottom:0;flex-shrink:0}.cm-ico.sm{width:44px;height:44px}.cm-prow h3{font-family:var(--font-heading);font-weight:600;font-size:18px;letter-spacing:.02em;margin-bottom:7px}.cm-prow p{color:var(--t2);font-size:14px;line-height:1.7}.cm-modes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:40px}.cm-mode{display:flex;gap:18px;align-items:flex-start;padding:28px 26px;border:1px solid rgba(119,198,192,.3);border-radius:var(--radius-2xl);background:var(--glass);transition:transform .3s,border-color .3s}.cm-mode:hover{transform:translateY(-4px);border-color:var(--coral)}.cm-mode .cm-ico{flex-shrink:0;margin-bottom:0}.cm-mode h3{font-family:var(--font-heading);font-weight:600;font-size:20px;letter-spacing:.02em;margin-bottom:8px}.cm-mode p{color:var(--t2);font-size:14px;line-height:1.7}.cm-feature{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,4vw,56px);align-items:center;padding:clamp(32px,4vw,52px);border:1px solid var(--line);border-radius:var(--radius-2xl);background:var(--glass)}.cm-fcopy h2{font-family:var(--font-heading);font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.08;letter-spacing:.01em;margin:14px 0}.cm-feat{list-style:none;display:flex;flex-direction:column;gap:12px;margin:20px 0 4px}.cm-feat li{display:flex;gap:10px;font-size:14.5px;color:var(--t2);line-height:1.6}.cm-feat li:before{content:"↗";color:var(--coral);font-family:var(--font-mono)}.cm-feat li strong{color:var(--t1);white-space:nowrap}.cm-targets{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px}.cm-targets span{font-family:var(--font-mono);font-size:11px;color:var(--t2);border:1px solid var(--line);padding:4px 10px;border-radius:var(--radius-full)}.cm-stack{background:#0000004d;border:1px solid var(--line);border-radius:var(--radius-xl);padding:22px}.cm-stack-lbl{font-family:var(--font-mono);font-size:11px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}.cm-srow{display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:var(--radius-md);background:var(--glass);border:1px solid var(--line);margin-bottom:7px;font-family:var(--font-mono);font-size:12px;color:var(--t2);transition:border-color .2s}.cm-srow:hover{border-color:var(--teal)}.cm-sref{color:var(--coral);font-size:11px}.cm-sico{color:var(--teal);display:inline-flex;flex-shrink:0}.cm-hook{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--teal);letter-spacing:.06em;border:1px solid rgba(119,198,192,.3);background:var(--glass);border-radius:var(--radius-full);padding:6px 14px;margin:4px 0 18px}.cm-composer-wrap{position:relative;max-width:920px;margin:0 auto}.cm-composer-wrap:before{content:"";position:absolute;inset:-34px;z-index:-1;border-radius:40px;background:radial-gradient(60% 60% at 50% 50%,rgba(119,198,192,.26),rgba(232,115,109,.14) 46%,transparent 72%)}.cm-composer{border:1px solid var(--line);border-radius:var(--radius-xl);overflow:hidden;background:#060b19f0;box-shadow:0 30px 80px #0009}.cm-cbar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid var(--line);background:#ffffff08}.cm-curl{font-family:var(--font-mono);font-size:12px;color:var(--t3);margin-left:10px;letter-spacing:.04em}.cm-cext{margin-left:auto;color:var(--t3);text-decoration:none;font-size:15px;line-height:1;transition:color .2s}.cm-cext:hover{color:var(--teal)}.cm-cstage{position:relative;aspect-ratio:16 / 9;background:#0a1020}.cm-cstage:not(.is-live):after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#03071200 55%,#0307128c)}.cm-cshot{display:block;width:100%;height:100%;object-fit:cover}.cm-cframe{display:block;width:100%;height:100%;border:0;background:#0a1020}.cm-cplay{position:absolute;left:50%;bottom:22px;transform:translate(-50%);z-index:1;display:inline-flex;align-items:center;gap:9px;cursor:pointer;font-family:var(--font-heading);font-weight:600;font-size:14px;color:var(--bg);background:var(--teal);border:0;padding:12px 22px;border-radius:var(--radius-full);box-shadow:0 10px 30px #00000073;transition:transform .2s}.cm-cplay:hover{transform:translate(-50%) translateY(-2px)}.cm-mod-points{list-style:none;max-width:760px;margin:36px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}.cm-mod-points li{font-size:13.5px;color:var(--t2);display:flex;gap:9px;line-height:1.6}.cm-mod-points li:before{content:"▸";color:var(--teal)}.cm-mod-points strong{color:var(--t1)}.cm-team{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:820px;margin:0 auto}.cm-member{padding:30px;text-align:center;border:1px solid var(--line);border-radius:var(--radius-2xl);background:var(--glass)}.cm-av{width:66px;height:66px;margin:0 auto 16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-weight:700;font-size:19px;color:var(--bg);background:var(--teal)}.cm-mname{font-family:var(--font-heading);font-weight:600;font-size:20px;letter-spacing:.02em}.cm-mrole{font-family:var(--font-mono);font-size:11px;color:var(--coral);margin:5px 0 12px}.cm-member p{color:var(--t2);font-size:14px;line-height:1.65}.cm-wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}.cm-witem{border-top:2px solid rgba(119,198,192,.35);padding-top:18px}.cm-wnum{font-family:var(--font-mono);font-size:12px;color:var(--coral);letter-spacing:.14em}.cm-witem h3{font-family:var(--font-heading);font-weight:600;font-size:18px;letter-spacing:.02em;margin:10px 0}.cm-witem p{color:var(--t2);font-size:14px;line-height:1.7}.cm-bb-label{text-align:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);margin-bottom:18px}.cm-comp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.cm-comp{display:flex;flex-direction:column;align-items:center;gap:8px;padding:28px 20px;text-align:center;border:1px solid var(--line);border-radius:var(--radius-2xl);background:var(--glass);transition:transform .3s,border-color .3s}.cm-comp:hover{transform:translateY(-4px);border-color:var(--teal)}.cm-cbadge-lg{font-family:var(--font-heading);font-weight:700;font-size:23px;letter-spacing:.04em;background:var(--teal);-webkit-background-clip:text;background-clip:text;color:transparent}.cm-clbl{font-family:var(--font-mono);font-size:12px;color:var(--t3);letter-spacing:.03em}.cm-cta{max-width:var(--container);margin:0 auto;text-align:center;padding:clamp(60px,9vw,120px) var(--pad)}.cm-cta-rkt{color:var(--coral);display:flex;justify-content:center;margin-bottom:18px}.cm-cta .cm-kick{display:block;margin-bottom:12px}.cm-cta h2{font-family:var(--font-heading);font-weight:700;font-size:clamp(32px,5vw,60px);letter-spacing:.01em}.cm-cta p{color:var(--t2);font-size:17px;max-width:520px;margin:16px auto 34px;line-height:1.7}.cm-mailline{font-family:var(--font-mono);font-size:13px!important;color:var(--t3)!important;margin-top:26px!important}.cm-mailline a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(119,198,192,.4)}.cm-mailline a:hover{border-bottom-color:var(--teal)}.cm-foot{max-width:var(--container);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:34px var(--pad);border-top:1px solid var(--line)}.cm-flogo{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-heading);font-weight:600;color:var(--t2);letter-spacing:.04em}.cm-feu{font-size:13px;color:var(--t3)}.cm-flinks{display:flex;gap:22px;flex-wrap:wrap}.cm-flinks a{font-size:13px;color:var(--t2);text-decoration:none;transition:color .2s}.cm-flinks a:hover{color:var(--teal)}.cm-fcopyright{font-family:var(--font-mono);font-size:12px;color:var(--t3)}html.js .reveal{opacity:0;transform:translateY(18px)}.cm-sec,.cm-cta{content-visibility:auto;contain-intrinsic-size:auto 640px}@media(max-width:900px){.cm-links{display:none}.cm-mnav{display:block}.cm-grid,.cm-grid.c4,.cm-comp-grid{grid-template-columns:1fr 1fr}.cm-plist{grid-template-columns:1fr}.cm-wgrid{grid-template-columns:1fr 1fr}.cm-feature,.cm-team,.cm-modes,.cm-mod-points{grid-template-columns:1fr}.cm-planet,.cm-cplay{display:none}}@media(max-width:560px){.cm-grid,.cm-grid.c4,.cm-comp-grid,.cm-wgrid{grid-template-columns:1fr}.cm-pill{display:none}}
+
+/* Spacing utilities: these replace three inline style="margin-top" attributes,
+   which is what lets the Content-Security-Policy drop 'unsafe-inline' for styles. */
+.cm-mt-24{margin-top:24px}
+.cm-mt-36{margin-top:36px}
+.cm-mt-40{margin-top:40px}
+
+/* Long-form pages (Impressum, Datenschutz, FAQ) and the error pages.
+   The marketing sections are all cards and grids; these need readable prose. */
+.cm-prose{max-width:760px;margin:0 auto;padding:clamp(90px,12vw,140px) var(--pad) clamp(60px,8vw,110px)}
+.cm-prose h1{font-family:var(--font-heading);font-weight:700;font-size:clamp(32px,5vw,60px);line-height:1.1;margin:0 0 28px}
+.cm-prose h2{font-family:var(--font-heading);font-weight:600;font-size:clamp(19px,2.4vw,27px);margin:44px 0 12px;color:var(--t1)}
+.cm-prose h3{font-family:var(--font-heading);font-weight:600;font-size:18px;margin:32px 0 10px;color:var(--t1)}
+.cm-prose p,.cm-prose li{color:var(--t2);font-size:16px;line-height:1.75;margin:0 0 14px}
+.cm-prose a{color:var(--color-link)}
+.cm-prose a:hover{color:var(--color-link-hover)}
+.cm-prose address{font-style:normal;color:var(--t2);line-height:1.9}
+.cm-prose .cm-back{display:inline-block;margin-top:40px}
+
+/* FAQ accordion. Native <details> so it needs no JavaScript, which also keeps
+   the page free of the inline onclick handlers the old markup relied on. */
+.cm-faq details{border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--glass);margin-bottom:12px}
+.cm-faq summary{cursor:pointer;list-style:none;padding:18px 22px;font-family:var(--font-heading);font-weight:600;font-size:17px;color:var(--t1)}
+.cm-faq summary::-webkit-details-marker{display:none}
+.cm-faq summary::after{content:"+";float:right;color:var(--color-hue);font-size:20px;line-height:1}
+.cm-faq details[open] summary::after{content:"−"}
+.cm-faq summary:hover{color:var(--color-hue)}
+.cm-faq details p{padding:0 22px 20px;margin:0}
+
+/* Brand mark in the navigation. The PNG already carries the brand teal
+   (#77c6c0 == --color-hue) on a transparent ground, so it needs no treatment.
+   width/height are set on the element to reserve space and avoid layout shift. */
+.cm-logo-pic{height:30px;width:30px;display:block;flex:none}
+/* "Rocket Pad Platforms" is far longer than "RPP" was: ease the tracking and
+   let it shrink before it can collide with the mobile menu button. */
+.cm-logo{letter-spacing:.04em;font-size:clamp(15px,2.2vw,19px);min-width:0}
+.cm-logo span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Right-hand end of the nav: language switch, CTA pill and the mobile menu. */
+.cm-nav-end{display:flex;align-items:center;gap:14px;flex:none}
+.cm-lang{display:flex;align-items:center;gap:2px;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;border:1px solid var(--line);border-radius:var(--radius-full);padding:3px}
+.cm-lang a{color:var(--t3);text-decoration:none;padding:4px 9px;border-radius:var(--radius-full);transition:color .2s,background .2s}
+.cm-lang a:hover{color:var(--t1)}
+.cm-lang a[aria-current]{color:var(--bg);background:var(--teal)}
+/* Visually hidden, still announced: the switch shows "DE"/"EN" but reads out
+   "Deutsch"/"English". */
+.cm-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* Five links, the language switch and the CTA no longer fit next to the logo
+   between the old 900px breakpoint and the container width. */
+@media (max-width:1100px){.cm-links{display:none}.cm-mnav{display:block}}
+
+/* The FAQ questions are real headings for document outline and rich results;
+   inside <summary> they keep the summary's look. */
+.cm-faq summary h2{display:inline;font:inherit;color:inherit;margin:0}
+.cm-faq-more{margin-top:28px}
+.cm-legal-note{font-size:14px!important;color:var(--t3)!important;border-left:2px solid var(--line);padding-left:14px}
+.cm-mail-faq{margin-top:10px!important}
+
+
+/* ==========================================================================
+   Background motion
+   --------------------------------------------------------------------------
+   The sky was a single static layer: three nebula gradients painted on
+   .cm-sky, plus 13 tiled star gradients on .cm-stars. Both are split into
+   their own elements here so each can be transformed independently.
+
+   Only `transform` and `opacity` are animated - both run on the compositor,
+   so a permanently-moving full-viewport background costs no repaints and no
+   main-thread work. Animating `background-position` instead would repaint the
+   whole screen every frame.
+
+   Every animation resolves to the element's base style at 0%/100%. That
+   matters: the global prefers-reduced-motion rule collapses animations to
+   0.001ms, so the resting state IS the reduced-motion state, and it has to be
+   identical to the original static design.
+   ========================================================================== */
+
+.cm-root{
+  --motion-drift-far: 240s;
+  --motion-drift-mid: 150s;
+  --motion-drift-near: 90s;
+  --motion-nebula: 120s;
+}
+
+/* Backgrounds move to child layers; the parents become positioning contexts. */
+.cm-sky{background:none}
+.cm-stars{background-image:none}
+.cm-stars-far{
+  position:absolute;left:0;right:0;top:0;
+  /* One extra tile of height so the wrap-around is never visible. */
+  height:calc(100% + 300px);
+  background-repeat:repeat;
+  background-size:300px 300px,300px 300px,300px 300px,300px 300px,300px 300px,300px 300px;
+  background-image:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 70%,#fff,transparent),radial-gradient(1px 1px at 60% 40%,#fff,transparent),radial-gradient(1px 1px at 80% 80%,#fff,transparent),radial-gradient(1px 1px at 90% 10%,#fff,transparent),radial-gradient(1px 1px at 45% 90%,#fff,transparent);
+  animation:cm-drift-far var(--motion-drift-far) linear infinite;
+}
+@keyframes cm-drift-far{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(0,-300px,0)}
+}
+.cm-stars-mid{
+  position:absolute;left:0;right:0;top:0;
+  /* One extra tile of height so the wrap-around is never visible. */
+  height:calc(100% + 480px);
+  background-repeat:repeat;
+  background-size:480px 480px,480px 480px,480px 480px,480px 480px;
+  background-image:radial-gradient(1.4px 1.4px at 25% 35%,rgba(119,198,192,.9),transparent),radial-gradient(1.4px 1.4px at 65% 15%,#fff,transparent),radial-gradient(1.4px 1.4px at 85% 55%,#fff,transparent),radial-gradient(1.4px 1.4px at 15% 75%,rgba(232,115,109,.8),transparent);
+  animation:cm-drift-mid var(--motion-drift-mid) linear infinite;
+}
+@keyframes cm-drift-mid{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(0,-480px,0)}
+}
+.cm-stars-near{
+  position:absolute;left:0;right:0;top:0;
+  /* One extra tile of height so the wrap-around is never visible. */
+  height:calc(100% + 700px);
+  background-repeat:repeat;
+  background-size:700px 700px,700px 700px,700px 700px;
+  background-image:radial-gradient(2px 2px at 40% 25%,#fff,transparent),radial-gradient(2px 2px at 75% 65%,rgba(119,198,192,.9),transparent),radial-gradient(2px 2px at 20% 55%,#fff,transparent);
+  animation:cm-drift-near var(--motion-drift-near) linear infinite;
+}
+@keyframes cm-drift-near{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(0,-700px,0)}
+}
+.cm-neb-a{
+  position:absolute;inset:0;
+  background:radial-gradient(640px 640px at 94% -10%,rgba(119,198,192,.2),transparent 68%);
+  animation:cm-neb-a var(--motion-nebula) ease-in-out 0s infinite;
+}
+@keyframes cm-neb-a{
+  0%,100%{transform:none;opacity:1}
+  50%{transform:translate3d(2.5%,-2%,0) scale(1.10);opacity:.86}
+}
+.cm-neb-b{
+  position:absolute;inset:0;
+  background:radial-gradient(580px 580px at -8% 40%,rgba(232,115,109,.16),transparent 68%);
+  animation:cm-neb-b var(--motion-nebula) ease-in-out -40s infinite;
+}
+@keyframes cm-neb-b{
+  0%,100%{transform:none;opacity:1}
+  50%{transform:translate3d(-2%,2.5%,0) scale(1.14);opacity:.86}
+}
+.cm-neb-c{
+  position:absolute;inset:0;
+  background:radial-gradient(520px 520px at 56% 112%,rgba(99,116,154,.16),transparent 68%);
+  animation:cm-neb-c var(--motion-nebula) ease-in-out -80s infinite;
+}
+@keyframes cm-neb-c{
+  0%,100%{transform:none;opacity:1}
+  50%{transform:translate3d(1.5%,2%,0) scale(1.08);opacity:.86}
+}
+
+/* --------------------------------------------------------------------------
+   Planet system
+
+   Three separate motions, all compositor-only (transform / opacity), all
+   resolving to the element's base style at 0% and 100% so the
+   prefers-reduced-motion path still renders the original static design.
+
+   The planet itself is deliberately NOT rotated: its shading is a fixed
+   radial-gradient highlight, so spinning it would drag the light source around
+   with the surface. It floats instead. And the orbit ring is a perfect circle
+   with a uniform border, so rotating THAT would be invisible - it breathes in
+   opacity instead, which actually reads.
+   -------------------------------------------------------------------------- */
+
+.cm-root{
+  --motion-planet-float: 20s;
+  --motion-orbit-breathe: 11s;
+  --motion-moon: 48s;
+}
+
+.cm-planet{
+  animation:cm-planet-float var(--motion-planet-float) ease-in-out infinite;
+}
+@keyframes cm-planet-float{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(0,-7px,0)}
+}
+
+.cm-orbit{
+  animation:cm-orbit-breathe var(--motion-orbit-breathe) ease-in-out infinite;
+}
+@keyframes cm-orbit-breathe{
+  0%,100%{opacity:1}
+  50%{opacity:.5}
+}
+
+/* The moon is centred on the planet and pushed out to the ring radius by
+   `rotate(-35deg) translate(105px)`. Sweeping that rotation a full turn walks
+   it around the ring; 325deg == -35deg + 360, so the loop is seamless and the
+   first frame matches the static position exactly. */
+.cm-moon{
+  animation:cm-moon-orbit var(--motion-moon) linear infinite;
+}
+@keyframes cm-moon-orbit{
+  from{transform:rotate(-35deg) translate(105px)}
+  to{transform:rotate(325deg) translate(105px)}
+}
+
+/* --------------------------------------------------------------------------
+   Headline launch sequence (runs once, on load)
+
+   The planet sits at the hero's top-right. The rocket drops off it, pitches
+   over onto the right end of the headline and flies RIGHT TO LEFT, laying down
+   smoke. The headline is not "wiped in" - it is hidden behind a soft mask that
+   resolves as the smoke thins, so the text emerges out of the clearing smoke.
+
+   ROTATION: the rocket glyph points north-east on its own, so nose direction
+   is `rotate(45deg - heading)`. 90deg points it down, 225deg points it left,
+   265deg up-and-left. The angles only ever increase, so it pitches over
+   smoothly instead of spinning back through zero. (An earlier version mirrored
+   the icon with scaleX(-1) and guessed the angles; that is what made the drop
+   off the planet look wrong.)
+
+   SAFETY: the headline's base style parks the mask at its REVEALED position,
+   so the text is visible whenever the animation does not run - reduced motion,
+   small screens, an old browser, or CSS that half-loaded. The reveal uses
+   `backwards` fill (to hold the hidden frame during the delay) and not
+   `forwards`, so it settles back onto that visible base rather than latching
+   its end state.
+   -------------------------------------------------------------------------- */
+
+.cm-root{
+  --motion-launch: 3.4s;
+  --motion-cross-start: 1.09s;  /* rocket reaches the headline's right edge */
+  --motion-cross: 1.7s;         /* time to cross the headline */
+}
+
+.cm-headline{position:relative}
+.cm-launch{position:absolute;inset:0;pointer-events:none;z-index:2}
+
+.cm-launch-fly{
+  position:absolute;left:0;top:50%;width:100%;height:0;
+  animation:cm-launch-path var(--motion-launch) linear both;
+}
+.cm-launch-rocket{
+  position:absolute;left:0;top:0;
+  display:block;margin:-13px 0 0 -13px;
+  color:var(--coral);
+  filter:drop-shadow(0 0 10px rgba(232,115,109,.6));
+  animation:cm-launch-tilt var(--motion-launch) linear both;
+}
+
+/* Exhaust. Lives on the rocket itself, so it rotates with it and therefore
+   trails correctly through the drop as well as the run across - the plume above
+   only starts once the rocket reaches the headline, which left the descent with
+   no smoke at all. The glyph points north-east, so its exhaust leaves from the
+   south-west corner.
+
+   Two layers: a bright core over the glyph and a broader, fainter haze behind
+   it (z-index:-1), pulsing on different periods so the two never beat in sync.
+   Both are anchored at the same pivot - right edge x=10px, centre y=22px - so
+   they stay pinned to the tail however far they are scaled. */
+.cm-launch-rocket::before,
+.cm-launch-rocket::after{
+  content:"";
+  position:absolute;
+  border-radius:999px;
+  transform-origin:right center;
+}
+
+/* broad haze, behind the glyph */
+.cm-launch-rocket::before{
+  left:-104px;top:1px;width:114px;height:42px;
+  background:radial-gradient(closest-side,
+    rgba(226,236,252,.34),rgba(232,115,109,.14) 58%,transparent 80%);
+  filter:blur(15px);
+  z-index:-1;
+  transform:rotate(-45deg);
+  animation:cm-launch-haze 1.7s ease-in-out infinite;
+}
+
+/* bright core */
+.cm-launch-rocket::after{
+  left:-68px;top:9px;width:78px;height:26px;
+  background:radial-gradient(closest-side,
+    rgba(240,246,255,.58),rgba(232,115,109,.24) 55%,transparent 78%);
+  filter:blur(10px);
+  transform:rotate(-45deg);
+  animation:cm-launch-exhaust 1.1s ease-in-out infinite;
+}
+
+@keyframes cm-launch-exhaust{
+  0%,100%{transform:rotate(-45deg) scale(1);opacity:.9}
+  50%    {transform:rotate(-45deg) scale(1.4,1.15);opacity:.6}
+}
+@keyframes cm-launch-haze{
+  0%,100%{transform:rotate(-45deg) scale(1);opacity:.55}
+  50%    {transform:rotate(-45deg) scale(1.3,1.12);opacity:.3}
+}
+
+@keyframes cm-launch-path{
+  0%   {transform:translate(96%,-185px);opacity:0}
+  6%   {opacity:1}
+  30%  {transform:translate(103%,0)}
+  32%  {transform:translate(101%,0)}
+  82%  {transform:translate(-3%,0);opacity:1}
+  100% {transform:translate(-24%,-72px);opacity:0}
+}
+
+@keyframes cm-launch-tilt{
+  0%   {transform:rotate(100deg) scale(.89)}  /* nose down, dropping away */
+  30%  {transform:rotate(190deg) scale(1.23)} /* pitching over */
+  34%  {transform:rotate(225deg) scale(1.23)} /* level, pointing left */
+  82%  {transform:rotate(225deg) scale(1.23)}
+  100% {transform:rotate(265deg) scale(.98)}  /* climbing away, nose up-left */
+}
+
+/* A plume, not a bar. Six soft puffs at staggered heights, and NO gradient that
+   runs to the element's boundary - the previous linear-gradient sat at full
+   opacity right on the right edge, which is what read as a box. The whole thing
+   is then feathered by its own radial mask, centred left-of-middle: dense where
+   the rocket just passed, thinning out towards the older right-hand end, and
+   never showing a straight edge anywhere.
+
+   top/height, never a percentage margin - those resolve against the container's
+   WIDTH. */
+.cm-launch-smoke{
+  position:absolute;right:-1%;top:-30%;
+  width:104%;height:160%;
+  transform-origin:right center;
+  transform:scaleX(0);
+  background:
+    radial-gradient(24% 38% at 12% 44%,rgba(232,240,255,.46),transparent 74%),
+    radial-gradient(21% 45% at 26% 62%,rgba(206,222,246,.40),transparent 76%),
+    radial-gradient(23% 36% at 40% 34%,rgba(226,236,252,.34),transparent 74%),
+    radial-gradient(19% 42% at 55% 66%,rgba(198,216,240,.26),transparent 76%),
+    radial-gradient(17% 34% at 70% 40%,rgba(214,228,248,.19),transparent 78%),
+    radial-gradient(15% 32% at 84% 58%,rgba(232,115,109,.13),transparent 80%);
+  -webkit-mask-image:radial-gradient(58% 62% at 44% 50%,#000 6%,rgba(0,0,0,.52) 38%,transparent 64%);
+  mask-image:radial-gradient(58% 62% at 44% 50%,#000 6%,rgba(0,0,0,.52) 38%,transparent 64%);
+  filter:blur(22px);
+  animation:cm-launch-smoke calc(var(--motion-cross) + 1s)
+            linear var(--motion-cross-start) both;
+}
+@keyframes cm-launch-smoke{
+  0%   {transform:scaleX(0);opacity:0}
+  6%   {opacity:1}
+  72%  {transform:scaleX(1);opacity:1}
+  100% {transform:scaleX(1.04);opacity:0}
+}
+
+/* A soft-edged mask, not a hard clip. The mask is 2.5x the headline width:
+   transparent on its left, opaque on its right, with a wide ramp between. As
+   mask-position travels 0% -> 100% the opaque side slides in from the right,
+   so the text surfaces behind the rocket with a feathered edge, timed to
+   finish just as the smoke finishes thinning. */
+.cm-hero h1{
+  -webkit-mask-image:linear-gradient(90deg,transparent 0 44%,#000 62% 100%);
+  mask-image:linear-gradient(90deg,transparent 0 44%,#000 62% 100%);
+  -webkit-mask-size:250% 100%;
+  mask-size:250% 100%;
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  /* The resting position is the REVEALED end. mask-position defaults to 0%,
+     which is the hidden end - leaving it at the default meant the headline
+     vanished again the moment the animation stopped and reverted to base. */
+  -webkit-mask-position:100% 0;
+  mask-position:100% 0;
+  animation:cm-headline-reveal 2s linear 1.25s backwards;
+}
+@keyframes cm-headline-reveal{
+  from{-webkit-mask-position:0% 0;mask-position:0% 0}
+  to  {-webkit-mask-position:100% 0;mask-position:100% 0}
+}
+
+/* No launch sequence when motion is unwelcome, or on phones where the planet
+   it launches from is not rendered at all. Base styles take over: headline
+   visible, nothing moving. */
+@media (prefers-reduced-motion:reduce){
+  .cm-hero h1{animation:none;-webkit-mask-image:none;mask-image:none}
+  .cm-launch{display:none}
+}
+@media (max-width:560px){
+  .cm-hero h1{animation:none;-webkit-mask-image:none;mask-image:none}
+  .cm-launch{display:none}
+}

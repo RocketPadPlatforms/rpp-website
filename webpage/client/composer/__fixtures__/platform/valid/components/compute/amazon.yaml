@@ -1,0 +1,9 @@
+kind: Component
+id: compute.amazon
+name: Amazon
+layer: compute
+type: cloud
+description: Amazon Web Services
+rules:
+  excludes: [kubernetes.gke, kubernetes.talos]
+  suggests: [kubernetes.aks]

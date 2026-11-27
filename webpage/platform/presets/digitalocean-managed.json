@@ -1,0 +1,6 @@
+{
+  "schema": "v1",
+  "name": "DigitalOcean Managed",
+  "description": "Fully managed DigitalOcean platform with DOKS",
+  "components": ["compute.digitalocean", "kubernetes.doks", "providers.cloud-lb", "providers.cloud-storage"]
+}

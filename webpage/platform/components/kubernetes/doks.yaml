@@ -1,0 +1,9 @@
+kind: Component
+id: kubernetes.doks
+name: DOKS
+layer: kubernetes
+type: managed
+description: DigitalOcean Managed Kubernetes
+rules:
+  suggests: [providers.cloud-lb, providers.cloud-storage]
+  excludes: [providers.metal-lb]

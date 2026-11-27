@@ -1,0 +1,6 @@
+kind: Component
+id: additional.sovereign-workplace
+name: Sovereign Workplace
+layer: additional
+type: office
+description: Run your own sovereign workplace on your own platform, based on openDesk Community Edition

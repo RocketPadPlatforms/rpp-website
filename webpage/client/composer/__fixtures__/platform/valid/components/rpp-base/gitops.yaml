@@ -1,0 +1,7 @@
+kind: Component
+id: rpp-base.gitops
+name: GitOps Tooling
+layer: rpp-base
+type: core
+description: GitOps-driven deployment workflows
+core: true

@@ -1,0 +1,6 @@
+kind: Component
+id: additional.s3-storage
+name: S3 Storage
+layer: additional
+type: storage
+description: S3-compatible object storage

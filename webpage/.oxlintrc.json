@@ -1,0 +1,15 @@
+{
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "rules": {
+    // Express 5 forwards rejected promises from async handlers to the error
+    // middleware, which is exactly what src/config/express.ts relies on. The
+    // rule's own note says to disable it on Express 5.
+    "oxc/no-async-endpoint-handlers": "off",
+    // The services use the conventional `_instance` singleton backing field.
+    "eslint/no-underscore-dangle": ["warn", { "allow": ["_instance"] }]
+  },
+  "ignorePatterns": ["dist", "node_modules", "assets/js", "assets/composer"]
+}

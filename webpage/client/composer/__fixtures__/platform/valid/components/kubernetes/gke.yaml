@@ -1,0 +1,9 @@
+kind: Component
+id: kubernetes.gke
+name: GKE
+layer: kubernetes
+type: managed
+description: Google Kubernetes Engine
+rules:
+  suggests: [providers.cloud-lb]
+  excludes: [providers.metal-lb, providers.longhorn, providers.ceph]

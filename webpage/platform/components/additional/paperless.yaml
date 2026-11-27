@@ -1,0 +1,6 @@
+kind: Component
+id: additional.paperless
+name: Paperless-ngx
+layer: additional
+type: office
+description: Organise your office paperwork digitally with Paperless-ngx

@@ -1,0 +1,6 @@
+kind: Component
+id: additional.psql-operator
+name: PostgreSQL Operator
+layer: additional
+type: database
+description: PostgreSQL databases on Kubernetes with the CloudNativePG operator

@@ -1,0 +1,18 @@
+# syntax=docker/dockerfile:1
+FROM node:24-alpine
+
+WORKDIR /app
+
+ENV PATH=/app/node_modules/.bin:$PATH
+
+COPY package.json package-lock.json ./
+
+RUN npm ci
+
+COPY ./ /app
+
+# 8080 serves the site, 9229 is the inspector. 9229 was never exposed before, so
+# the --inspect flag in the watch script had nothing listening it could reach.
+EXPOSE 8080 9229
+
+CMD ["npm", "run", "dev:debug"]

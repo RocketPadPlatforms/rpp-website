@@ -1,0 +1,9 @@
+kind: Component
+id: compute.hetzner
+name: Hetzner
+layer: compute
+type: cloud
+description: Hetzner Cloud
+rules:
+  excludes: [kubernetes.gke, kubernetes.aks]
+  suggests: [kubernetes.talos]

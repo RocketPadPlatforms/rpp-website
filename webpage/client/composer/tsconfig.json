@@ -1,0 +1,36 @@
+{
+  // The composer is a browser bundle, so it needs the DOM libs and JSX that the
+  // server build deliberately omits. It lives outside ../../src for exactly this
+  // reason: the root tsconfig compiles src/**/*.ts to CommonJS with lib ES2023
+  // only, and this code would not survive that.
+  "compilerOptions": {
+    "target": "ES2023",
+    // Array.prototype.toReversed() in ui/Canvas.tsx needs the ES2023 lib.
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+
+    // Vite emits the bundle; tsc only ever typechecks here.
+    "noEmit": true,
+    // data/loader.ts imports "./types.ts" with its extension - see the comment
+    // there. Permitted only alongside noEmit, which is why these sit together.
+    "allowImportingTsExtensions": true,
+
+    // "vite/client" declares the *.css side-effect import in entry/client.tsx.
+    // "node" is needed because data/loader.ts reads the catalogue with fs/path -
+    // it runs at build time (from vite.config.mts) and in tests, never in the
+    // browser bundle, which imports only data/types.
+    "types": ["node", "vite/client"],
+
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "__fixtures__"]
+}

@@ -1,0 +1,6 @@
+kind: Component
+id: providers.cloud-lb
+name: Cloud LB
+layer: providers
+type: networking
+description: Integrates directly with the cloud provider's load balancer

@@ -1,0 +1,9 @@
+kind: Component
+id: kubernetes.eks
+name: EKS
+layer: kubernetes
+type: managed
+description: Elastic Kubernetes Service
+rules:
+  suggests: [providers.cloud-lb, providers.cloud-storage]
+  excludes: [providers.metal-lb]

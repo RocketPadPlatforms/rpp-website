@@ -1,0 +1,6 @@
+kind: Component
+id: rpp-base.dns
+name: DNS Automation
+layer: rpp-base
+type: optional
+description: Automated DNS record management

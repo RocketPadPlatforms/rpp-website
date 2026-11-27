@@ -1,0 +1,261 @@
+{
+  "meta": {
+    "ogLocale": "de_DE",
+    "languageName": "Deutsch",
+    "ogImageAlt": "Rocket Pad Platforms – souveräne Kubernetes-Cloud für KMU"
+  },
+  "pages": {
+    "home": {
+      "title": "Souveräne Kubernetes-Cloud für KMU | Rocket Pad Platforms",
+      "description": "Ihre eigene Private Cloud auf Kubernetes: Open Source, mit einem Befehl ausgerollt, Daten in der EU und ohne Vendor-Lock-in. Plattform und Beratung für den Mittelstand."
+    },
+    "faq": {
+      "title": "FAQ – Souveräne Cloud & Kubernetes | Rocket Pad Platforms",
+      "description": "Antworten auf häufige Fragen zu Rocket Pad Platforms: was die souveräne Cloud-Plattform leistet, wie wir arbeiten, Hosting, Outsourcing und komplexe Cloud-Projekte.",
+      "nav": "FAQ"
+    },
+    "imprint": {
+      "title": "Impressum | Rocket Pad Platforms",
+      "description": "Impressum der Rocket Pad Platforms GmbH, Ratingen: Anschrift, Geschäftsführung, Kontakt und Registereintrag.",
+      "nav": "Impressum"
+    },
+    "privacy": {
+      "title": "Datenschutzerklärung | Rocket Pad Platforms",
+      "description": "Wie die Rocket Pad Platforms GmbH auf dieser Website personenbezogene Daten verarbeitet: keine Cookies, kein Tracking, selbst gehostete Schriftarten und Ihre Rechte nach DSGVO.",
+      "nav": "Datenschutz"
+    },
+    "notFound": {
+      "title": "Seite nicht gefunden | Rocket Pad Platforms",
+      "description": "Diese Seite existiert nicht oder wurde verschoben."
+    },
+    "error": {
+      "title": "Es ist ein Fehler aufgetreten | Rocket Pad Platforms",
+      "description": "Ein unerwarteter Fehler ist aufgetreten."
+    }
+  },
+  "nav": {
+    "label": "Hauptnavigation",
+    "home": "Rocket Pad Platforms – Startseite",
+    "platform": "Plattform",
+    "composer": "Composer",
+    "consultancy": "Beratung",
+    "team": "Team",
+    "cta": "Gespräch buchen",
+    "menu": "Menü",
+    "language": "Sprache"
+  },
+  "footer": {
+    "madeIn": "Made in Germany",
+    "docs": "Dokumentation",
+    "copyright": "© {year} Rocket Pad Platforms GmbH"
+  },
+  "common": {
+    "backHome": "Zurück zur Startseite",
+    "writeUs": "Schreiben Sie uns",
+    "legalEyebrow": "Rechtliches"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Souveräne Cloud für den europäischen Mittelstand",
+      "titleLine": "Die Cloud-Plattform,",
+      "titleGlow": "die wirklich Ihnen gehört.",
+      "slogan": "It's Your IT · Ihre Cloud · Ihre Regeln",
+      "lead": "RPP gibt kleinen und mittleren Unternehmen in Europa ihre eigene Private Cloud — die Leistung der Hyperscaler, ohne Lock-in, ohne böse Überraschungen auf der Rechnung und ohne dass Ihre Daten die EU verlassen. Open Source, mit einem Befehl ausgerollt, dauerhaft Ihres.",
+      "ctaCall": "Erstgespräch vereinbaren",
+      "ctaExplore": "Plattform entdecken",
+      "footnote": "Open Source · Läuft überall · Daten in der EU · Kein Lock-in"
+    },
+    "outcomes": {
+      "kick": "Worauf es ankommt",
+      "title": "Enterprise-Cloud zu Ihren Bedingungen.",
+      "costsTitle": "Planbare Kosten",
+      "costsBody": "Betrieb bei günstigen europäischen Anbietern wie Hetzner oder auf Ihrer eigenen Hardware. Keine Lizenzen pro Nutzer, keine Egress-Gebühren, keine Rechnung, die sich über Nacht verdreifacht.",
+      "euTitle": "Ihre Daten bleiben in der EU",
+      "euBody": "Ihre Daten liegen dort, wo Sie es wollen — in Ihrem Rechtsraum, auf Wunsch auf Ihrer eigenen Hardware. DSGVO durch Architektur, nicht per Häkchen.",
+      "freedomTitle": "Freiheit zu wechseln",
+      "freedomBody": "Vollständig auf offenen Standards gebaut. Nichts Proprietäres hält Ihr Unternehmen fest. Wechseln Sie den Anbieter oder holen Sie alles ins Haus — jederzeit.",
+      "teamTitle": "Kein großes Team nötig",
+      "teamBody": "Wir bauen auf, dokumentieren und schulen Ihr Team. Infrastruktur auf Expertenniveau — sichere Voreinstellungen, Hochverfügbarkeit, Monitoring — ohne eine eigene Expertenabteilung."
+    },
+    "pillars": {
+      "kick": "Plattform-Funktionen",
+      "title": "Eine komplette Plattform ab dem ersten Tag.",
+      "sub": "Die Grundlagen, die die SovereignCloud Platform direkt zu einer produktionsreifen internen Entwicklerplattform machen.",
+      "gitopsTitle": "GitOps als Standard",
+      "gitopsBody": "Jede Änderung ist deklarativ, in Git geprüft und umkehrbar. ArgoCD hält Ihren Cluster exakt im beschriebenen Zustand — nachvollziehbare Historie, kein manueller Drift.",
+      "anywhereTitle": "Läuft überall",
+      "anywhereBody": "Hetzner, OVH, AWS, Azure, GCP oder Ihr eigenes Rechenzentrum — die Plattform verhält sich überall gleich. Starten Sie kostengünstig und wechseln Sie, wann immer es passt.",
+      "k8sTitle": "Kubernetes als Fundament",
+      "k8sBody": "Derselbe bewährte Kern, auf dem die größten Unternehmen laufen — passend dimensioniert und für Sie abgestimmt. Skalierbar und hochverfügbar, ohne Betriebskopfschmerzen.",
+      "aiTitle": "Bereit für KI",
+      "aiBody": "Ein KI-Gateway, lokal betriebene Modelle und die direkte Integration in die Plattform. Geben Sie Ihrem Entwicklungsteam aktuelle LLMs über ein einziges, kontrolliertes Gateway.",
+      "containersTitle": "Container zuerst",
+      "containersBody": "Einmal paketiert, läuft überall — identisch vom Laptop bis in die Produktion. Kein „Bei mir läuft's“ mehr, keine Überraschungen zwischen Umgebungen.",
+      "liveTitle": "In Stunden live",
+      "liveBody": "Eine komplette Plattform, ausgerollt mit einem einzigen Befehl. Ihre Entwickler liefern nach Stunden — nicht nach einem Quartal Einrichtung.",
+      "ssoTitle": "Single Sign-On",
+      "ssoBody": "Ein sicherer Login für alle Dienste über Keycloak (OIDC / OAuth). Einheitliche Zugriffsregeln, einfachere Audits, weniger Passwörter, die abhandenkommen können."
+    },
+    "modules": {
+      "kick": "Plattform zusammenstellen",
+      "titleLine": "Bauen Sie Ihre Cloud,",
+      "titleGlow": "Modul für Modul.",
+      "sub": "Schlank starten, mit dem Bedarf wachsen. Kerndienste sind immer aktiv; optionale Module schalten Sie zu, wenn Sie so weit sind — der Composer stellt sicher, dass alles zusammenpasst, und exportiert eine einsatzbereite Konfiguration.",
+      "openTab": "Composer in einem neuen Tab öffnen",
+      "previewAlt": "Vorschau des RPP Composers: Plattform-Schichten und Module auf einer Arbeitsfläche",
+      "launch": "Interaktiven Composer starten",
+      "coreTitle": "Kerndienste",
+      "coreBody": "GitOps, Kubernetes und SSO sind immer aktiv",
+      "optionalTitle": "Optionale Module",
+      "optionalBody": "Monitoring, Speicher und KI-Module bei Bedarf zuschalten",
+      "scaleTitle": "Skalierbarer Ausbau",
+      "scaleBody": "neue Module fügen sich ein, ohne laufende Workloads zu stören",
+      "complianceTitle": "Compliance-fähig",
+      "complianceBody": "gebaut, um die Anforderungen von ISO 27001, BSI IT-Grundschutz, NIS2 und DSGVO leichter zu erfüllen",
+      "open": "Composer öffnen",
+      "docs": "Zur Dokumentation"
+    },
+    "product": {
+      "kick": "Die Plattform · Open Source · GitOps first · Bereit für KI",
+      "titleLine": "Alles an Bord,",
+      "titleGlow": "nichts, was Sie bindet.",
+      "sub": "Zahlen Sie nicht länger für Infrastruktur, die Sie nicht kontrollieren. Die SovereignCloud Platform gibt Ihnen eine vollwertige Private Cloud — identisch bei Hetzner, AWS oder im eigenen Rechenzentrum — ohne Lizenzgebühren und ohne Telemetrie.",
+      "providerTitle": "Jeder Anbieter",
+      "providerBody": "Hetzner, OVH, AWS, Azure, GCP oder Bare Metal",
+      "gitopsTitle": "GitOps-nativ",
+      "gitopsBody": "jede Änderung deklarativ, nachvollziehbar, umkehrbar",
+      "aiTitle": "Bereit für KI",
+      "aiBody": "KI-Gateway, lokal betriebene Modelle, KI-Budgets & Observability",
+      "batteriesTitle": "Alles inklusive",
+      "batteriesBody": "IdP, Ingress, Speicher, Monitoring & Secrets ab Werk",
+      "modularTitle": "Modularer Aufbau",
+      "modularBody": "nur aktivieren, was Sie brauchen; mitwachsen, wenn Sie wachsen",
+      "bareMetal": "Bare Metal",
+      "yours": "…und Ihres",
+      "docs": "Zur Dokumentation",
+      "stackLabel": "⌖ Stack-Architektur",
+      "stackIam": "Identität & Zugriff — Keycloak / OIDC",
+      "stackIngress": "Ingress — Traefik / Gateway API",
+      "stackK8s": "Einheitliche Kubernetes-Schicht",
+      "stackGitops": "GitOps-Engine — ArgoCD",
+      "stackStorage": "Verteilter Speicher — Longhorn / Rook-Ceph",
+      "stackObs": "Observability — Prometheus · Grafana · Loki"
+    },
+    "consultancy": {
+      "kick": "Zusammenarbeit",
+      "title": "Brauchen Sie Unterstützung — oder wollen Sie Ihr eigenes Team stärken?",
+      "sub": "Zwei Wege der Zusammenarbeit. Wir betreiben Ihre souveräne Cloud für Sie, oder wir bauen gemeinsam mit Ihrem Team und übergeben die Schlüssel — damit das Wissen im Haus bleibt und nicht bei einem Anbieter.",
+      "runTitle": "Wir betreiben es für Sie",
+      "runBody": "Konzeption, Aufbau und Betrieb Ihrer Plattform aus einer Hand. Sie erhalten eine verwaltete souveräne Cloud, ohne ein eigenes Ops-Team aufzubauen.",
+      "empowerTitle": "Wir befähigen Ihr Team",
+      "empowerBody": "Wir arbeiten im Pairing, schulen und dokumentieren, damit Ihr Team die Plattform nach unserem Einsatz selbst beherrscht. Sie gewinnen Kompetenz, keine Abhängigkeit.",
+      "k8sTitle": "Kubernetes Engineering",
+      "k8sBody": "Produktionsreifes Cluster-Design, GitOps-Pipelines und Operator-Entwicklung — vom Bare-Metal-Bootstrapping bis zur mandantenfähigen Plattformarchitektur.",
+      "hostingTitle": "Souveränes Hosting",
+      "hostingBody": "Ihre Daten bleiben Ihre Daten. Selbst betriebene Infrastruktur auf Ihrer Hardware, in Ihrem Rechtsraum — ein solides technisches Fundament für DSGVO-Konformität, ohne Cloud-Abhängigkeit.",
+      "cloudTitle": "Cloud Engineering",
+      "cloudBody": "Multi-Cloud- und Hybrid-Strategien ohne Komplexitätsfalle. Robuste, kostenoptimierte Architekturen über Hetzner, OVH, AWS, Azure und GCP hinweg.",
+      "platformTitle": "Platform Engineering",
+      "platformBody": "Interne Entwicklerplattformen, die Ihre Teams schneller machen — Backstage-Portale, Service Meshes, Secret-Management und vollständige Observability-Stacks.",
+      "securityTitle": "Sicherheit & Compliance",
+      "securityBody": "Zero-Trust-Netzwerke, Policy-as-Code und Supply-Chain-Sicherheit. Härten Sie Cluster in Richtung BSI, NIS2 und DSGVO, ohne Ihre Teams auszubremsen.",
+      "signedCommits": "Signierte Commits",
+      "migrationTitle": "Migration & Schulung",
+      "migrationBody": "Von Legacy zu Cloud-native — und Ihr Team lernt von Anfang an mit. Wir containerisieren, migrieren auf die neue Plattform und sorgen dafür, dass das Wissen in Ihrem Unternehmen bleibt.",
+      "tagContainerize": "Containerisierung",
+      "tagReplatform": "Replatforming",
+      "tagWorkshops": "Workshops",
+      "cta": "Mit einem Engineer sprechen"
+    },
+    "team": {
+      "kick": "Das Team",
+      "title": "Wer Ihre Plattform baut.",
+      "sub": "Ein kleines, erfahrenes Team mit tiefem Praxiswissen — und wir sorgen dafür, dass dieses Wissen lange nach Projektende in Ihrem Team bleibt.",
+      "kilianRole": "Geschäftsführer · Cloud Engineer · DevOps Engineer",
+      "kilianBio": "IaC- und Cloud-Experte mit Schwerpunkt auf GCP und Kubernetes. Entwirft souveräne Infrastruktur, die skaliert und unabhängig bleibt.",
+      "alexanderRole": "Kubernetes Engineer · Platform Engineer",
+      "alexanderBio": "Experte für Private-Cloud-Plattformen und Kubernetes-Architektur. Spezialisiert auf Cluster-Betrieb und Plattformzuverlässigkeit."
+    },
+    "why": {
+      "kick": "Warum RPP",
+      "titleLine": "Stärken Sie das Team,",
+      "titleGlow": "das Sie schon haben.",
+      "defaultsTitle": "Sinnvolle Voreinstellungen, schon getroffen",
+      "defaultsBody": "Die Plattform bringt die Entscheidungen mit, die ein erfahrenes Team treffen würde — sichere Voreinstellungen, Hochverfügbarkeit, GitOps. Sie starten auf festem Boden, nicht auf einem leeren Blatt.",
+      "engineersTitle": "Echte Engineers, wenn Sie sie brauchen",
+      "engineersBody": "Architektur-Reviews, Pairing und ein direkter Draht zu Menschen, die das in Produktion betrieben haben. Hilfe, wenn es darauf ankommt — ohne zusätzliche Vollzeitstelle.",
+      "investTitle": "Investieren, wo es zählt",
+      "investBody": "Wir helfen Ihnen zu entscheiden, was Sie bauen, kaufen oder weglassen — damit Ihr Budget dorthin fließt, wo es wirkt, und teure Umwege ausbleiben.",
+      "knowledgeTitle": "Das Wissen bleibt im Haus",
+      "knowledgeBody": "Wir schulen, dokumentieren und arbeiten im Pairing, damit Ihr Team wächst. Am Ende sind Sie kompetenter, nicht abhängiger."
+    },
+    "compliance": {
+      "kick": "Ein Fundament für Compliance",
+      "title": "Die technische Grundlage. Das Zertifikat bleibt Ihres.",
+      "sub": "Compliance betrifft das ganze Unternehmen und liegt immer in Ihrer Verantwortung — sie reicht weit über die Infrastruktur hinaus. Die Plattform liefert die technische Grundlage, die den Weg dorthin erleichtert: Datenhaltung in der EU, Audit-Trails, Zugriffskontrollen und gehärtete Voreinstellungen, die auf DSGVO, NIS2, BSI IT-Grundschutz und ISO 27001 einzahlen.",
+      "label": "Bausteine für:",
+      "gdpr": "DSGVO",
+      "gdprBody": "Datenhaltung in der EU by Design",
+      "nis2Body": "Audit-Logging & Zugriffskontrolle",
+      "bsiBody": "Gehärtete, am IT-Grundschutz ausgerichtete Voreinstellungen",
+      "isoBody": "Dokumentierte, wiederholbare Kontrollen"
+    },
+    "contact": {
+      "kick": "Bereit zum Abheben?",
+      "title": "Übernehmen Sie Ihre Infrastruktur.",
+      "body": "Vereinbaren Sie ein unverbindliches Erstgespräch oder lesen Sie zuerst die Dokumentation. Ob Neustart, Migration oder einfach Neugier — lassen Sie uns sprechen.",
+      "ctaCall": "Erstgespräch vereinbaren",
+      "docs": "Zur Dokumentation",
+      "mail": "Lieber per E-Mail? Schreiben Sie uns an",
+      "faq": "Erst einmal Fragen? Zu den häufigen Fragen"
+    }
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Häufige Fragen",
+    "items": [
+      {
+        "q": "Was ist Rocket Pad Platforms?",
+        "a": "Rocket Pad Platforms ist ein Unternehmen, das eine private Cloud-Plattform und das damit verbundene Fachwissen anbietet. Unsere Plattform ermöglicht kleinen und mittleren Unternehmen (KMU) den Einsatz von Cloud-Technologien, um die Vorteile der Skalierbarkeit, Elastizität, Sicherheit und Stabilität der modernen Softwareentwicklung der öffentlichen Cloud zu nutzen."
+      },
+      {
+        "q": "Wo ist Rocket Pad Platforms?",
+        "a": "Wir sind ein Remote-Team, das über ganz Deutschland verteilt arbeitet. Unsere Gründer verfügen über langjährige Erfahrung in den Bereichen Cloud, DevOps und Software Engineering. Obwohl wir remote arbeiten, bieten wir unseren Service bundesweit an."
+      },
+      {
+        "q": "Wobei kann Rocket Pad Platforms mich unterstützen?",
+        "a": "Rocket Pad Platforms kann Sie bei der Transformation Ihrer IT-Landschaft unterstützen und Ihnen helfen, die Vorteile der Cloud-Technologie optimal zu nutzen. Wir bieten eine Plattform, die alle Vorteile der öffentlichen Cloud bietet (Skalierbarkeit, Elastizität, Widerstandsfähigkeit) sowie eine reife interne Entwicklungsplattform mit Funktionen wie kontinuierlichem Deployment, Logging/Observability, Authentifizierung (SSO) und Autorisierung, Datenbank-as-a-Service, Mutual TLS, Policy-Engines und kontinuierlichem Schwachstellen-Scanning. Mit unserer Plattform können Sie sich vollständig auf die Entwicklung von Software konzentrieren, die für Ihr Kerngeschäft relevant ist."
+      },
+      {
+        "q": "Wie kann ich euch kontaktieren?",
+        "a": "Schreiben Sie uns einfach an <a href=\"mailto:hello@rpp.gmbh\">hello@rpp.gmbh</a> — wir melden uns so schnell wie möglich bei Ihnen."
+      },
+      {
+        "q": "Bietet Rocket Pad Platforms IT-Outsourcing an?",
+        "a": "Nein, wir bieten kein IT-Outsourcing an. Unser Fokus liegt auf der Bereitstellung unserer Plattform und dem Angebot von Projekten, bei denen wir Kunden mit unserer Plattform unterstützen."
+      },
+      {
+        "q": "Kann ich bei euch Serverhosting bestellen?",
+        "a": "Nein, wir bieten kein Serverhosting an. Unsere Plattform konzentriert sich auf die Bereitstellung einer umfassenden Lösung für die private Cloud, die alle erforderlichen Funktionen und Services umfasst. Diese setzen wir gerne für Sie bei einem beliebigen Hosting-Dienstleister auf, stellen aber selbst keine Server zur Verfügung."
+      },
+      {
+        "q": "Ich habe ein komplexes Cloud-Projekt. Könnt ihr das umsetzen?",
+        "a": "Ja, wir können Ihnen bei komplexen Cloud-Projekten helfen. Unsere Plattform und unser erfahrenes Team ermöglichen es uns, Ihre Anforderungen umzusetzen und maßgeschneiderte Lösungen für Ihr Cloud-Projekt zu entwickeln. Bitte kontaktieren Sie uns, um weitere Informationen zu erhalten und Ihre spezifischen Anforderungen zu besprechen."
+      }
+    ]
+  },
+  "errors": {
+    "notFound": {
+      "eyebrow": "404",
+      "titleLine": "Verloren im",
+      "titleGlow": "All.",
+      "body": "Diese Seite existiert nicht oder wurde verschoben. Von der Startseite aus finden Sie alles Weitere."
+    },
+    "server": {
+      "eyebrow": "500",
+      "titleLine": "Houston, wir haben ein",
+      "titleGlow": "Problem.",
+      "body": "Auf unserer Seite ist etwas schiefgelaufen. Bitte versuchen Sie es in einem Moment erneut — falls das Problem bestehen bleibt, erreichen Sie uns unter"
+    }
+  }
+}

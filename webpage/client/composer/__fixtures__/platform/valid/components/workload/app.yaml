@@ -1,0 +1,6 @@
+kind: Component
+id: workload.app
+name: APP
+layer: workload
+type: service
+description: Application workload

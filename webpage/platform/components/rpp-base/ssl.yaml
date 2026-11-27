@@ -1,0 +1,7 @@
+kind: Component
+id: rpp-base.ssl
+name: SSL Automation
+layer: rpp-base
+type: core
+description: Automated TLS certificate management
+core: true

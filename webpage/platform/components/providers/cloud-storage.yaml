@@ -1,0 +1,6 @@
+kind: Component
+id: providers.cloud-storage
+name: Cloud Storage
+layer: providers
+type: storage
+description: Integrates directly with the cloud provider's storage

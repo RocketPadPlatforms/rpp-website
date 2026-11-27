@@ -1,0 +1,6 @@
+kind: Component
+id: additional.ai-chat
+name: AI Chat
+layer: additional
+type: ai
+description: Open WebUI deployment wired into the other AI modules

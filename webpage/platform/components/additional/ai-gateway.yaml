@@ -1,0 +1,6 @@
+kind: Component
+id: additional.ai-gateway
+name: AI Gateway
+layer: additional
+type: ai
+description: An AI gateway wired up with local models and the chat UI

@@ -1,0 +1,6 @@
+{
+  "schema": "v1",
+  "name": "AWS Managed",
+  "description": "Fully managed AWS platform with EKS",
+  "components": ["compute.amazon", "kubernetes.eks", "providers.cloud-lb", "providers.cloud-storage"]
+}

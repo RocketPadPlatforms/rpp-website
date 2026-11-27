@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["kind", "id", "name", "position", "select"],
+  "properties": {
+    "kind": { "const": "Layer" },
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "name": { "type": "string", "minLength": 1 },
+    "position": { "type": "integer", "minimum": 0 },
+    "select": { "enum": ["single", "multi"] },
+    "unlocksAfter": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+  },
+  "additionalProperties": false
+}

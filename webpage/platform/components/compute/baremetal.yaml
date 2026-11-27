@@ -1,0 +1,9 @@
+kind: Component
+id: compute.baremetal
+name: Bare Metal
+layer: compute
+type: self-hosted
+description: Self-hosted bare metal servers
+rules:
+  excludes: [kubernetes.gke, kubernetes.eks, kubernetes.doks]
+  suggests: [kubernetes.talos, providers.longhorn, providers.metal-lb]

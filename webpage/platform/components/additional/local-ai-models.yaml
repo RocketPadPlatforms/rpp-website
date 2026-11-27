@@ -1,0 +1,6 @@
+kind: Component
+id: additional.local-ai
+name: Local AI Models
+layer: additional
+type: ai
+description: A toolchain to host your own AI models inside your platform

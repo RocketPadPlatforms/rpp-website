@@ -1,0 +1,6 @@
+kind: Component
+id: additional.artifact-registry
+name: Artifact Registry
+layer: additional
+type: registry
+description: Container image registry

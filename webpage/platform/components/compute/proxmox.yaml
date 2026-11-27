@@ -1,0 +1,9 @@
+kind: Component
+id: compute.proxmox
+name: Proxmox
+layer: compute
+type: self-hosted
+description: Self-hosted on Proxmox datacenter VMs
+rules:
+  excludes: [kubernetes.gke, kubernetes.eks, kubernetes.doks]
+  suggests: [kubernetes.talos, providers.metal-lb]

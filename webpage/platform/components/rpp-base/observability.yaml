@@ -1,0 +1,6 @@
+kind: Component
+id: rpp-base.observability
+name: Observability Stack
+layer: rpp-base
+type: optional
+description: Monitoring, logging, and tracing

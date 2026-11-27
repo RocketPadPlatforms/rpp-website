@@ -1,0 +1,6 @@
+kind: Component
+id: providers.metal-lb
+name: Metal LB
+layer: providers
+type: networking
+description: Bare metal load balancer

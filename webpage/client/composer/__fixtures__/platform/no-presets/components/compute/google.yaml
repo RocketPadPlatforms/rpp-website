@@ -1,0 +1,6 @@
+kind: Component
+id: compute.google
+name: Google
+layer: compute
+type: cloud
+description: Google Cloud Platform

@@ -1,0 +1,9 @@
+kind: Component
+id: kubernetes.aks
+name: AKS
+layer: kubernetes
+type: managed
+description: Azure Kubernetes Service
+rules:
+  suggests: [providers.cloud-lb]
+  excludes: [providers.metal-lb, providers.longhorn, providers.ceph]
