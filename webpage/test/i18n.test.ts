@@ -4,7 +4,6 @@ import { beforeAll, describe, expect, it } from "vitest";
 import de from "../src/locales/de.json";
 import en from "../src/locales/en.json";
 
-process.env.NODE_ENV = "development";
 process.env.APP_ROOT = ".";
 process.env.LOG_LEVEL = "silent";
 

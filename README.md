@@ -203,6 +203,6 @@ docker build -t rocketpadplatforms-website .
 docker run --rm -p 8080:8080 --env-file .env rocketpadplatforms-website
 ```
 
-The container runs as the unprivileged `node` user under tini, serves `/healthz`
+The container runs as the unprivileged `node` user, serves `/healthz`
 for the Kubernetes probes, and shuts down on SIGTERM without dropping in-flight
 requests. See `example.env` for the supported environment variables.

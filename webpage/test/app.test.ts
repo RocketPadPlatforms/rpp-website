@@ -2,9 +2,8 @@ import type { Application } from "express";
 import request from "supertest";
 import { beforeAll, describe, expect, it } from "vitest";
 
-// All three must be set before src/config/express is imported: paths.ts and
+// Both must be set before src/config/express is imported: paths.ts and
 // logger.ts read process.env at module scope.
-process.env.NODE_ENV = "development"; // never sends real mail
 process.env.APP_ROOT = "."; // serve views/ and assets/ from the working tree
 process.env.LOG_LEVEL = "silent"; // keep request logs out of the test report
 
@@ -191,6 +190,13 @@ describe("retired and moved pages", () => {
 });
 
 describe("security headers", () => {
+  it("answers cross-origin requests without CORS headers", async () => {
+    const res = await request(app)
+      .get("/en")
+      .set("Origin", "https://example.com");
+    expect(res.headers["access-control-allow-origin"]).toBeUndefined();
+  });
+
   it("the CSP allows no inline script or style", async () => {
     const res = await request(app).get("/en");
     const csp = res.headers["content-security-policy"];

@@ -1,5 +1,4 @@
 import compression from "compression";
-import cors from "cors";
 import express, {
   Application,
   json,
@@ -26,31 +25,6 @@ import routes from "../routes/site";
 import logger from "./logger";
 import { SITE_URL } from "./site";
 import { ASSETS_DIR, VIEWS_DIR } from "./paths";
-
-// Cross-origin requests are refused unless an origin is explicitly allowlisted.
-// This used to be a hardcoded empty array, which made the delegate below dead
-// code: every cross-origin request was denied, and requests with no Origin
-// header fell through to cors' `origin: '*'` default.
-const allowlist = (process.env.CORS_ALLOWED_ORIGINS ?? "")
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
-
-type CorsCallback = (err: Error | null, options: { origin: boolean }) => void;
-
-const corsOptionsDelegate = (req: Request, callback: CorsCallback) => {
-  const origin = req.header("Origin");
-
-  if (!origin) {
-    callback(null, { origin: false });
-    return;
-  }
-
-  const isDomainAllowed =
-    allowlist.indexOf(origin) !== -1 || process.env.NODE_ENV === "development";
-
-  callback(null, { origin: isDomainAllowed });
-};
 
 interface HelperOptions {
   fn: (context: unknown) => string;
@@ -124,8 +98,8 @@ function errorLocale(req: Request): Locale {
 export function createApp(): Application {
   const app: Application = express();
 
-  // Request logging needs the real client IP, which arrives in X-Forwarded-For
-  // from the ingress rather than on the socket.
+  // Behind the ingress, req.hostname must come from X-Forwarded-Host, or the
+  // www redirect below never sees the host the visitor asked for.
   app.set("trust proxy", Number(process.env.TRUST_PROXY ?? 1));
 
   // Before anything else: a www request should not pay for rendering,
@@ -196,7 +170,6 @@ export function createApp(): Application {
   );
   app.use(compression());
   app.use(pinoHttp({ logger }));
-  app.use(cors(corsOptionsDelegate));
   app.use(json({ limit: "64kb" }));
   app.use(urlencoded({ extended: false, limit: "64kb" }));
   // The composer's HTML must have exactly one public URL.

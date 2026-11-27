@@ -42,8 +42,6 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-RUN apk add --no-cache tini
-
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY package.json ./
@@ -52,8 +50,4 @@ USER node
 
 EXPOSE 8080
 
-# tini has been installed here for years without ever being used: node ran as
-# PID 1, so it neither reaped children nor forwarded SIGTERM, and every rolling
-# update waited out the full termination grace period.
-ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["node", "/app/dist/app.js"]

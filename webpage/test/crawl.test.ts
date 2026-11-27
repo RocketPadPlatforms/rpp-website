@@ -2,7 +2,6 @@ import type { Application } from "express";
 import request from "supertest";
 import { beforeAll, describe, expect, it } from "vitest";
 
-process.env.NODE_ENV = "development";
 process.env.APP_ROOT = ".";
 process.env.LOG_LEVEL = "silent";
 
