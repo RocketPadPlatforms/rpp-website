@@ -1,0 +1,177 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Weekly re-scan of the published image for newly disclosed vulnerabilities.
+    - cron: "0 5 * * 1"
+
+permissions: {}
+
+concurrency:
+  group: ci-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  IMAGE_NAME: ghcr.io/rocketpadplatforms/rpp-website
+  # renovate: datasource=github-releases depName=helm/helm
+  HELM_VERSION: v4.3.2
+
+jobs:
+  lint-workflows:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: actionlint
+        uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+        with:
+          args: -color
+      - name: zizmor
+        uses: zizmorcore/zizmor-action@1b4550e929643b8b26a62303c6bd64814271a4f1 # v0.9.2
+        with:
+          # Pull requests from forks get a read-only token and cannot upload.
+          advanced-security: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+
+  verify:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: webpage
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: webpage/.nvmrc
+          cache: npm
+          cache-dependency-path: webpage/package-lock.json
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+
+  chart:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: azure/setup-helm@2f5e7bc67f1f9972ab16657bb795f36d8f04de0e # v5.1.0
+        with:
+          version: ${{ env.HELM_VERSION }}
+      - run: helm lint --strict chart
+      - run: helm template rpp-website chart > "$RUNNER_TEMP/chart.yaml"
+      - uses: RocketPadPlatforms/github-actions/actions/kubeconform-validate@f6d860561e1cd1f11398ea5538cf4898d1cb8a7a # v1.6.0
+        with:
+          file: ${{ runner.temp }}/chart.yaml
+
+  image:
+    if: github.event_name != 'schedule'
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+    env:
+      # Pull requests from forks only build and scan: no upload, no push.
+      PUBLISH: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - id: meta
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        env:
+          # Tag pull request images with the head commit, not the merge commit.
+          DOCKER_METADATA_PR_HEAD_SHA: "true"
+        with:
+          images: ${{ env.IMAGE_NAME }}
+          tags: type=sha,prefix=,format=short
+      - name: Build
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: webpage
+          platforms: linux/amd64
+          load: true
+          push: false
+          provenance: false
+          sbom: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      - name: Trivy report
+        uses: docker://aquasec/trivy:0.76.2@sha256:8f6bb947dbc528902e11f2f5be52f7b519f6a39d5d148f41166f2040499768fb
+        with:
+          args: image --format sarif --output trivy.sarif --cache-dir .trivy --no-progress ${{ steps.meta.outputs.tags }}
+      - name: Upload Trivy report
+        if: always() && env.PUBLISH == 'true' && hashFiles('trivy.sarif') != ''
+        uses: github/codeql-action/upload-sarif@1bd86f2fdb4b86187fa4059f16f31a3202acc9ea # v4.39.4
+        with:
+          sarif_file: trivy.sarif
+          category: trivy
+      - name: Fail on critical vulnerabilities
+        uses: docker://aquasec/trivy:0.76.2@sha256:8f6bb947dbc528902e11f2f5be52f7b519f6a39d5d148f41166f2040499768fb
+        with:
+          args: image --exit-code 1 --severity CRITICAL --cache-dir .trivy --no-progress ${{ steps.meta.outputs.tags }}
+      - name: Log in to ghcr.io
+        if: env.PUBLISH == 'true'
+        uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Push the scanned image
+        if: env.PUBLISH == 'true'
+        env:
+          IMAGE: ${{ steps.meta.outputs.tags }}
+        run: docker push "$IMAGE"
+
+  rescan:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - id: image
+        run: echo "ref=${IMAGE_NAME}:${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+      - name: Trivy report
+        uses: docker://aquasec/trivy:0.76.2@sha256:8f6bb947dbc528902e11f2f5be52f7b519f6a39d5d148f41166f2040499768fb
+        with:
+          args: image --format sarif --output trivy.sarif --cache-dir .trivy --no-progress ${{ steps.image.outputs.ref }}
+      - name: Upload Trivy report
+        if: always() && hashFiles('trivy.sarif') != ''
+        uses: github/codeql-action/upload-sarif@1bd86f2fdb4b86187fa4059f16f31a3202acc9ea # v4.39.4
+        with:
+          sarif_file: trivy.sarif
+          category: trivy
+      - name: Fail on critical vulnerabilities
+        uses: docker://aquasec/trivy:0.76.2@sha256:8f6bb947dbc528902e11f2f5be52f7b519f6a39d5d148f41166f2040499768fb
+        with:
+          args: image --exit-code 1 --severity CRITICAL --cache-dir .trivy --no-progress ${{ steps.image.outputs.ref }}
