@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":pinAllExceptPeerDependencies",
+    "customManagers:githubActionsVersions"
+  ],
+  "minimumReleaseAge": "3 days",
+  "ignoreDeps": ["ghcr.io/rocketpadplatforms/rpp-website"],
+  "packageRules": [
+    {
+      "description": "Patch and digest updates merge themselves once the required checks pass",
+      "matchUpdateTypes": ["patch", "digest", "pin", "pinDigest"],
+      "automerge": true
+    },
+    {
+      "description": "Node.js moves as one: .nvmrc, the Docker image, the devcontainer and the types",
+      "matchDepNames": [
+        "node",
+        "@types/node",
+        "mcr.microsoft.com/devcontainers/typescript-node"
+      ],
+      "groupName": "Node.js"
+    },
+    {
+      "description": "@types/node follows Node's LTS majors, like the runtime",
+      "matchDepNames": ["@types/node"],
+      "versioning": "node"
+    }
+  ]
+}
