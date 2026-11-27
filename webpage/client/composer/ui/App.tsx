@@ -7,7 +7,10 @@ import { ComposeDrawer } from "./ComposeDrawer";
 import type { PlatformData } from "../data/types";
 import { RPP, FONTS } from "./theme";
 
-function selectionIsCoreOnly(selection: Set<string>, coreIds: string[]): boolean {
+function selectionIsCoreOnly(
+  selection: Set<string>,
+  coreIds: string[],
+): boolean {
   if (selection.size !== coreIds.length) return false;
   for (const id of coreIds) {
     if (!selection.has(id)) return false;
@@ -28,9 +31,17 @@ export const SITE_LINKS = [
 
 function SiteLinks() {
   return (
-    <nav aria-label="Rocket Pad Platforms" className="flex items-center gap-4 text-xs">
+    <nav
+      aria-label="Rocket Pad Platforms"
+      className="flex items-center gap-4 text-xs"
+    >
       {SITE_LINKS.map((link) => (
-        <a key={link.href} href={link.href} target="_top" className="rpp-site-link">
+        <a
+          key={link.href}
+          href={link.href}
+          target="_top"
+          className="rpp-site-link"
+        >
           {link.label}
         </a>
       ))}
@@ -43,12 +54,9 @@ export function App({ platform }: { platform: PlatformData }) {
   const [composeOpen, setComposeOpen] = useState(false);
   const canvasRef = useRef<CanvasHandle>(null);
 
-  const handleWorkloadPaletteClick = useCallback(
-    (compId: string) => {
-      canvasRef.current?.openWorkloadAdd(compId);
-    },
-    [],
-  );
+  const handleWorkloadPaletteClick = useCallback((compId: string) => {
+    canvasRef.current?.openWorkloadAdd(compId);
+  }, []);
 
   useEffect(() => {
     // Also when a share link was present but sanitised down to nothing: the
@@ -78,7 +86,8 @@ export function App({ platform }: { platform: PlatformData }) {
             className="text-lg font-extrabold"
             style={{ color: RPP.textPrimary, letterSpacing: "0.02em" }}
           >
-            <span style={{ color: RPP.mainBlue }}>Rocket Pad Platform</span> Composer
+            <span style={{ color: RPP.mainBlue }}>Rocket Pad Platform</span>{" "}
+            Composer
           </h1>
           <p className="text-xs" style={{ color: RPP.textDim }}>
             Build your platform by dragging modules from the palette into the
@@ -102,7 +111,10 @@ export function App({ platform }: { platform: PlatformData }) {
           className="w-1/3 shrink-0 flex flex-col min-h-0 border-r"
           style={{ borderColor: RPP.border, background: RPP.bgMuted }}
         >
-          <Palette composer={composer} onWorkloadClick={handleWorkloadPaletteClick} />
+          <Palette
+            composer={composer}
+            onWorkloadClick={handleWorkloadPaletteClick}
+          />
           <ExportBar composer={composer} />
         </aside>
 

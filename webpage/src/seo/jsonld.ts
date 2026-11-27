@@ -1,4 +1,10 @@
-import { absoluteUrl, BRAND, CONTACT_EMAIL, LEGAL_NAME, SITE_URL } from "../config/site";
+import {
+  absoluteUrl,
+  BRAND,
+  CONTACT_EMAIL,
+  LEGAL_NAME,
+  SITE_URL,
+} from "../config/site";
 import { Locale, LOCALES, lookup, translate } from "../i18n";
 import { Page, pagePath } from "../routes/pages";
 
@@ -7,13 +13,21 @@ const WEBSITE_ID = `${SITE_URL}/#website`;
 
 const SAME_AS = [
   "https://www.linkedin.com/company/rocket-pad-platforms-gmbh",
-  "https://github.com/RocketPadPlatforms"
+  "https://github.com/RocketPadPlatforms",
 ];
 
 // Order matches the team section: the managing director first.
 const PEOPLE = [
-  { slug: "kilian-mehringer", name: "Kilian Mehringer", roleKey: "home.team.kilianRole" },
-  { slug: "alexander-weidemann", name: "Alexander Weidemann", roleKey: "home.team.alexanderRole" }
+  {
+    slug: "kilian-mehringer",
+    name: "Kilian Mehringer",
+    roleKey: "home.team.kilianRole",
+  },
+  {
+    slug: "alexander-weidemann",
+    name: "Alexander Weidemann",
+    roleKey: "home.team.alexanderRole",
+  },
 ];
 
 const ADDRESS = {
@@ -21,7 +35,7 @@ const ADDRESS = {
   streetAddress: "Wallstr. 16",
   postalCode: "40878",
   addressLocality: "Ratingen",
-  addressCountry: "DE"
+  addressCountry: "DE",
 };
 
 interface FaqItem {
@@ -45,13 +59,13 @@ function organization(): Record<string, unknown> {
       "@type": "ImageObject",
       url: absoluteUrl("/assets/img/rocket-pad-platforms-logo.png"),
       width: 640,
-      height: 640
+      height: 640,
     },
     image: absoluteUrl("/assets/img/og-default.png"),
     email: CONTACT_EMAIL,
     address: ADDRESS,
     sameAs: SAME_AS,
-    employee: PEOPLE.map((person) => ({ "@id": personId(person.slug) }))
+    employee: PEOPLE.map((person) => ({ "@id": personId(person.slug) })),
   };
 }
 
@@ -61,11 +75,14 @@ function people(locale: Locale): Record<string, unknown>[] {
     "@id": personId(person.slug),
     name: person.name,
     jobTitle: translate(locale, person.roleKey),
-    worksFor: { "@id": ORG_ID }
+    worksFor: { "@id": ORG_ID },
   }));
 }
 
-function professionalService(locale: Locale, url: string): Record<string, unknown> {
+function professionalService(
+  locale: Locale,
+  url: string,
+): Record<string, unknown> {
   return {
     "@type": "ProfessionalService",
     "@id": `${SITE_URL}/#service`,
@@ -77,7 +94,14 @@ function professionalService(locale: Locale, url: string): Record<string, unknow
     address: ADDRESS,
     areaServed: { "@type": "Place", name: "Europe" },
     parentOrganization: { "@id": ORG_ID },
-    knowsAbout: ["Kubernetes", "GitOps", "Platform Engineering", "Cloud Engineering", "DevOps", "Sovereign Cloud"]
+    knowsAbout: [
+      "Kubernetes",
+      "GitOps",
+      "Platform Engineering",
+      "Cloud Engineering",
+      "DevOps",
+      "Sovereign Cloud",
+    ],
   };
 }
 
@@ -92,8 +116,8 @@ function faqPage(locale: Locale, url: string): Record<string, unknown> {
       "@type": "Question",
       name: item.q,
       // Google accepts a small set of HTML tags in answers, <a> among them.
-      acceptedAnswer: { "@type": "Answer", text: item.a }
-    }))
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
   };
 }
 
@@ -102,7 +126,12 @@ function faqPage(locale: Locale, url: string): Record<string, unknown> {
  * <script type="application/ld+json"> data block, which browsers never
  * execute, so the strict script-src 'self' policy does not apply to it.
  */
-export function jsonLd(page: Page, locale: Locale, title: string, description: string): string {
+export function jsonLd(
+  page: Page,
+  locale: Locale,
+  title: string,
+  description: string,
+): string {
   const url = absoluteUrl(pagePath(page, locale));
 
   const graph: Record<string, unknown>[] = [
@@ -113,7 +142,7 @@ export function jsonLd(page: Page, locale: Locale, title: string, description: s
       url: absoluteUrl("/"),
       name: BRAND,
       inLanguage: [...LOCALES],
-      publisher: { "@id": ORG_ID }
+      publisher: { "@id": ORG_ID },
     },
     ...people(locale),
     {
@@ -124,8 +153,8 @@ export function jsonLd(page: Page, locale: Locale, title: string, description: s
       description,
       inLanguage: locale,
       isPartOf: { "@id": WEBSITE_ID },
-      about: { "@id": ORG_ID }
-    }
+      about: { "@id": ORG_ID },
+    },
   ];
 
   if (page.id === "home") {
@@ -136,5 +165,8 @@ export function jsonLd(page: Page, locale: Locale, title: string, description: s
   }
 
   // "<" is escaped so that no string in the copy can close the script element.
-  return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c");
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": graph,
+  }).replace(/</g, "\\u003c");
 }

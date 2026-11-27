@@ -73,7 +73,8 @@ function makeWorkload(
 ): WorkloadInstance {
   const w: WorkloadInstance = { type, id };
   if (title) w.title = title.slice(0, WORKLOAD_TITLE_MAX);
-  if (description) w.description = description.slice(0, WORKLOAD_DESCRIPTION_MAX);
+  if (description)
+    w.description = description.slice(0, WORKLOAD_DESCRIPTION_MAX);
   return w;
 }
 
@@ -98,7 +99,8 @@ export function useComposer(platform: PlatformData): ComposerState {
       // A share link is untrusted input: it goes through the same checks as
       // a pasted config before it reaches the canvas.
       const decoded = decodeShareURL(hash);
-      if (decoded.length > 0) return sanitizeEntries(decoded, platform, coreIds);
+      if (decoded.length > 0)
+        return sanitizeEntries(decoded, platform, coreIds);
     }
     return [...coreIds];
   });

@@ -4,7 +4,9 @@ import { ComposeDrawer } from "./ComposeDrawer";
 
 afterEach(cleanup);
 
-function makeComposer(overrides: Partial<ReturnType<typeof baseComposer>> = {}) {
+function makeComposer(
+  overrides: Partial<ReturnType<typeof baseComposer>> = {},
+) {
   return { ...baseComposer(), ...overrides };
 }
 
@@ -19,7 +21,11 @@ function baseComposer() {
           id: "gcp-managed",
           name: "GCP Managed",
           description: "Fully managed GCP platform with GKE",
-          components: ["compute.google", "kubernetes.gke", "providers.cloud-lb"],
+          components: [
+            "compute.google",
+            "kubernetes.gke",
+            "providers.cloud-lb",
+          ],
         },
       ],
     },
@@ -39,7 +45,9 @@ describe("ComposeDrawer", () => {
 
   it("renders framing copy and inputs when open", () => {
     const composer = makeComposer();
-    render(<ComposeDrawer composer={composer} open={true} onClose={() => {}} />);
+    render(
+      <ComposeDrawer composer={composer} open={true} onClose={() => {}} />,
+    );
 
     expect(screen.getByText(/Start from one of our presets/i)).toBeTruthy();
     expect(screen.getByLabelText(/paste json/i)).toBeTruthy();
@@ -48,14 +56,20 @@ describe("ComposeDrawer", () => {
 
   it("does not render the description textarea", () => {
     const composer = makeComposer();
-    render(<ComposeDrawer composer={composer} open={true} onClose={() => {}} />);
+    render(
+      <ComposeDrawer composer={composer} open={true} onClose={() => {}} />,
+    );
     expect(screen.queryByLabelText(/^description$/i)).toBeNull();
   });
 
   it("disables Compose button when JSON textarea is empty", () => {
     const composer = makeComposer();
-    render(<ComposeDrawer composer={composer} open={true} onClose={() => {}} />);
-    const btn = screen.getByRole("button", { name: /^compose$/i }) as HTMLButtonElement;
+    render(
+      <ComposeDrawer composer={composer} open={true} onClose={() => {}} />,
+    );
+    const btn = screen.getByRole("button", {
+      name: /^compose$/i,
+    }) as HTMLButtonElement;
     expect(btn.disabled).toBe(true);
   });
 
@@ -65,7 +79,9 @@ describe("ComposeDrawer", () => {
     const composer = makeComposer({ hydrateFromJSON: hydrate } as any);
 
     render(<ComposeDrawer composer={composer} open={true} onClose={onClose} />);
-    const textarea = screen.getByLabelText(/paste json/i) as HTMLTextAreaElement;
+    const textarea = screen.getByLabelText(
+      /paste json/i,
+    ) as HTMLTextAreaElement;
     fireEvent.change(textarea, {
       target: {
         value: '{"schema":"v1","components":["compute.google"]}',
@@ -85,7 +101,9 @@ describe("ComposeDrawer", () => {
     const composer = makeComposer({ hydrateFromJSON: hydrate } as any);
 
     render(<ComposeDrawer composer={composer} open={true} onClose={onClose} />);
-    const textarea = screen.getByLabelText(/paste json/i) as HTMLTextAreaElement;
+    const textarea = screen.getByLabelText(
+      /paste json/i,
+    ) as HTMLTextAreaElement;
     fireEvent.change(textarea, { target: { value: "garbage" } });
 
     fireEvent.click(screen.getByRole("button", { name: /^compose$/i }));
@@ -106,9 +124,13 @@ describe("ComposeDrawer", () => {
 
   it("renders preset cards when open", () => {
     const composer = makeComposer();
-    render(<ComposeDrawer composer={composer} open={true} onClose={() => {}} />);
+    render(
+      <ComposeDrawer composer={composer} open={true} onClose={() => {}} />,
+    );
     expect(screen.getByText("GCP Managed")).toBeTruthy();
-    expect(screen.getByText("Fully managed GCP platform with GKE")).toBeTruthy();
+    expect(
+      screen.getByText("Fully managed GCP platform with GKE"),
+    ).toBeTruthy();
   });
 
   it("clicking a preset calls hydrateFromJSON and closes drawer", () => {
@@ -130,8 +152,16 @@ describe("ComposeDrawer", () => {
 
 describe("ComposeDrawer as a dialog", () => {
   it("is a labelled modal dialog that takes focus", () => {
-    render(<ComposeDrawer composer={makeComposer() as never} open onClose={() => {}} />);
-    const dialog = screen.getByRole("dialog", { name: "Compose your platform" });
+    render(
+      <ComposeDrawer
+        composer={makeComposer() as never}
+        open
+        onClose={() => {}}
+      />,
+    );
+    const dialog = screen.getByRole("dialog", {
+      name: "Compose your platform",
+    });
     expect(dialog.getAttribute("aria-modal")).toBe("true");
     expect(dialog.contains(document.activeElement)).toBe(true);
   });
@@ -141,10 +171,22 @@ describe("ComposeDrawer as a dialog", () => {
     document.body.appendChild(opener);
     opener.focus();
     const onClose = vi.fn();
-    const { rerender } = render(<ComposeDrawer composer={makeComposer() as never} open onClose={onClose} />);
+    const { rerender } = render(
+      <ComposeDrawer
+        composer={makeComposer() as never}
+        open
+        onClose={onClose}
+      />,
+    );
     fireEvent.keyDown(window, { key: "Escape" });
     expect(onClose).toHaveBeenCalled();
-    rerender(<ComposeDrawer composer={makeComposer() as never} open={false} onClose={onClose} />);
+    rerender(
+      <ComposeDrawer
+        composer={makeComposer() as never}
+        open={false}
+        onClose={onClose}
+      />,
+    );
     expect(document.activeElement).toBe(opener);
     opener.remove();
   });

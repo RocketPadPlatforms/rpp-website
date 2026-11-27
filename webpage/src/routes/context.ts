@@ -36,7 +36,7 @@ export interface ViewLocals {
 function navFor(slot: NavSlot, locale: Locale): NavLink[] {
   return PAGES.filter((page) => page.nav.includes(slot)).map((page) => ({
     href: pagePath(page, locale),
-    label: translate(locale, `pages.${page.id}.nav`)
+    label: translate(locale, `pages.${page.id}.nav`),
   }));
 }
 
@@ -48,7 +48,7 @@ function navFor(slot: NavSlot, locale: Locale): NavLink[] {
 export function viewLocals(
   locale: Locale,
   page: Page | undefined,
-  copyKey: string
+  copyKey: string,
 ): ViewLocals {
   const target = page ?? pageById("home");
   const title = translate(locale, `pages.${copyKey}.title`);
@@ -60,7 +60,7 @@ export function viewLocals(
     ? {
         canonical: absoluteUrl(pagePath(page, locale)),
         alternates: alternateLinks(page),
-        jsonLd: jsonLd(page, locale, title, description)
+        jsonLd: jsonLd(page, locale, title, description),
       }
     : {};
 
@@ -72,8 +72,8 @@ export function viewLocals(
     ...seo,
     siteUrl: SITE_URL,
     ogLocale: translate(locale, "meta.ogLocale"),
-    ogLocaleAlternates: LOCALES.filter((other) => other !== locale).map((other) =>
-      translate(other, "meta.ogLocale")
+    ogLocaleAlternates: LOCALES.filter((other) => other !== locale).map(
+      (other) => translate(other, "meta.ogLocale"),
     ),
     ogImageAlt: translate(locale, "meta.ogImageAlt"),
     homePath: pagePath(pageById("home"), locale),
@@ -85,8 +85,8 @@ export function viewLocals(
       code: other.toUpperCase(),
       name: translate(other, "meta.languageName"),
       href: pagePath(target, other),
-      current: other === locale
+      current: other === locale,
     })),
-    year: new Date().getFullYear()
+    year: new Date().getFullYear(),
   };
 }

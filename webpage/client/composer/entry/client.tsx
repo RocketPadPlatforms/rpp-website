@@ -34,5 +34,8 @@ loadPlatformData().then(
       </ErrorBoundary>,
     ),
   // Network errors and bad JSON used to reject unhandled and leave an empty page.
-  () => root.render(<ComposerError message="The module catalogue could not be loaded. Please try again." />),
+  () =>
+    root.render(
+      <ComposerError message="The module catalogue could not be loaded. Please try again." />,
+    ),
 );

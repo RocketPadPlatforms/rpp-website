@@ -17,7 +17,6 @@ fullnameOverride: ""
 envFrom:
   secretRef:
     name: "rocketpadplatforms-website-secrets" # Needs the secrets defined in the example.env file
-  
 
 serviceAccount:
   # Specifies whether a service account should be created

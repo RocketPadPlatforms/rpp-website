@@ -131,7 +131,9 @@ describe("Canvas", () => {
 
   it("calls toggle when dropping a draggable onto an unlocked layer", () => {
     let called = null as string | null;
-    const composer = makeComposer([], ["compute"], (id: string) => { called = id; });
+    const composer = makeComposer([], ["compute"], (id: string) => {
+      called = id;
+    });
     render(<Canvas composer={composer} />);
     const zone = screen.getByTestId("drop-zone-compute");
 
@@ -139,7 +141,9 @@ describe("Canvas", () => {
     store.set("text/plain", "compute.aws");
     const dataTransfer = {
       getData: (k: string) => store.get(k) ?? "",
-      setData: (k: string, v: string) => { store.set(k, v); },
+      setData: (k: string, v: string) => {
+        store.set(k, v);
+      },
       dropEffect: "move",
       effectAllowed: "move",
     } as unknown as DataTransfer;
@@ -151,7 +155,9 @@ describe("Canvas", () => {
 
   it("ignores drops onto locked layers", () => {
     let called = null as string | null;
-    const composer = makeComposer([], ["compute"], (id: string) => { called = id; });
+    const composer = makeComposer([], ["compute"], (id: string) => {
+      called = id;
+    });
     render(<Canvas composer={composer} />);
     const zone = screen.getByTestId("drop-zone-kubernetes");
 
@@ -159,7 +165,9 @@ describe("Canvas", () => {
     store.set("text/plain", "kubernetes.eks");
     const dataTransfer = {
       getData: (k: string) => store.get(k) ?? "",
-      setData: (k: string, v: string) => { store.set(k, v); },
+      setData: (k: string, v: string) => {
+        store.set(k, v);
+      },
       dropEffect: "move",
       effectAllowed: "move",
     } as unknown as DataTransfer;
@@ -205,7 +213,9 @@ describe("Canvas", () => {
     composer.expandedLayers = new Set(["compute", "kubernetes"]);
     render(<Canvas composer={composer} />);
     const computeZone = screen.getByTestId("drop-zone-compute");
-    expect(computeZone.querySelector('[data-wire="compute.aws"]')).not.toBeNull();
+    expect(
+      computeZone.querySelector('[data-wire="compute.aws"]'),
+    ).not.toBeNull();
   });
 });
 
@@ -256,7 +266,9 @@ describe("Canvas workload drop flow", () => {
       getData: (_k: string) => "workload.api",
       types: ["text/plain"],
     } as unknown as DataTransfer;
-    fireEvent.drop(screen.getByTestId("drop-zone-workload"), { dataTransfer: dt });
+    fireEvent.drop(screen.getByTestId("drop-zone-workload"), {
+      dataTransfer: dt,
+    });
     fireEvent.click(screen.getByRole("button", { name: /save/i }));
 
     // The fallback label already reads "API #1"; a bare "API" line underneath
@@ -277,7 +289,9 @@ describe("Canvas workload drop flow", () => {
       getData: (_k: string) => "workload.api",
       types: ["text/plain"],
     } as unknown as DataTransfer;
-    fireEvent.drop(screen.getByTestId("drop-zone-workload"), { dataTransfer: dt });
+    fireEvent.drop(screen.getByTestId("drop-zone-workload"), {
+      dataTransfer: dt,
+    });
     fireEvent.change(screen.getByPlaceholderText(/Title/i), {
       target: { value: "Billing" },
     });

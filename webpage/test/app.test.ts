@@ -39,7 +39,7 @@ describe("pages", () => {
     "/en/legal-notice",
     "/de/datenschutz",
     "/en/privacy",
-    "/composer"
+    "/composer",
   ])("GET %s renders", async (path) => {
     const res = await request(app).get(path);
     expect(res.status).toBe(200);
@@ -47,13 +47,23 @@ describe("pages", () => {
     expect(res.text).toContain("<title>");
   });
 
-  it.each(["/de", "/en"])("the landing page %s renders the cosmos sections", async (path) => {
-    const res = await request(app).get(path);
-    for (const id of ["pillars", "modules", "product", "consultancy", "team", "contact"]) {
-      expect(res.text).toContain(`id="${id}"`);
-    }
-    expect(res.text).toContain("cm-sky");
-  });
+  it.each(["/de", "/en"])(
+    "the landing page %s renders the cosmos sections",
+    async (path) => {
+      const res = await request(app).get(path);
+      for (const id of [
+        "pillars",
+        "modules",
+        "product",
+        "consultancy",
+        "team",
+        "contact",
+      ]) {
+        expect(res.text).toContain(`id="${id}"`);
+      }
+      expect(res.text).toContain("cm-sky");
+    },
+  );
 
   it("every page links the legally required Impressum and Datenschutz in its language", async () => {
     for (const path of ["/de", "/de/faq", "/de/datenschutz"]) {
@@ -96,7 +106,9 @@ describe("the platform composer", () => {
     const res = await request(app).get("/composer");
     expect(res.text).not.toMatch(/on(click|load|error|submit)=/);
     expect(res.text).not.toMatch(/\sstyle="/);
-    expect(res.text).not.toMatch(/<script(?![^>]*\ssrc=)(?![^>]*type="application\/ld\+json")/);
+    expect(res.text).not.toMatch(
+      /<script(?![^>]*\ssrc=)(?![^>]*type="application\/ld\+json")/,
+    );
   });
 
   it("the composer references no third-party font or asset host", async () => {
@@ -145,7 +157,7 @@ describe("static files", () => {
       "jetbrains-mono-latin",
       // Raleway is the composer's face, self-hosted like the other three so the
       // composer makes no request to fonts.googleapis.com.
-      "raleway-latin"
+      "raleway-latin",
     ]) {
       const res = await request(app).get(`/assets/fonts/${font}.woff2`);
       expect(res.status).toBe(200);
@@ -170,7 +182,7 @@ describe("retired and moved pages", () => {
     ["/training", "/de#consultancy"],
     ["/impressum", "/de/impressum"],
     ["/datenschutz", "/de/datenschutz"],
-    ["/info/faq", "/de/faq"]
+    ["/info/faq", "/de/faq"],
   ])("GET %s redirects permanently to %s", async (from, to) => {
     const res = await request(app).get(from);
     expect(res.status).toBe(301);
@@ -206,7 +218,9 @@ describe("security headers", () => {
     expect(res.text).not.toMatch(/\sstyle="/);
     // The only src-less script allowed is the JSON-LD data block, which
     // browsers never execute and CSP therefore does not govern.
-    expect(res.text).not.toMatch(/<script(?![^>]*\ssrc=)(?![^>]*type="application\/ld\+json")/);
+    expect(res.text).not.toMatch(
+      /<script(?![^>]*\ssrc=)(?![^>]*type="application\/ld\+json")/,
+    );
   });
 
   it("no third-party font or asset host is referenced", async () => {

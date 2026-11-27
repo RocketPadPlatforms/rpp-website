@@ -1,21 +1,21 @@
 {{!-- Questions and answers live in src/locales/<lang>.json under faq.items.
 The same data feeds the FAQPage structured data, so the two cannot drift. --}}
 <article class="cm-prose">
-	<span class="cm-eyebrow">{{t "faq.eyebrow"}}</span>
-	<h1>{{t "faq.title"}}</h1>
+  <span class="cm-eyebrow">{{t "faq.eyebrow"}}</span>
+  <h1>{{t "faq.title"}}</h1>
 
-	<div class="cm-faq">
-		{{#each (tdata "faq.items")}}
-		<details>
-			<summary><h2>{{q}}</h2></summary>
-			<p>{{{a}}}</p>
-		</details>
-		{{/each}}
-	</div>
+  <div class="cm-faq">
+    {{#each (tdata "faq.items")}}
+    <details>
+      <summary><h2>{{q}}</h2></summary>
+      <p>{{{a}}}</p>
+    </details>
+    {{/each}}
+  </div>
 
-	<p class="cm-faq-more">
-		{{t "home.contact.mail"}} <a href="mailto:hello@rpp.gmbh">hello@rpp.gmbh</a>
-	</p>
+  <p class="cm-faq-more">
+    {{t "home.contact.mail"}} <a href="mailto:hello@rpp.gmbh">hello@rpp.gmbh</a>
+  </p>
 
-	<p><a class="cm-btn ghost cm-back" href="{{homePath}}">{{t "common.backHome"}}</a></p>
+  <p><a class="cm-btn ghost cm-back" href="{{homePath}}">{{t "common.backHome"}}</a></p>
 </article>

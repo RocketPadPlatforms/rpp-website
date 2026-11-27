@@ -29,7 +29,10 @@ export function toTypeSet(entries: SelectionEntry[]): Set<string> {
  * directly below it. Lets a layer sit high in the stack without inheriting the
  * layer below it as a prerequisite.
  */
-export function gatingLayer(layer: Layer, platform: PlatformData): Layer | undefined {
+export function gatingLayer(
+  layer: Layer,
+  platform: PlatformData,
+): Layer | undefined {
   if (layer.unlocksAfter !== undefined) {
     return platform.layers.find((l) => l.id === layer.unlocksAfter);
   }
@@ -44,7 +47,10 @@ export function gatingLayer(layer: Layer, platform: PlatformData): Layer | undef
  * and gates always sit lower (the loader enforces both), so one ordered sweep
  * resolves every layer.
  */
-export function computeUnlockedLayers(selection: Set<string>, platform: PlatformData): Set<string> {
+export function computeUnlockedLayers(
+  selection: Set<string>,
+  platform: PlatformData,
+): Set<string> {
   const unlocked = new Set<string>();
   for (const layer of platform.layers) {
     if (layer.position === 0) {
@@ -52,7 +58,11 @@ export function computeUnlockedLayers(selection: Set<string>, platform: Platform
       continue;
     }
     const gate = gatingLayer(layer, platform);
-    if (gate && unlocked.has(gate.id) && gate.components.some((c) => selection.has(c.id))) {
+    if (
+      gate &&
+      unlocked.has(gate.id) &&
+      gate.components.some((c) => selection.has(c.id))
+    ) {
       unlocked.add(layer.id);
     }
   }
@@ -92,11 +102,17 @@ export function sanitizeEntries(
 
     if (isWorkload(entry)) {
       if (!isWorkloadLayer) continue;
-      if (!WORKLOAD_ID_PATTERN.test(entry.id) || seenWorkloadIds.has(entry.id)) continue;
+      if (!WORKLOAD_ID_PATTERN.test(entry.id) || seenWorkloadIds.has(entry.id))
+        continue;
       seenWorkloadIds.add(entry.id);
       const instance: SelectionEntry = { type: entry.type, id: entry.id };
-      if (entry.title) instance.title = entry.title.slice(0, WORKLOAD_TITLE_MAX);
-      if (entry.description) instance.description = entry.description.slice(0, WORKLOAD_DESCRIPTION_MAX);
+      if (entry.title)
+        instance.title = entry.title.slice(0, WORKLOAD_TITLE_MAX);
+      if (entry.description)
+        instance.description = entry.description.slice(
+          0,
+          WORKLOAD_DESCRIPTION_MAX,
+        );
       next.push(instance);
       continue;
     }

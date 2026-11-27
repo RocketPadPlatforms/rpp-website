@@ -30,10 +30,10 @@ function bakePlatform(): Plugin {
           layers: platform.layers,
           // The client rehydrates this back into a Map.
           components: Object.fromEntries(platform.components),
-          presets: platform.presets
-        })
+          presets: platform.presets,
+        }),
       });
-    }
+    },
   };
 }
 
@@ -72,6 +72,6 @@ export default defineConfig({
     cssCodeSplit: false,
     // Single entry, no dynamic imports: the modulepreload polyfill would be
     // dead weight, and it works by injecting markup.
-    modulePreload: false
-  }
+    modulePreload: false,
+  },
 });

@@ -32,95 +32,100 @@ type ModalState =
     }
   | null;
 
-export const Canvas = forwardRef<CanvasHandle, CanvasProps>(
-  function Canvas({ composer }, ref) {
-    const {
-      platform,
-      entries,
-      selection,
-      toggle,
-      addWorkload,
-      updateWorkload,
-      removeEntry,
-      coreIds,
-      isLayerUnlocked,
-      isLayerExpanded,
-    } = composer;
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [dropTarget, setDropTarget] = useState<string | null>(null);
-    const [snapped, setSnapped] = useState<Set<string>>(new Set());
-    const [hoveredComp, setHoveredComp] = useState<string | null>(null);
-    const [workloadModal, setWorkloadModal] = useState<ModalState>(null);
+export const Canvas = forwardRef<CanvasHandle, CanvasProps>(function Canvas(
+  { composer },
+  ref,
+) {
+  const {
+    platform,
+    entries,
+    selection,
+    toggle,
+    addWorkload,
+    updateWorkload,
+    removeEntry,
+    coreIds,
+    isLayerUnlocked,
+    isLayerExpanded,
+  } = composer;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [dropTarget, setDropTarget] = useState<string | null>(null);
+  const [snapped, setSnapped] = useState<Set<string>>(new Set());
+  const [hoveredComp, setHoveredComp] = useState<string | null>(null);
+  const [workloadModal, setWorkloadModal] = useState<ModalState>(null);
 
-    const openWorkloadAdd = useCallback(
-      (compId: string) => {
-        const comp = platform.components.get(compId);
-        if (!comp || comp.layer !== "workload") return;
-        setWorkloadModal({
-          mode: "add",
-          type: comp.id,
-          typeName: comp.name,
-          defaultDescription: comp.description,
-        });
-      },
-      [platform],
-    );
+  const openWorkloadAdd = useCallback(
+    (compId: string) => {
+      const comp = platform.components.get(compId);
+      if (!comp || comp.layer !== "workload") return;
+      setWorkloadModal({
+        mode: "add",
+        type: comp.id,
+        typeName: comp.name,
+        defaultDescription: comp.description,
+      });
+    },
+    [platform],
+  );
 
-    useImperativeHandle(ref, () => ({ openWorkloadAdd }), [openWorkloadAdd]);
+  useImperativeHandle(ref, () => ({ openWorkloadAdd }), [openWorkloadAdd]);
 
-    const handleDrop = useCallback(
-      (layerId: string, e: React.DragEvent) => {
-        e.preventDefault();
-        const id = e.dataTransfer.getData("text/plain");
-        setDropTarget(null);
-        if (!id) return;
-        const comp = platform.components.get(id);
-        if (!comp || comp.layer !== layerId) return;
-        if (!isLayerUnlocked(layerId)) return;
+  const handleDrop = useCallback(
+    (layerId: string, e: React.DragEvent) => {
+      e.preventDefault();
+      const id = e.dataTransfer.getData("text/plain");
+      setDropTarget(null);
+      if (!id) return;
+      const comp = platform.components.get(id);
+      if (!comp || comp.layer !== layerId) return;
+      if (!isLayerUnlocked(layerId)) return;
 
-        if (comp.layer === "workload") {
-          openWorkloadAdd(id);
-          return;
-        }
+      if (comp.layer === "workload") {
+        openWorkloadAdd(id);
+        return;
+      }
 
-        if (selection.has(id)) return;
-        toggle(id);
+      if (selection.has(id)) return;
+      toggle(id);
+      setSnapped((prev) => {
+        const n = new Set(prev);
+        n.add(id);
+        return n;
+      });
+      setTimeout(() => {
         setSnapped((prev) => {
           const n = new Set(prev);
-          n.add(id);
+          n.delete(id);
           return n;
         });
-        setTimeout(() => {
-          setSnapped((prev) => {
-            const n = new Set(prev);
-            n.delete(id);
-            return n;
-          });
-        }, 500);
-      },
-      [platform, selection, toggle, isLayerUnlocked, openWorkloadAdd],
-    );
+      }, 500);
+    },
+    [platform, selection, toggle, isLayerUnlocked, openWorkloadAdd],
+  );
 
-    return (
-      <div
-        ref={containerRef}
-        className="rpp-scroll flex-1 min-h-0 overflow-y-auto relative"
-        style={{
-          background: RPP.bgAlt,
-          padding: 20,
-          fontFamily: FONTS.body,
-        }}
-      >
-        <CanvasWires
-          layers={platform.layers}
-          selection={selection}
-          entries={entries}
-          containerRef={containerRef}
-          hoveredComp={hoveredComp}
-        />
+  return (
+    <div
+      ref={containerRef}
+      className="rpp-scroll flex-1 min-h-0 overflow-y-auto relative"
+      style={{
+        background: RPP.bgAlt,
+        padding: 20,
+        fontFamily: FONTS.body,
+      }}
+    >
+      <CanvasWires
+        layers={platform.layers}
+        selection={selection}
+        entries={entries}
+        containerRef={containerRef}
+        hoveredComp={hoveredComp}
+      />
 
-        <div className="relative flex flex-col gap-4" style={{ zIndex: 1 }}>
-          {platform.layers.slice().toReversed().map((layer, layerIdx) => {
+      <div className="relative flex flex-col gap-4" style={{ zIndex: 1 }}>
+        {platform.layers
+          .slice()
+          .toReversed()
+          .map((layer, layerIdx) => {
             const unlocked = isLayerUnlocked(layer.id);
             const color = LAYER_COLORS[layer.id] ?? RPP.textSecondary;
             const selected = layer.components.filter((c) =>
@@ -171,11 +176,17 @@ export const Canvas = forwardRef<CanvasHandle, CanvasProps>(
                     />
                     <span
                       className="text-xs font-extrabold uppercase"
-                      style={{ color: RPP.textPrimary, letterSpacing: "0.12em" }}
+                      style={{
+                        color: RPP.textPrimary,
+                        letterSpacing: "0.12em",
+                      }}
                     >
                       {layer.name}
                     </span>
-                    <span className="text-[0.65rem]" style={{ color: RPP.textDim }}>
+                    <span
+                      className="text-[0.65rem]"
+                      style={{ color: RPP.textDim }}
+                    >
                       {snappedCount} snapped
                     </span>
                   </div>
@@ -232,7 +243,10 @@ export const Canvas = forwardRef<CanvasHandle, CanvasProps>(
                       <span className="sr-only">layer complete</span>
                     </span>
                   )}
-                  <span className="text-[0.65rem]" style={{ color: RPP.textDim }}>
+                  <span
+                    className="text-[0.65rem]"
+                    style={{ color: RPP.textDim }}
+                  >
                     {isWorkloadLayer
                       ? `${workloadEntries.length}`
                       : layer.select === "single"
@@ -258,10 +272,12 @@ export const Canvas = forwardRef<CanvasHandle, CanvasProps>(
                           const comp = platform.components.get(inst.type);
                           if (!comp) return null;
                           const suffix = inst.id.slice(inst.type.length + 1);
-                          const displayName = inst.title || `${comp.name} #${suffix}`;
+                          const displayName =
+                            inst.title || `${comp.name} #${suffix}`;
                           // Catalog values stand in wherever the user left a
                           // field blank; they are never stored on the instance.
-                          const description = inst.description || comp.description;
+                          const description =
+                            inst.description || comp.description;
                           return (
                             <Tooltip
                               key={inst.id}
@@ -380,7 +396,11 @@ export const Canvas = forwardRef<CanvasHandle, CanvasProps>(
                                 data-wire={comp.id}
                                 className={`rpp-canvas-card ${justSnapped ? "rpp-canvas-card--snap" : ""}`}
                                 {...buttonProps(() => toggle(comp.id), isCore)}
-                                aria-label={isCore ? `${comp.name} (required)` : `Remove ${comp.name}`}
+                                aria-label={
+                                  isCore
+                                    ? `${comp.name} (required)`
+                                    : `Remove ${comp.name}`
+                                }
                                 onClick={() => {
                                   if (!isCore) toggle(comp.id);
                                 }}
@@ -467,46 +487,45 @@ export const Canvas = forwardRef<CanvasHandle, CanvasProps>(
               </div>
             );
           })}
-        </div>
-
-        {workloadModal?.mode === "add" && (
-          <WorkloadModal
-            type={workloadModal.type}
-            typeName={workloadModal.typeName}
-            mode="add"
-            defaultDescription={workloadModal.defaultDescription}
-            onSave={(title, description) => {
-              addWorkload(workloadModal.type, title, description);
-              setWorkloadModal(null);
-            }}
-            onCancel={() => setWorkloadModal(null)}
-          />
-        )}
-
-        {workloadModal?.mode === "edit" && (
-          <WorkloadModal
-            key={workloadModal.instance.id}
-            type={workloadModal.instance.type}
-            typeName={workloadModal.typeName}
-            mode="edit"
-            initialTitle={workloadModal.instance.title}
-            initialDescription={workloadModal.instance.description}
-            defaultDescription={workloadModal.defaultDescription}
-            onSave={(title, description) => {
-              updateWorkload(workloadModal.instance.id, title, description);
-              setWorkloadModal(null);
-            }}
-            onRemove={() => {
-              removeEntry(workloadModal.instance.id);
-              setWorkloadModal(null);
-            }}
-            onCancel={() => setWorkloadModal(null)}
-          />
-        )}
       </div>
-    );
-  },
-);
+
+      {workloadModal?.mode === "add" && (
+        <WorkloadModal
+          type={workloadModal.type}
+          typeName={workloadModal.typeName}
+          mode="add"
+          defaultDescription={workloadModal.defaultDescription}
+          onSave={(title, description) => {
+            addWorkload(workloadModal.type, title, description);
+            setWorkloadModal(null);
+          }}
+          onCancel={() => setWorkloadModal(null)}
+        />
+      )}
+
+      {workloadModal?.mode === "edit" && (
+        <WorkloadModal
+          key={workloadModal.instance.id}
+          type={workloadModal.instance.type}
+          typeName={workloadModal.typeName}
+          mode="edit"
+          initialTitle={workloadModal.instance.title}
+          initialDescription={workloadModal.instance.description}
+          defaultDescription={workloadModal.defaultDescription}
+          onSave={(title, description) => {
+            updateWorkload(workloadModal.instance.id, title, description);
+            setWorkloadModal(null);
+          }}
+          onRemove={() => {
+            removeEntry(workloadModal.instance.id);
+            setWorkloadModal(null);
+          }}
+          onCancel={() => setWorkloadModal(null)}
+        />
+      )}
+    </div>
+  );
+});
 
 /** A wire segment: fan-in (source→bundle) or fan-out (bundle→target) */
 interface WirePath {
@@ -547,12 +566,20 @@ function CanvasWires({
       const from = reversed[i + 1]!;
       const to = reversed[i]!;
 
-      const fromIds: string[] = from.id === "workload"
-        ? entries.filter(isWorkload).filter((w) => from.components.some((c) => c.id === w.type)).map((w) => w.id)
-        : from.components.filter((m) => selection.has(m.id)).map((m) => m.id);
-      const toIds: string[] = to.id === "workload"
-        ? entries.filter(isWorkload).filter((w) => to.components.some((c) => c.id === w.type)).map((w) => w.id)
-        : to.components.filter((m) => selection.has(m.id)).map((m) => m.id);
+      const fromIds: string[] =
+        from.id === "workload"
+          ? entries
+              .filter(isWorkload)
+              .filter((w) => from.components.some((c) => c.id === w.type))
+              .map((w) => w.id)
+          : from.components.filter((m) => selection.has(m.id)).map((m) => m.id);
+      const toIds: string[] =
+        to.id === "workload"
+          ? entries
+              .filter(isWorkload)
+              .filter((w) => to.components.some((c) => c.id === w.type))
+              .map((w) => w.id)
+          : to.components.filter((m) => selection.has(m.id)).map((m) => m.id);
       if (fromIds.length === 0 || toIds.length === 0) continue;
 
       const lc = LAYER_COLORS[from.id] ?? RPP.mainBlue;
@@ -560,7 +587,9 @@ function CanvasWires({
 
       const sources: { id: string; x: number; y: number }[] = [];
       for (const fid of fromIds) {
-        const el = box.querySelector(`[data-wire="${CSS.escape(fid)}"]`) as HTMLElement | null;
+        const el = box.querySelector(
+          `[data-wire="${CSS.escape(fid)}"]`,
+        ) as HTMLElement | null;
         if (!el) continue;
         const r = el.getBoundingClientRect();
         sources.push({
@@ -571,7 +600,9 @@ function CanvasWires({
       }
       const targets: { id: string; x: number; y: number }[] = [];
       for (const tid of toIds) {
-        const el = box.querySelector(`[data-wire="${CSS.escape(tid)}"]`) as HTMLElement | null;
+        const el = box.querySelector(
+          `[data-wire="${CSS.escape(tid)}"]`,
+        ) as HTMLElement | null;
         if (!el) continue;
         const r = el.getBoundingClientRect();
         targets.push({
@@ -587,7 +618,10 @@ function CanvasWires({
           const my = (s.y + t.y) / 2;
           nextPaths.push({
             d: `M${s.x},${s.y} C${s.x},${my} ${t.x},${my} ${t.x},${t.y}`,
-            color: lc, compId: s.id, pairIds, kind: "fan-in",
+            color: lc,
+            compId: s.id,
+            pairIds,
+            kind: "fan-in",
           });
         }
       }
@@ -595,7 +629,9 @@ function CanvasWires({
     setPaths(nextPaths);
   }, [layers, selection, entries, containerRef]);
 
-  useEffect(() => { recalc(); }, [recalc]);
+  useEffect(() => {
+    recalc();
+  }, [recalc]);
 
   useEffect(() => {
     const id = setTimeout(recalc, 450);
@@ -631,17 +667,32 @@ function CanvasWires({
       }}
     >
       {paths.map((p, i) => {
-        const pairActive = hoveredComp != null && p.pairIds.includes(hoveredComp);
+        const pairActive =
+          hoveredComp != null && p.pairIds.includes(hoveredComp);
         const isDirectlyHovered = hoveredComp === p.compId;
         const isDimmed = hoveredComp != null && !pairActive;
         const isIdle = hoveredComp == null;
-        const glowOpacity = isDimmed || isIdle ? 0.04 : isDirectlyHovered ? 0.25 : 0.15;
-        const lineOpacity = isDimmed || isIdle ? 0.08 : isDirectlyHovered ? 0.7 : pairActive ? 0.5 : 0.4;
+        const glowOpacity =
+          isDimmed || isIdle ? 0.04 : isDirectlyHovered ? 0.25 : 0.15;
+        const lineOpacity =
+          isDimmed || isIdle
+            ? 0.08
+            : isDirectlyHovered
+              ? 0.7
+              : pairActive
+                ? 0.5
+                : 0.4;
         const width = isDirectlyHovered ? 2 : 1.5;
 
         return (
           <g key={i}>
-            <path d={p.d} fill="none" stroke={p.color} strokeWidth={width + 0.5} strokeOpacity={glowOpacity} />
+            <path
+              d={p.d}
+              fill="none"
+              stroke={p.color}
+              strokeWidth={width + 0.5}
+              strokeOpacity={glowOpacity}
+            />
             <path
               d={p.d}
               fill="none"

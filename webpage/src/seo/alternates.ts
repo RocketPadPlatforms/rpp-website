@@ -19,8 +19,8 @@ export function alternateLinks(page: Page): AlternateLink[] {
   return [
     ...LOCALES.map((locale) => ({
       hreflang: locale,
-      href: absoluteUrl(pagePath(page, locale))
+      href: absoluteUrl(pagePath(page, locale)),
     })),
-    { hreflang: "x-default", href: absoluteUrl(xDefault) }
+    { hreflang: "x-default", href: absoluteUrl(xDefault) },
   ];
 }

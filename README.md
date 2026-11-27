@@ -11,12 +11,12 @@ the legal pages and the composer at `/composer`.
 
 The site is bilingual. German lives under `/de`, English under `/en`:
 
-| German | English |
-|---|---|
-| `/de` | `/en` |
-| `/de/faq` | `/en/faq` |
-| `/de/impressum` | `/en/legal-notice` |
-| `/de/datenschutz` | `/en/privacy` |
+| German            | English            |
+| ----------------- | ------------------ |
+| `/de`             | `/en`              |
+| `/de/faq`         | `/en/faq`          |
+| `/de/impressum`   | `/en/legal-notice` |
+| `/de/datenschutz` | `/en/privacy`      |
 
 `/` redirects (302, `Vary: Accept-Language`) to the language the browser
 prefers; without a German preference, and for crawlers that send no
@@ -72,13 +72,13 @@ does this itself rather than the ingress; `/healthz` is exempt.
 The visual system - the "cosmos" look - lives entirely in
 `webpage/assets/css/cosmos.css`, built on the brand palette:
 
-| Token | Hex | Role |
-|---|---|---|
-| `--color-universum` | `#0d304f` | the ground |
-| `--color-hue` | `#77c6c0` | brand, links, highlights |
-| `--color-zuendung` | `#e8736d` | accent, the ignition |
-| `--color-rakete` | `#efefef` | neutral surface |
-| `--color-platform` | `#b5c2d3` | structure, borders |
+| Token               | Hex       | Role                     |
+| ------------------- | --------- | ------------------------ |
+| `--color-universum` | `#0d304f` | the ground               |
+| `--color-hue`       | `#77c6c0` | brand, links, highlights |
+| `--color-zuendung`  | `#e8736d` | accent, the ignition     |
+| `--color-rakete`    | `#efefef` | neutral surface          |
+| `--color-platform`  | `#b5c2d3` | structure, borders       |
 
 Components reference the semantic aliases (`--color-primary`, `--color-accent`,
 `--color-border`, `--t1`/`--t2`/`--t3`), never the raw values, so the palette can
@@ -99,12 +99,12 @@ to Vercel and embedded as a third-party iframe; that meant an external origin in
 the CSP, a Google Fonts request, and a second deploy target that could break on
 its own. All three are gone.
 
-| Path | What it is |
-|---|---|
+| Path                       | What it is                                                              |
+| -------------------------- | ----------------------------------------------------------------------- |
 | `webpage/client/composer/` | The SPA - `ui/` components, `engine/` state and rules, `data/loader.ts` |
-| `webpage/platform/` | The catalog: layers, components and presets as declarative YAML/JSON |
-| `webpage/vite.config.mts` | Builds the bundle and bakes the catalog |
-| `webpage/assets/composer/` | Build output. Generated, gitignored |
+| `webpage/platform/`        | The catalog: layers, components and presets as declarative YAML/JSON    |
+| `webpage/vite.config.mts`  | Builds the bundle and bakes the catalog                                 |
+| `webpage/assets/composer/` | Build output. Generated, gitignored                                     |
 
 The modules section of the landing page still embeds it in an iframe, loaded
 only on click (`assets/js/cosmos.js`), so the bundle costs nothing to visitors
@@ -124,14 +124,14 @@ creating `webpage/platform/components/<layer>/<name>.yaml`:
 
 ```yaml
 kind: Component
-id: compute.google        # must be <layer>.<name>
+id: compute.google # must be <layer>.<name>
 name: Google
 layer: compute
 type: cloud
 description: Google Cloud Platform
 rules:
-  excludes: [kubernetes.aks]   # selecting this makes those unavailable
-  suggests: [kubernetes.gke]   # ...and auto-selects those
+  excludes: [kubernetes.aks] # selecting this makes those unavailable
+  suggests: [kubernetes.gke] # ...and auto-selects those
 ```
 
 Layers live in `platform/layers.yaml` as multi-document YAML and unlock
@@ -206,4 +206,3 @@ docker run --rm -p 8080:8080 --env-file .env rocketpadplatforms-website
 The container runs as the unprivileged `node` user under tini, serves `/healthz`
 for the Kubernetes probes, and shuts down on SIGTERM without dropping in-flight
 requests. See `example.env` for the supported environment variables.
-

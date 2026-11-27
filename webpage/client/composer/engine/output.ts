@@ -1,4 +1,8 @@
-import type { PlatformOutput, SelectionEntry, WorkloadInstance } from "../data/types";
+import type {
+  PlatformOutput,
+  SelectionEntry,
+  WorkloadInstance,
+} from "../data/types";
 import { isWorkload } from "../data/types";
 
 /**
@@ -92,7 +96,10 @@ export function encodeShareURL(entries: SelectionEntry[]): string {
   const bytes = new TextEncoder().encode(JSON.stringify(buildOutput(entries)));
   let binary = "";
   for (const byte of bytes) binary += String.fromCharCode(byte);
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return btoa(binary)
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
 }
 
 export function decodeShareURL(fragment: string): SelectionEntry[] {

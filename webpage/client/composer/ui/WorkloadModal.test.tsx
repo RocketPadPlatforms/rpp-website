@@ -14,11 +14,7 @@ const baseProps = {
 describe("WorkloadModal", () => {
   it("renders header with typeName", () => {
     render(
-      <WorkloadModal
-        {...baseProps}
-        onSave={() => {}}
-        onCancel={() => {}}
-      />,
+      <WorkloadModal {...baseProps} onSave={() => {}} onCancel={() => {}} />,
     );
     expect(screen.getByText(/Add API Workload/i)).toBeTruthy();
   });
@@ -26,13 +22,11 @@ describe("WorkloadModal", () => {
   it("Save passes title and description", () => {
     const onSave = vi.fn(() => {});
     render(
-      <WorkloadModal
-        {...baseProps}
-        onSave={onSave}
-        onCancel={() => {}}
-      />,
+      <WorkloadModal {...baseProps} onSave={onSave} onCancel={() => {}} />,
     );
-    const titleInput = screen.getByPlaceholderText(/Title/i) as HTMLInputElement;
+    const titleInput = screen.getByPlaceholderText(
+      /Title/i,
+    ) as HTMLInputElement;
     fireEvent.change(titleInput, { target: { value: "Billing" } });
     const textarea = screen.getByPlaceholderText(
       /API service workload/i,
@@ -48,11 +42,7 @@ describe("WorkloadModal", () => {
     // catalog text that goes stale when the component is edited.
     const onSave = vi.fn(() => {});
     render(
-      <WorkloadModal
-        {...baseProps}
-        onSave={onSave}
-        onCancel={() => {}}
-      />,
+      <WorkloadModal {...baseProps} onSave={onSave} onCancel={() => {}} />,
     );
     fireEvent.click(screen.getByRole("button", { name: /save/i }));
     expect(onSave).toHaveBeenCalledWith("", "");
@@ -83,11 +73,7 @@ describe("WorkloadModal", () => {
   it("Cancel button invokes onCancel", () => {
     const onCancel = vi.fn(() => {});
     render(
-      <WorkloadModal
-        {...baseProps}
-        onSave={() => {}}
-        onCancel={onCancel}
-      />,
+      <WorkloadModal {...baseProps} onSave={() => {}} onCancel={onCancel} />,
     );
     fireEvent.click(screen.getByRole("button", { name: /cancel/i }));
     expect(onCancel).toHaveBeenCalled();
@@ -96,11 +82,7 @@ describe("WorkloadModal", () => {
   it("ESC key invokes onCancel", () => {
     const onCancel = vi.fn(() => {});
     render(
-      <WorkloadModal
-        {...baseProps}
-        onSave={() => {}}
-        onCancel={onCancel}
-      />,
+      <WorkloadModal {...baseProps} onSave={() => {}} onCancel={onCancel} />,
     );
     fireEvent.keyDown(window, { key: "Escape" });
     expect(onCancel).toHaveBeenCalled();
@@ -109,11 +91,7 @@ describe("WorkloadModal", () => {
   it("Ctrl+Enter triggers Save", () => {
     const onSave = vi.fn(() => {});
     render(
-      <WorkloadModal
-        {...baseProps}
-        onSave={onSave}
-        onCancel={() => {}}
-      />,
+      <WorkloadModal {...baseProps} onSave={onSave} onCancel={() => {}} />,
     );
     const textarea = screen.getByPlaceholderText(
       /API service workload/i,
@@ -143,11 +121,7 @@ describe("WorkloadModal", () => {
 
   it("add mode has no Remove button", () => {
     render(
-      <WorkloadModal
-        {...baseProps}
-        onSave={() => {}}
-        onCancel={() => {}}
-      />,
+      <WorkloadModal {...baseProps} onSave={() => {}} onCancel={() => {}} />,
     );
     expect(screen.queryByRole("button", { name: /remove/i })).toBeNull();
   });

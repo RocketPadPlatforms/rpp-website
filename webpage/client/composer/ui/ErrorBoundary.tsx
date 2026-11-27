@@ -35,7 +35,10 @@ export function ComposerError({ message }: { message: string }) {
         <a href="/composer" target="_top">
           Start over with an empty platform
         </a>{" "}
-        · <a href="/" target="_top">Back to Rocket Pad Platforms</a>
+        ·{" "}
+        <a href="/" target="_top">
+          Back to Rocket Pad Platforms
+        </a>
       </p>
     </main>
   );

@@ -1,8 +1,8 @@
 services:
   server-side-landingpages-dev:
     build:
-        context: .
-        dockerfile: Dockerfile.dev
+      context: .
+      dockerfile: Dockerfile.dev
     image: server-side-landingpages-dev
     container_name: server-side-landingpages-dev
     volumes:

@@ -15,17 +15,17 @@ export default defineConfig({
         test: {
           name: "server",
           environment: "node",
-          include: ["test/**/*.test.ts"]
-        }
+          include: ["test/**/*.test.ts"],
+        },
       },
       {
         test: {
           name: "composer",
           environment: "happy-dom",
           include: ["client/composer/**/*.test.{ts,tsx}"],
-          setupFiles: ["./client/composer/test-setup.ts"]
-        }
-      }
-    ]
-  }
+          setupFiles: ["./client/composer/test-setup.ts"],
+        },
+      },
+    ],
+  },
 });

@@ -41,7 +41,12 @@ describe("buildOutput", () => {
 
   it("omits blank title and description so untitled workloads stay minimal", () => {
     const entries: SelectionEntry[] = [
-      { type: "workload.app", id: "workload.app-1", title: "", description: "" },
+      {
+        type: "workload.app",
+        id: "workload.app-1",
+        title: "",
+        description: "",
+      },
     ];
     const [workload] = buildOutput(entries).components;
     expect(workload).toEqual({ type: "workload.app", id: "workload.app-1" });
@@ -52,9 +57,16 @@ describe("buildOutput", () => {
   it("never bakes catalog text in: encoding is stable across platform edits", () => {
     // Two identical selections must encode identically regardless of what the
     // component catalog says, so share URLs stay comparable over time.
-    const a: SelectionEntry[] = [{ type: "workload.app", id: "workload.app-1" }];
+    const a: SelectionEntry[] = [
+      { type: "workload.app", id: "workload.app-1" },
+    ];
     const b: SelectionEntry[] = [
-      { type: "workload.app", id: "workload.app-1", title: "", description: "" },
+      {
+        type: "workload.app",
+        id: "workload.app-1",
+        title: "",
+        description: "",
+      },
     ];
     expect(encodeShareURL(a)).toBe(encodeShareURL(b));
   });
@@ -101,11 +113,20 @@ describe("decodeComposeJSON", () => {
     const raw = JSON.stringify({
       schema: "v1",
       components: [
-        { type: "workload.api", id: "workload.api-1", title: "", description: "API service workload" },
+        {
+          type: "workload.api",
+          id: "workload.api-1",
+          title: "",
+          description: "API service workload",
+        },
       ],
     });
     expect(decodeComposeJSON(raw)).toEqual([
-      { type: "workload.api", id: "workload.api-1", description: "API service workload" },
+      {
+        type: "workload.api",
+        id: "workload.api-1",
+        description: "API service workload",
+      },
     ]);
   });
 
@@ -138,13 +159,23 @@ describe("encodeShareURL / decodeShareURL", () => {
   it("round-trips mixed entries through base64 fragment", () => {
     const entries: SelectionEntry[] = [
       "compute.hetzner",
-      { type: "workload.app", id: "workload.app-1", title: "Web", description: "web" },
+      {
+        type: "workload.app",
+        id: "workload.app-1",
+        title: "Web",
+        description: "web",
+      },
     ];
     const fragment = encodeShareURL(entries);
     const decoded = decodeShareURL(fragment);
     expect(decoded).toEqual([
       "compute.hetzner",
-      { type: "workload.app", id: "workload.app-1", title: "Web", description: "web" },
+      {
+        type: "workload.app",
+        id: "workload.app-1",
+        title: "Web",
+        description: "web",
+      },
     ]);
   });
 
@@ -165,19 +196,25 @@ describe("encodeShareURL / decodeShareURL", () => {
   it.each(["Café €", "Zahlungen — Bestellung", "支払い", "🚀 launch"])(
     "round-trips non-Latin-1 text: %s",
     (title) => {
-      const entries: SelectionEntry[] = [{ type: "workload.app", id: "workload.app-1", title }];
+      const entries: SelectionEntry[] = [
+        { type: "workload.app", id: "workload.app-1", title },
+      ];
       expect(() => encodeShareURL(entries)).not.toThrow();
       expect(decodeShareURL(encodeShareURL(entries))).toEqual(entries);
     },
   );
 
   it("produces a URL-safe fragment", () => {
-    const fragment = encodeShareURL([{ type: "workload.app", id: "workload.app-1", title: "??>>~~ÿ" }]);
+    const fragment = encodeShareURL([
+      { type: "workload.app", id: "workload.app-1", title: "??>>~~ÿ" },
+    ]);
     expect(fragment).toMatch(/^[A-Za-z0-9_-]+$/);
   });
 
   it("still decodes links shared with the old standard-base64 encoding", () => {
-    const legacy = btoa(JSON.stringify({ schema: "v1", components: ["compute.hetzner"] }));
+    const legacy = btoa(
+      JSON.stringify({ schema: "v1", components: ["compute.hetzner"] }),
+    );
     expect(decodeShareURL(legacy)).toEqual(["compute.hetzner"]);
   });
 });

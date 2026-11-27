@@ -31,26 +31,26 @@ export const PAGES: readonly Page[] = [
     id: "home",
     path: { de: "", en: "" },
     view: { de: "index", en: "index" },
-    nav: []
+    nav: [],
   },
   {
     id: "faq",
     path: { de: "/faq", en: "/faq" },
     view: { de: "faq", en: "faq" },
-    nav: ["header", "footer"]
+    nav: ["header", "footer"],
   },
   {
     id: "imprint",
     path: { de: "/impressum", en: "/legal-notice" },
     view: { de: "legal/de/impressum", en: "legal/en/legal-notice" },
-    nav: ["footer"]
+    nav: ["footer"],
   },
   {
     id: "privacy",
     path: { de: "/datenschutz", en: "/privacy" },
     view: { de: "legal/de/datenschutz", en: "legal/en/privacy" },
-    nav: ["footer"]
-  }
+    nav: ["footer"],
+  },
 ];
 
 export function pageById(id: PageId): Page {
@@ -68,7 +68,9 @@ export function pagePath(page: Page, locale: Locale): string {
 
 /** Every localised URL, for the sitemap and the crawl test. */
 export function allPagePaths(): string[] {
-  return PAGES.flatMap((page) => LOCALES.map((locale) => pagePath(page, locale)));
+  return PAGES.flatMap((page) =>
+    LOCALES.map((locale) => pagePath(page, locale)),
+  );
 }
 
 /**
@@ -85,5 +87,5 @@ export const LEGACY_REDIRECTS: Record<string, string> = {
   "/kubernetes": "/de#pillars",
   "/platform": "/de#product",
   "/software": "/de#consultancy",
-  "/training": "/de#consultancy"
+  "/training": "/de#consultancy",
 };

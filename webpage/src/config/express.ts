@@ -6,7 +6,7 @@ import express, {
   NextFunction,
   Request,
   Response,
-  urlencoded
+  urlencoded,
 } from "express";
 import { create } from "express-handlebars";
 import helmet from "helmet";
@@ -14,7 +14,13 @@ import { Server } from "http";
 import path from "path";
 import { pinoHttp } from "pino-http";
 import routesAPI from "../api/routes";
-import { detectLocale, Locale, localeFromPath, lookup, translate } from "../i18n";
+import {
+  detectLocale,
+  Locale,
+  localeFromPath,
+  lookup,
+  translate,
+} from "../i18n";
 import { viewLocals } from "../routes/context";
 import routes from "../routes/site";
 import logger from "./logger";
@@ -78,7 +84,11 @@ function queryOf(req: Request): string {
 
 /** Redirects /en/ to /en, so every page has exactly one URL. */
 function stripTrailingSlash(req: Request, res: Response, next: NextFunction) {
-  if ((req.method !== "GET" && req.method !== "HEAD") || req.path === "/" || !req.path.endsWith("/")) {
+  if (
+    (req.method !== "GET" && req.method !== "HEAD") ||
+    req.path === "/" ||
+    !req.path.endsWith("/")
+  ) {
     next();
     return;
   }
@@ -143,8 +153,8 @@ export function createApp(): Application {
           throw new Error(`Missing translation data for "${key}"`);
         }
         return value;
-      }
-    }
+      },
+    },
   });
   app.engine(".hbs", hbs.engine);
   app.set("view engine", ".hbs");
@@ -177,12 +187,12 @@ export function createApp(): Application {
           // this same origin - which would render that iframe blank with only a
           // console violation to show for it. 'self' still blocks every
           // third-party embed, which is the actual clickjacking threat.
-          frameAncestors: ["'self'"]
-        }
+          frameAncestors: ["'self'"],
+        },
       },
       // The site is served over TLS by the ingress; let it own HSTS.
-      strictTransportSecurity: false
-    })
+      strictTransportSecurity: false,
+    }),
   );
   app.use(compression());
   app.use(pinoHttp({ logger }));
@@ -190,7 +200,9 @@ export function createApp(): Application {
   app.use(json({ limit: "64kb" }));
   app.use(urlencoded({ extended: false, limit: "64kb" }));
   // The composer's HTML must have exactly one public URL.
-  app.get("/assets/composer/index.html", (_req: Request, res: Response) => res.redirect(301, "/composer"));
+  app.get("/assets/composer/index.html", (_req: Request, res: Response) =>
+    res.redirect(301, "/composer"),
+  );
   app.use(
     "/assets",
     express.static(ASSETS_DIR, {
@@ -201,10 +213,17 @@ export function createApp(): Application {
         // Vite fingerprints everything under assets/composer/assets/, so a
         // changed file always gets a new URL and can be cached forever. The
         // rest keeps stable names and gets a day.
-        const hashed = filePath.includes(`${path.sep}composer${path.sep}assets${path.sep}`);
-        res.setHeader("Cache-Control", hashed ? "public, max-age=31536000, immutable" : "public, max-age=86400");
-      }
-    })
+        const hashed = filePath.includes(
+          `${path.sep}composer${path.sep}assets${path.sep}`,
+        );
+        res.setHeader(
+          "Cache-Control",
+          hashed
+            ? "public, max-age=31536000, immutable"
+            : "public, max-age=86400",
+        );
+      },
+    }),
   );
 
   // Liveness/readiness target. Deliberately cheap: no template rendering, no
@@ -227,7 +246,10 @@ export function createApp(): Application {
       return;
     }
 
-    res.status(404).render("404", { ...viewLocals(errorLocale(req), undefined, "notFound"), noindex: true });
+    res.status(404).render("404", {
+      ...viewLocals(errorLocale(req), undefined, "notFound"),
+      noindex: true,
+    });
   });
 
   // Express identifies error middleware by arity, so `next` has to stay in the
@@ -246,7 +268,10 @@ export function createApp(): Application {
       return;
     }
 
-    res.status(500).render("500", { ...viewLocals(errorLocale(req), undefined, "error"), noindex: true });
+    res.status(500).render("500", {
+      ...viewLocals(errorLocale(req), undefined, "error"),
+      noindex: true,
+    });
   });
 
   return app;
@@ -256,7 +281,9 @@ function initExpress(): Server {
   const app = createApp();
   const PORT = Number(process.env.PORT ?? 8080);
 
-  const server = app.listen(PORT, () => logger.info(`Server started on port ${PORT}`));
+  const server = app.listen(PORT, () =>
+    logger.info(`Server started on port ${PORT}`),
+  );
 
   // Kubernetes sends SIGTERM and then SIGKILLs after the grace period. Without
   // this the pod drops in-flight requests on every rolling update.

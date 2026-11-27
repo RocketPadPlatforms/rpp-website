@@ -1,5 +1,8 @@
 import { useCallback, useRef, useState } from "react";
-import { WORKLOAD_DESCRIPTION_MAX, WORKLOAD_TITLE_MAX } from "../engine/sanitize";
+import {
+  WORKLOAD_DESCRIPTION_MAX,
+  WORKLOAD_TITLE_MAX,
+} from "../engine/sanitize";
 import { useModalFocus } from "./a11y";
 import { RPP, LAYER_COLORS, FONTS } from "./theme";
 
@@ -71,16 +74,16 @@ export function WorkloadModal({
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div
-          className="h-1 w-full"
-          style={{ background: accentColor }}
-        />
+        <div className="h-1 w-full" style={{ background: accentColor }} />
 
         <div className="px-5 pt-4 pb-5 space-y-4">
           <div className="flex items-center gap-2.5">
             <div
               className="w-2 h-2 rounded-full shrink-0"
-              style={{ background: accentColor, boxShadow: `0 0 8px ${accentColor}66` }}
+              style={{
+                background: accentColor,
+                boxShadow: `0 0 8px ${accentColor}66`,
+              }}
             />
             <h2
               className="font-extrabold uppercase tracking-wider text-sm"
@@ -92,7 +95,10 @@ export function WorkloadModal({
 
           <div className="space-y-3">
             <label className="block space-y-1">
-              <span className="text-[0.65rem] font-semibold uppercase tracking-wide" style={{ color: RPP.textDim }}>
+              <span
+                className="text-[0.65rem] font-semibold uppercase tracking-wide"
+                style={{ color: RPP.textDim }}
+              >
                 Title
               </span>
               <input
@@ -115,7 +121,10 @@ export function WorkloadModal({
             </label>
 
             <label className="block space-y-1">
-              <span className="text-[0.65rem] font-semibold uppercase tracking-wide" style={{ color: RPP.textDim }}>
+              <span
+                className="text-[0.65rem] font-semibold uppercase tracking-wide"
+                style={{ color: RPP.textDim }}
+              >
                 Description
               </span>
               <textarea

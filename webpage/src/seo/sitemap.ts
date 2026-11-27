@@ -35,7 +35,7 @@ function lastModified(page: Page, locale: Locale): string | undefined {
   const newest = Math.max(
     mtime(path.join(VIEWS_DIR, `${page.view[locale]}.hbs`)),
     mtime(path.join(VIEWS_DIR, "layouts", "main.hbs")),
-    mtime(path.join(__dirname, "..", "locales", `${locale}.json`))
+    mtime(path.join(__dirname, "..", "locales", `${locale}.json`)),
   );
   return newest > 0 ? new Date(newest).toISOString() : undefined;
 }
@@ -49,7 +49,7 @@ export function renderSitemap(): string {
       const links = alternateLinks(page)
         .map(
           (link) =>
-            `    <xhtml:link rel="alternate" hreflang="${link.hreflang}" href="${escapeXml(link.href)}"/>`
+            `    <xhtml:link rel="alternate" hreflang="${link.hreflang}" href="${escapeXml(link.href)}"/>`,
         )
         .join("\n");
 
@@ -59,14 +59,20 @@ export function renderSitemap(): string {
           `    <loc>${escapeXml(absoluteUrl(pagePath(page, locale)))}</loc>`,
           ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
           links,
-          "  </url>"
-        ].join("\n")
+          "  </url>",
+        ].join("\n"),
       );
     }
   }
 
   for (const extra of EXTRA_PATHS) {
-    entries.push(["  <url>", `    <loc>${escapeXml(absoluteUrl(extra))}</loc>`, "  </url>"].join("\n"));
+    entries.push(
+      [
+        "  <url>",
+        `    <loc>${escapeXml(absoluteUrl(extra))}</loc>`,
+        "  </url>",
+      ].join("\n"),
+    );
   }
 
   return [
@@ -74,6 +80,6 @@ export function renderSitemap(): string {
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
     ...entries,
     "</urlset>",
-    ""
+    "",
   ].join("\n");
 }

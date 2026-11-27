@@ -4,7 +4,9 @@
  * sitemap. Those must never echo the request's Host header, or a staging or
  * spoofed host would end up canonicalised.
  */
-export const SITE_URL = (process.env.SITE_URL ?? "https://rocketpadplatforms.de").replace(/\/+$/, "");
+export const SITE_URL = (
+  process.env.SITE_URL ?? "https://rocketpadplatforms.de"
+).replace(/\/+$/, "");
 
 export const BRAND = "Rocket Pad Platforms";
 export const LEGAL_NAME = "Rocket Pad Platforms GmbH";

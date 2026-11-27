@@ -31,7 +31,9 @@ function OpenDrawer({ composer, onClose }: Omit<ComposeDrawerProps, "open">) {
     setError(null);
     const ok = composer.hydrateFromJSON(jsonInput);
     if (!ok) {
-      setError("Could not read that JSON. Double-check the format and try again.");
+      setError(
+        "Could not read that JSON. Double-check the format and try again.",
+      );
       return;
     }
     setJsonInput("");
@@ -73,7 +75,11 @@ function OpenDrawer({ composer, onClose }: Omit<ComposeDrawerProps, "open">) {
           className="flex items-center justify-between px-4 py-3 border-b"
           style={{ borderColor: RPP.border }}
         >
-          <h2 id={titleId} className="text-sm font-bold" style={{ color: RPP.mainBlue }}>
+          <h2
+            id={titleId}
+            className="text-sm font-bold"
+            style={{ color: RPP.mainBlue }}
+          >
             Compose your platform
           </h2>
           <button
@@ -87,13 +93,19 @@ function OpenDrawer({ composer, onClose }: Omit<ComposeDrawerProps, "open">) {
         </header>
 
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
-          <p className="text-xs leading-relaxed" style={{ color: RPP.textSecondary }}>
+          <p
+            className="text-xs leading-relaxed"
+            style={{ color: RPP.textSecondary }}
+          >
             {FRAMING_COPY}
           </p>
 
           {presets.length > 0 && (
             <div className="space-y-1.5">
-              <span className="text-xs font-semibold" style={{ color: RPP.textDim }}>
+              <span
+                className="text-xs font-semibold"
+                style={{ color: RPP.textDim }}
+              >
                 Load preset
               </span>
               <p className="text-[0.65rem]" style={{ color: RPP.textDim }}>
@@ -107,10 +119,16 @@ function OpenDrawer({ composer, onClose }: Omit<ComposeDrawerProps, "open">) {
                     onClick={() => handlePreset(preset.components)}
                     className="rpp-preset text-left rounded p-2 transition-colors"
                   >
-                    <div className="text-xs font-semibold" style={{ color: RPP.textPrimary }}>
+                    <div
+                      className="text-xs font-semibold"
+                      style={{ color: RPP.textPrimary }}
+                    >
                       {preset.name}
                     </div>
-                    <div className="text-[0.65rem] mt-0.5" style={{ color: RPP.textDim }}>
+                    <div
+                      className="text-[0.65rem] mt-0.5"
+                      style={{ color: RPP.textDim }}
+                    >
                       {preset.description}
                     </div>
                   </button>
@@ -124,7 +142,10 @@ function OpenDrawer({ composer, onClose }: Omit<ComposeDrawerProps, "open">) {
               features" in webpage/README.md for the full checklist. */}
 
           <label className="block space-y-1">
-            <span className="text-xs font-semibold" style={{ color: RPP.textDim }}>
+            <span
+              className="text-xs font-semibold"
+              style={{ color: RPP.textDim }}
+            >
               Paste JSON
             </span>
             <textarea

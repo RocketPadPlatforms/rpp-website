@@ -2,5 +2,10 @@
   "schema": "v1",
   "name": "Bare Metal Self-Hosted",
   "description": "Self-hosted bare metal with Talos and Longhorn",
-  "components": ["compute.baremetal", "kubernetes.talos", "providers.metal-lb", "providers.longhorn"]
+  "components": [
+    "compute.baremetal",
+    "kubernetes.talos",
+    "providers.metal-lb",
+    "providers.longhorn"
+  ]
 }

@@ -5,7 +5,9 @@ import { isWorkload, type SelectionEntry } from "../data/types";
 import { getCoreComponentIds } from "./rules";
 import { computeUnlockedLayers, sanitizeEntries } from "./sanitize";
 
-const platform = loadPlatform(path.resolve(import.meta.dirname, "../__fixtures__/platform/valid"));
+const platform = loadPlatform(
+  path.resolve(import.meta.dirname, "../__fixtures__/platform/valid"),
+);
 const core = getCoreComponentIds(platform);
 
 const STACK = ["compute.google", "kubernetes.gke", "providers.cloud-lb"];
@@ -40,7 +42,11 @@ describe("sanitizeEntries", () => {
 
   it("drops components whose layer is locked, transitively", () => {
     // No compute: kubernetes, providers and everything above stay locked.
-    const out = run(["kubernetes.gke", "providers.cloud-lb", "rpp-base.observability"]);
+    const out = run([
+      "kubernetes.gke",
+      "providers.cloud-lb",
+      "rpp-base.observability",
+    ]);
     expect(strings(out)).toEqual([...core].toSorted());
   });
 
@@ -67,7 +73,9 @@ describe("sanitizeEntries", () => {
       { type: "workload.api", id: "workload.api-1" },
     ]);
     expect(out).not.toContain("workload.api");
-    expect(out.filter(isWorkload)).toEqual([{ type: "workload.api", id: "workload.api-1" }]);
+    expect(out.filter(isWorkload)).toEqual([
+      { type: "workload.api", id: "workload.api-1" },
+    ]);
   });
 
   it.each(['x"] , body', "UPPER", "", "a".repeat(65), "../etc"])(
@@ -84,11 +92,16 @@ describe("sanitizeEntries", () => {
       { type: "workload.api", id: "workload.api-1", title: "A" },
       { type: "workload.api", id: "workload.api-1", title: "B" },
     ]);
-    expect(out.filter(isWorkload)).toEqual([{ type: "workload.api", id: "workload.api-1", title: "A" }]);
+    expect(out.filter(isWorkload)).toEqual([
+      { type: "workload.api", id: "workload.api-1", title: "A" },
+    ]);
   });
 
   it("truncates overlong workload text", () => {
-    const [w] = run([...STACK, { type: "workload.api", id: "w-1", title: "t".repeat(500) }]).filter(isWorkload);
+    const [w] = run([
+      ...STACK,
+      { type: "workload.api", id: "w-1", title: "t".repeat(500) },
+    ]).filter(isWorkload);
     expect(w.title!.length).toBe(80);
   });
 });
@@ -100,9 +113,19 @@ describe("computeUnlockedLayers", () => {
   });
 
   it("unlocks the whole stack once each gate has a selection", () => {
-    const unlocked = computeUnlockedLayers(new Set([...core, ...STACK]), platform);
+    const unlocked = computeUnlockedLayers(
+      new Set([...core, ...STACK]),
+      platform,
+    );
     expect([...unlocked].toSorted()).toEqual(
-      ["additional", "compute", "kubernetes", "providers", "rpp-base", "workload"].toSorted(),
+      [
+        "additional",
+        "compute",
+        "kubernetes",
+        "providers",
+        "rpp-base",
+        "workload",
+      ].toSorted(),
     );
   });
 });

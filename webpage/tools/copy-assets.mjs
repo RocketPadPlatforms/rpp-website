@@ -19,7 +19,7 @@ for (const dir of ["views", "assets"]) {
     recursive: true,
     // Vite's sourcemaps stay in the working tree for debugging; they are not
     // shipped (see build.sourcemap in vite.config.mts).
-    filter: (source) => !source.endsWith(".map")
+    filter: (source) => !source.endsWith(".map"),
   });
   console.log(`copied ${dir} -> dist/${dir}`);
 }

@@ -44,13 +44,16 @@ routes.get("/composer", (_req: Request, res: Response, next: NextFunction) => {
 
 // Served inline, not as a download: res.download() would set
 // Content-Disposition: attachment.
-routes.get("/robots.txt", (_req: Request, res: Response, next: NextFunction) => {
-  res.sendFile(path.join(ASSETS_DIR, "robots.txt"), (err) => {
-    if (err) {
-      next(err);
-    }
-  });
-});
+routes.get(
+  "/robots.txt",
+  (_req: Request, res: Response, next: NextFunction) => {
+    res.sendFile(path.join(ASSETS_DIR, "robots.txt"), (err) => {
+      if (err) {
+        next(err);
+      }
+    });
+  },
+);
 
 // Generated from the page table, so a new page or language cannot be left out.
 routes.get("/sitemap.xml", (_req: Request, res: Response) => {

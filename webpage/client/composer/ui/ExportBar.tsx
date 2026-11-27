@@ -49,10 +49,18 @@ export function ExportBar({ composer }: { composer: ComposerState }) {
       className="border-t p-3 flex gap-2 shrink-0 flex-wrap"
       style={{ borderColor: RPP.border, background: RPP.bg }}
     >
-      <button type="button" onClick={handleExportJSON} className="rpp-btn rpp-btn--primary">
+      <button
+        type="button"
+        onClick={handleExportJSON}
+        className="rpp-btn rpp-btn--primary"
+      >
         Export JSON
       </button>
-      <button type="button" onClick={handleCopyJSON} className="rpp-btn rpp-btn--ghost">
+      <button
+        type="button"
+        onClick={handleCopyJSON}
+        className="rpp-btn rpp-btn--ghost"
+      >
         {copied === "json" ? "Copied!" : "Copy JSON"}
       </button>
       <button type="button" onClick={handleShareURL} className="rpp-btn">
@@ -62,8 +70,14 @@ export function ExportBar({ composer }: { composer: ComposerState }) {
         Reset
       </button>
       {/* Announced to screen readers; the button labels above change too. */}
-      <span role="status" className="text-xs self-center" style={{ color: RPP.textDim }}>
-        {feedback === "error" ? "Copying failed — your browser blocked clipboard access." : ""}
+      <span
+        role="status"
+        className="text-xs self-center"
+        style={{ color: RPP.textDim }}
+      >
+        {feedback === "error"
+          ? "Copying failed — your browser blocked clipboard access."
+          : ""}
       </span>
     </div>
   );

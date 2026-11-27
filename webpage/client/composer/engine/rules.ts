@@ -6,7 +6,7 @@ import type { PlatformData } from "../data/types";
  */
 export function getExcluded(
   selection: Set<string>,
-  platform: PlatformData
+  platform: PlatformData,
 ): Map<string, string> {
   const excluded = new Map<string, string>();
 
@@ -28,7 +28,7 @@ export function getExcluded(
  */
 export function getSuggested(
   selection: Set<string>,
-  platform: PlatformData
+  platform: PlatformData,
 ): Set<string> {
   const suggested = new Set<string>();
 

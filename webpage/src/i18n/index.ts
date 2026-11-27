@@ -25,7 +25,9 @@ export class MissingTranslationError extends Error {
 }
 
 export function isLocale(value: unknown): value is Locale {
-  return typeof value === "string" && (LOCALES as readonly string[]).includes(value);
+  return (
+    typeof value === "string" && (LOCALES as readonly string[]).includes(value)
+  );
 }
 
 /** Resolves a dotted key ("home.hero.title") to whatever sits there. */
@@ -48,14 +50,14 @@ export function lookup(locale: Locale, key: string): unknown {
 export function translate(
   locale: Locale,
   key: string,
-  vars: Record<string, unknown> = {}
+  vars: Record<string, unknown> = {},
 ): string {
   const value = lookup(locale, key);
   if (typeof value !== "string") {
     throw new MissingTranslationError(locale, key);
   }
   return value.replace(/\{(\w+)\}/g, (match, name: string) =>
-    name in vars ? String(vars[name]) : match
+    name in vars ? String(vars[name]) : match,
   );
 }
 

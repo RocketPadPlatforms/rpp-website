@@ -7,8 +7,8 @@ const logger = pino({
   // Never let a stray log line carry credentials from the request.
   redact: {
     paths: ["req.headers.authorization", "req.headers.cookie"],
-    remove: true
-  }
+    remove: true,
+  },
 });
 
 export default logger;

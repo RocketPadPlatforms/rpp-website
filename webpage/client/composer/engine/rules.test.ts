@@ -5,7 +5,7 @@ import path from "path";
 
 const PLATFORM_DIR = path.resolve(
   import.meta.dirname,
-  "../__fixtures__/platform/valid"
+  "../__fixtures__/platform/valid",
 );
 const platform = loadPlatform(PLATFORM_DIR);
 
@@ -36,7 +36,7 @@ describe("getExcluded", () => {
   it("accumulates exclusions from multiple selections", () => {
     const excluded = getExcluded(
       new Set(["compute.hetzner", "kubernetes.talos"]),
-      platform
+      platform,
     );
     expect(excluded.has("kubernetes.gke")).toBe(true);
     expect(excluded.has("kubernetes.aks")).toBe(true);

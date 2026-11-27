@@ -4,7 +4,10 @@
   "required": ["kind", "id", "name", "layer", "type", "description"],
   "properties": {
     "kind": { "const": "Component" },
-    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*\\.[a-z][a-z0-9-]*$" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*\\.[a-z][a-z0-9-]*$"
+    },
     "name": { "type": "string", "minLength": 1 },
     "layer": { "type": "string" },
     "type": { "type": "string" },

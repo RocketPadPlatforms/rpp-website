@@ -54,7 +54,10 @@ async function crawlSite(): Promise<Crawl> {
       if (location.startsWith("/")) queue.push(location);
       continue;
     }
-    if (res.status !== 200 || !/text\/html/.test(res.headers["content-type"] ?? "")) {
+    if (
+      res.status !== 200 ||
+      !/text\/html/.test(res.headers["content-type"] ?? "")
+    ) {
       if (res.status !== 200) broken.set(path, res.status);
       continue;
     }
@@ -70,7 +73,9 @@ async function crawlSite(): Promise<Crawl> {
 
 async function sitemapPaths(): Promise<string[]> {
   const res = await request(app).get("/sitemap.xml");
-  return [...res.text.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => loc.replace(SITE, ""));
+  return [...res.text.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) =>
+    loc.replace(SITE, ""),
+  );
 }
 
 beforeAll(async () => {
@@ -81,13 +86,17 @@ beforeAll(async () => {
 
 describe("crawl from the homepages", () => {
   it("reaches every page in the sitemap through links - no orphans", async () => {
-    const orphans = (await sitemapPaths()).filter((path) => !crawl.pages.has(path));
+    const orphans = (await sitemapPaths()).filter(
+      (path) => !crawl.pages.has(path),
+    );
     expect(orphans).toEqual([]);
   });
 
   it("finds no indexable page that the sitemap leaves out", async () => {
     const listed = new Set(await sitemapPaths());
-    const unlisted = [...crawl.pages.keys()].filter((path) => !listed.has(path));
+    const unlisted = [...crawl.pages.keys()].filter(
+      (path) => !listed.has(path),
+    );
     expect(unlisted).toEqual([]);
   });
 
@@ -122,7 +131,10 @@ describe("crawl from the homepages", () => {
   });
 
   it("links the FAQ from the header and the contact section, not only the footer", async () => {
-    for (const [home, faq] of [["/de", "/de/faq"], ["/en", "/en/faq"]]) {
+    for (const [home, faq] of [
+      ["/de", "/de/faq"],
+      ["/en", "/en/faq"],
+    ]) {
       const html = (await request(app).get(home)).text;
       const count = html.split(`href="${faq}"`).length - 1;
       // desktop nav, mobile nav, contact section, footer

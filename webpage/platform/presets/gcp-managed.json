@@ -2,5 +2,10 @@
   "schema": "v1",
   "name": "GCP Managed",
   "description": "Fully managed GCP platform with GKE",
-  "components": ["compute.google", "kubernetes.gke", "providers.cloud-lb", "providers.cloud-storage"]
+  "components": [
+    "compute.google",
+    "kubernetes.gke",
+    "providers.cloud-lb",
+    "providers.cloud-storage"
+  ]
 }

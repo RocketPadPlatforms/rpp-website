@@ -10,7 +10,12 @@ interface PaletteProps {
   onWorkloadClick?: (id: string) => void;
 }
 
-export function Palette({ composer, onDragStart, onDragEnd, onWorkloadClick }: PaletteProps) {
+export function Palette({
+  composer,
+  onDragStart,
+  onDragEnd,
+  onWorkloadClick,
+}: PaletteProps) {
   const {
     platform,
     selection,
@@ -46,7 +51,9 @@ export function Palette({ composer, onDragStart, onDragEnd, onWorkloadClick }: P
         const unlocked = isLayerUnlocked(layer.id);
         const color = LAYER_COLORS[layer.id] ?? RPP.textSecondary;
         const expanded = isLayerExpanded(layer.id);
-        const snappedCount = layer.components.filter((c) => selection.has(c.id)).length;
+        const snappedCount = layer.components.filter((c) =>
+          selection.has(c.id),
+        ).length;
 
         return (
           <div
@@ -81,96 +88,102 @@ export function Palette({ composer, onDragStart, onDragEnd, onWorkloadClick }: P
               )}
             </div>
 
-            {expanded && (() => {
-              const unselected = layer.components.filter(
-                (c) => layer.id === "workload" || !selection.has(c.id),
-              );
+            {expanded &&
+              (() => {
+                const unselected = layer.components.filter(
+                  (c) => layer.id === "workload" || !selection.has(c.id),
+                );
 
-              return (
-                <>
-                  {layer.id !== "workload" && unselected.length === 0 && (
-                    <div
-                      className="italic px-2 py-1 text-[0.65rem]"
-                      style={{ color: RPP.textDim }}
-                    >
-                      All snapped
-                    </div>
-                  )}
+                return (
+                  <>
+                    {layer.id !== "workload" && unselected.length === 0 && (
+                      <div
+                        className="italic px-2 py-1 text-[0.65rem]"
+                        style={{ color: RPP.textDim }}
+                      >
+                        All snapped
+                      </div>
+                    )}
 
-                  {unselected.map((comp) => {
-                    const isExcluded = excluded.has(comp.id);
-                    const isSuggested = suggested.has(comp.id);
-                    const isCore = coreIds.includes(comp.id);
-                    const disabled = isExcluded || !unlocked;
+                    {unselected.map((comp) => {
+                      const isExcluded = excluded.has(comp.id);
+                      const isSuggested = suggested.has(comp.id);
+                      const isCore = coreIds.includes(comp.id);
+                      const disabled = isExcluded || !unlocked;
 
-                    const reason:
-                      | { kind: "excluded" | "suggested" | "core"; by?: string }
-                      | undefined =
-                      isExcluded
+                      const reason:
+                        | {
+                            kind: "excluded" | "suggested" | "core";
+                            by?: string;
+                          }
+                        | undefined = isExcluded
                         ? { kind: "excluded", by: excluded.get(comp.id) }
                         : isCore
                           ? { kind: "core" }
                           : isSuggested
-                            ? { kind: "suggested", by: findSuggestSource(comp.id) }
+                            ? {
+                                kind: "suggested",
+                                by: findSuggestSource(comp.id),
+                              }
                             : undefined;
 
-                    const activate = () => {
-                      if (layer.id === "workload" && onWorkloadClick) {
-                        onWorkloadClick(comp.id);
-                      } else {
-                        toggle(comp.id);
-                      }
-                    };
+                      const activate = () => {
+                        if (layer.id === "workload" && onWorkloadClick) {
+                          onWorkloadClick(comp.id);
+                        } else {
+                          toggle(comp.id);
+                        }
+                      };
 
-                    return (
-                      <Tooltip
-                        key={comp.id}
-                        label={comp.name}
-                        description={comp.description}
-                        reason={reason}
-                        side="right"
-                      >
-                        <div
-                          {...buttonProps(activate, disabled)}
-                          aria-label={`Add ${comp.name}${isExcluded ? ` (incompatible with ${excluded.get(comp.id)})` : !unlocked ? " (locked)" : ""}`}
-                          className={`rpp-pal-card ${disabled ? "rpp-pal-card--disabled" : ""}`}
-                          draggable={!disabled}
-                          onDragStart={(e) => {
-                            e.dataTransfer.setData("text/plain", comp.id);
-                            e.dataTransfer.effectAllowed = "move";
-                            onDragStart?.(comp.id);
-                          }}
-                          onDragEnd={() => onDragEnd?.()}
-                          onClick={() => {
-                            if (!disabled) activate();
-                          }}
-                          style={{
-                            padding: "6px 10px",
-                            marginBottom: 3,
-                            borderRadius: 8,
-                            background: RPP.bg,
-                            border: `1px solid ${isSuggested ? color : RPP.border}`,
-                            borderStyle: isSuggested ? "dashed" : "solid",
-                            fontFamily: FONTS.heading,
-                            fontSize: 12,
-                            fontWeight: 500,
-                            color: RPP.textPrimary,
-                          }}
+                      return (
+                        <Tooltip
+                          key={comp.id}
+                          label={comp.name}
+                          description={comp.description}
+                          reason={reason}
+                          side="right"
                         >
-                          {comp.name}
                           <div
-                            className="text-[0.65rem] mt-0.5"
-                            style={{ color: RPP.textDim }}
+                            {...buttonProps(activate, disabled)}
+                            aria-label={`Add ${comp.name}${isExcluded ? ` (incompatible with ${excluded.get(comp.id)})` : !unlocked ? " (locked)" : ""}`}
+                            className={`rpp-pal-card ${disabled ? "rpp-pal-card--disabled" : ""}`}
+                            draggable={!disabled}
+                            onDragStart={(e) => {
+                              e.dataTransfer.setData("text/plain", comp.id);
+                              e.dataTransfer.effectAllowed = "move";
+                              onDragStart?.(comp.id);
+                            }}
+                            onDragEnd={() => onDragEnd?.()}
+                            onClick={() => {
+                              if (!disabled) activate();
+                            }}
+                            style={{
+                              padding: "6px 10px",
+                              marginBottom: 3,
+                              borderRadius: 8,
+                              background: RPP.bg,
+                              border: `1px solid ${isSuggested ? color : RPP.border}`,
+                              borderStyle: isSuggested ? "dashed" : "solid",
+                              fontFamily: FONTS.heading,
+                              fontSize: 12,
+                              fontWeight: 500,
+                              color: RPP.textPrimary,
+                            }}
                           >
-                            {comp.description}
+                            {comp.name}
+                            <div
+                              className="text-[0.65rem] mt-0.5"
+                              style={{ color: RPP.textDim }}
+                            >
+                              {comp.description}
+                            </div>
                           </div>
-                        </div>
-                      </Tooltip>
-                    );
-                  })}
-                </>
-              );
-            })()}
+                        </Tooltip>
+                      );
+                    })}
+                  </>
+                );
+              })()}
           </div>
         );
       })}

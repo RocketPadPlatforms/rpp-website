@@ -141,19 +141,29 @@ export function Tooltip({
       "aria-describedby": open ? id : undefined,
       onMouseEnter: (e: React.MouseEvent) => {
         show();
-        (existingProps.onMouseEnter as ((e: React.MouseEvent) => void) | undefined)?.(e);
+        (
+          existingProps.onMouseEnter as
+            ((e: React.MouseEvent) => void) | undefined
+        )?.(e);
       },
       onMouseLeave: (e: React.MouseEvent) => {
         hide();
-        (existingProps.onMouseLeave as ((e: React.MouseEvent) => void) | undefined)?.(e);
+        (
+          existingProps.onMouseLeave as
+            ((e: React.MouseEvent) => void) | undefined
+        )?.(e);
       },
       onFocus: (e: React.FocusEvent) => {
         show();
-        (existingProps.onFocus as ((e: React.FocusEvent) => void) | undefined)?.(e);
+        (
+          existingProps.onFocus as ((e: React.FocusEvent) => void) | undefined
+        )?.(e);
       },
       onBlur: (e: React.FocusEvent) => {
         hide();
-        (existingProps.onBlur as ((e: React.FocusEvent) => void) | undefined)?.(e);
+        (existingProps.onBlur as ((e: React.FocusEvent) => void) | undefined)?.(
+          e,
+        );
       },
     } as Record<string, unknown>,
   );
@@ -202,8 +212,12 @@ export function Tooltip({
                 fontWeight: 700,
               }}
             >
-              {reason.kind === "excluded" && reason.by && `Incompatible with ${reason.by}`}
-              {reason.kind === "suggested" && reason.by && `Suggested by ${reason.by}`}
+              {reason.kind === "excluded" &&
+                reason.by &&
+                `Incompatible with ${reason.by}`}
+              {reason.kind === "suggested" &&
+                reason.by &&
+                `Suggested by ${reason.by}`}
               {reason.kind === "core" && "Required — always included"}
             </div>
           )}

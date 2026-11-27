@@ -21,7 +21,7 @@ function keyPaths(node: unknown, prefix = ""): string[] {
     return [prefix];
   }
   return Object.entries(node).flatMap(([key, value]) =>
-    keyPaths(value, prefix ? `${prefix}.${key}` : key)
+    keyPaths(value, prefix ? `${prefix}.${key}` : key),
   );
 }
 
@@ -33,7 +33,12 @@ describe("locale files", () => {
   it("no translation is left empty", () => {
     for (const dictionary of [de, en]) {
       for (const key of keyPaths(dictionary)) {
-        const value = key.split(".").reduce<unknown>((node, part) => (node as Record<string, unknown>)[part], dictionary);
+        const value = key
+          .split(".")
+          .reduce<unknown>(
+            (node, part) => (node as Record<string, unknown>)[part],
+            dictionary,
+          );
         expect(value, key).not.toBe("");
       }
     }
@@ -46,7 +51,7 @@ describe("language selection at /", () => {
     ["de", "/de"],
     ["en-US,en;q=0.9", "/en"],
     ["en-GB,de;q=0.5", "/en"],
-    ["fr-FR,fr;q=0.9", "/en"]
+    ["fr-FR,fr;q=0.9", "/en"],
   ])("Accept-Language %s goes to %s", async (header, target) => {
     const res = await request(app).get("/").set("Accept-Language", header);
     expect(res.status).toBe(302);
@@ -70,7 +75,7 @@ describe("localised pages", () => {
     ["/de", "de"],
     ["/en", "en"],
     ["/de/impressum", "de"],
-    ["/en/legal-notice", "en"]
+    ["/en/legal-notice", "en"],
   ])("%s declares lang=%s", async (path, lang) => {
     const res = await request(app).get(path);
     expect(res.text).toContain(`<html lang="${lang}">`);
@@ -79,11 +84,15 @@ describe("localised pages", () => {
   it("the language switch points at the same page in the other language", async () => {
     const res = await request(app).get("/en/legal-notice");
     expect(res.text).toMatch(/<a href="\/de\/impressum" hreflang="de"/);
-    expect(res.text).toMatch(/<a href="\/en\/legal-notice" hreflang="en"[^>]*aria-current="true"/);
+    expect(res.text).toMatch(
+      /<a href="\/en\/legal-notice" hreflang="en"[^>]*aria-current="true"/,
+    );
   });
 
   it("the German homepage is German and the English one English", async () => {
-    expect((await request(app).get("/de")).text).toContain("die wirklich Ihnen gehört.");
+    expect((await request(app).get("/de")).text).toContain(
+      "die wirklich Ihnen gehört.",
+    );
     expect((await request(app).get("/en")).text).toContain("you actually own.");
   });
 
@@ -100,16 +109,19 @@ describe("localised pages", () => {
 describe("team and managing director", () => {
   it.each([
     ["/de", "Geschäftsführer · Cloud Engineer · DevOps Engineer"],
-    ["/en", "Managing Director · Cloud Engineer · DevOps Engineer"]
-  ])("%s lists Kilian first, as managing director", async (path, kilianRole) => {
-    const res = await request(app).get(path);
-    const kilian = res.text.indexOf("Kilian Mehringer");
-    const alexander = res.text.indexOf("Alexander Weidemann");
-    expect(kilian).toBeGreaterThan(-1);
-    expect(alexander).toBeGreaterThan(kilian);
-    expect(res.text).toContain(kilianRole);
-    expect(res.text).toContain("Kubernetes Engineer · Platform Engineer");
-  });
+    ["/en", "Managing Director · Cloud Engineer · DevOps Engineer"],
+  ])(
+    "%s lists Kilian first, as managing director",
+    async (path, kilianRole) => {
+      const res = await request(app).get(path);
+      const kilian = res.text.indexOf("Kilian Mehringer");
+      const alexander = res.text.indexOf("Alexander Weidemann");
+      expect(kilian).toBeGreaterThan(-1);
+      expect(alexander).toBeGreaterThan(kilian);
+      expect(res.text).toContain(kilianRole);
+      expect(res.text).toContain("Kubernetes Engineer · Platform Engineer");
+    },
+  );
 
   it("role descriptions are separated by · only", () => {
     for (const dictionary of [de, en]) {
@@ -119,8 +131,12 @@ describe("team and managing director", () => {
   });
 
   it("both legal notices name the managing director", async () => {
-    expect((await request(app).get("/de/impressum")).text).toContain("Geschäftsführer: Kilian Mehringer");
-    expect((await request(app).get("/en/legal-notice")).text).toContain("Managing Director: Kilian Mehringer");
+    expect((await request(app).get("/de/impressum")).text).toContain(
+      "Geschäftsführer: Kilian Mehringer",
+    );
+    expect((await request(app).get("/en/legal-notice")).text).toContain(
+      "Managing Director: Kilian Mehringer",
+    );
   });
 });
 

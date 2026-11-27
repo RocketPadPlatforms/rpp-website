@@ -28,11 +28,16 @@ export class ValidationError extends Error {
 // The JSON Schemas in platform/schemas/ are the contract for catalogue
 // authors; they are enforced here so the build fails on a document that breaks
 // them instead of the hand-written checks below silently disagreeing.
-const SCHEMA_DIR = path.resolve(import.meta.dirname, "../../../platform/schemas");
+const SCHEMA_DIR = path.resolve(
+  import.meta.dirname,
+  "../../../platform/schemas",
+);
 const ajv = new Ajv2020({ allErrors: true });
 const validators = {
   layer: ajv.compile(readJson(path.join(SCHEMA_DIR, "layer.schema.json"))),
-  component: ajv.compile(readJson(path.join(SCHEMA_DIR, "component.schema.json"))),
+  component: ajv.compile(
+    readJson(path.join(SCHEMA_DIR, "component.schema.json")),
+  ),
   preset: ajv.compile(readJson(path.join(SCHEMA_DIR, "preset.schema.json"))),
 };
 
@@ -62,14 +67,21 @@ function schemaErrors(
 export function loadPlatform(
   platformDir: string,
   layersFile = "layers.yaml",
-  componentFile?: string
+  componentFile?: string,
 ): PlatformData {
   const layers = loadLayers(path.join(platformDir, layersFile));
   const layerMap = new Map(layers.map((l) => [l.id, l]));
 
   const componentsDir = path.join(platformDir, "components");
   const rawComponents = componentFile
-    ? [{ dir: "compute", doc: loadSingleComponent(path.join(componentsDir, "compute", componentFile)) }]
+    ? [
+        {
+          dir: "compute",
+          doc: loadSingleComponent(
+            path.join(componentsDir, "compute", componentFile),
+          ),
+        },
+      ]
     : loadAllComponents(componentsDir);
 
   const components = new Map<string, Component>();
@@ -93,7 +105,7 @@ export function loadPlatform(
     // components/<layer>/ is how authors find a component; keep it truthful.
     if (dir !== raw.layer) {
       errors.push(
-        `Component "${raw.id}" is in components/${dir}/ but belongs to layer "${raw.layer}"`
+        `Component "${raw.id}" is in components/${dir}/ but belongs to layer "${raw.layer}"`,
       );
       continue;
     }
@@ -101,7 +113,7 @@ export function loadPlatform(
     // Validate layer field matches ID prefix
     if (raw.layer !== layerId) {
       errors.push(
-        `Component "${raw.id}" layer field "${raw.layer}" doesn't match ID prefix "${layerId}"`
+        `Component "${raw.id}" layer field "${raw.layer}" doesn't match ID prefix "${layerId}"`,
       );
       continue;
     }
@@ -138,7 +150,7 @@ export function loadPlatform(
     for (const ref of allRefs) {
       if (!components.has(ref)) {
         errors.push(
-          `Component "${comp.id}" references unknown component "${ref}"`
+          `Component "${comp.id}" references unknown component "${ref}"`,
         );
       }
     }
@@ -156,7 +168,11 @@ export function loadPlatform(
       components: [...components.values()].filter((c) => c.layer === l.id),
     }));
 
-  const data: PlatformData = { layers: resolvedLayers, components, presets: [] };
+  const data: PlatformData = {
+    layers: resolvedLayers,
+    components,
+    presets: [],
+  };
   data.presets = loadPresets(platformDir, data);
   return data;
 }
@@ -167,7 +183,13 @@ function loadLayers(filePath: string): RawLayer[] {
 
   const errors: string[] = [];
   docs.forEach((doc, i) => {
-    errors.push(...schemaErrors("layer", `Layer #${i + 1} (${doc?.id ?? "unknown"})`, doc));
+    errors.push(
+      ...schemaErrors(
+        "layer",
+        `Layer #${i + 1} (${doc?.id ?? "unknown"})`,
+        doc,
+      ),
+    );
   });
   for (const doc of docs) {
     if (doc.kind !== "Layer") {
@@ -175,12 +197,12 @@ function loadLayers(filePath: string): RawLayer[] {
     }
     if (!doc.id || !doc.name || doc.position === undefined || !doc.select) {
       errors.push(
-        `Layer "${doc.id ?? "unknown"}" missing required fields (need: id, name, position, select)`
+        `Layer "${doc.id ?? "unknown"}" missing required fields (need: id, name, position, select)`,
       );
     }
     if (doc.select && !["single", "multi"].includes(doc.select)) {
       errors.push(
-        `Layer "${doc.id}" has invalid select value: "${doc.select}"`
+        `Layer "${doc.id}" has invalid select value: "${doc.select}"`,
       );
     }
   }
@@ -188,13 +210,15 @@ function loadLayers(filePath: string): RawLayer[] {
   // The engine walks layers by position and treats position 0 as the root,
   // so ids and positions must be unique and positions contiguous from 0.
   const layerIds = docs.map((d) => d.id);
-  for (const dup of new Set(layerIds.filter((id, i) => layerIds.indexOf(id) !== i))) {
+  for (const dup of new Set(
+    layerIds.filter((id, i) => layerIds.indexOf(id) !== i),
+  )) {
     errors.push(`Duplicate layer id "${dup}"`);
   }
   const positions = docs.map((d) => d.position).toSorted((a, b) => a - b);
   if (positions.some((pos, i) => pos !== i)) {
     errors.push(
-      `Layer positions must be unique and contiguous from 0, got [${positions.join(", ")}]`
+      `Layer positions must be unique and contiguous from 0, got [${positions.join(", ")}]`,
     );
   }
 
@@ -206,13 +230,13 @@ function loadLayers(filePath: string): RawLayer[] {
     const target = byId.get(doc.unlocksAfter);
     if (!target) {
       errors.push(
-        `Layer "${doc.id}" references unknown layer "${doc.unlocksAfter}" in unlocksAfter`
+        `Layer "${doc.id}" references unknown layer "${doc.unlocksAfter}" in unlocksAfter`,
       );
       continue;
     }
     if (target.position >= doc.position) {
       errors.push(
-        `Layer "${doc.id}" (position ${doc.position}) cannot unlock after "${doc.unlocksAfter}" (position ${target.position}) — it must sit lower`
+        `Layer "${doc.id}" (position ${doc.position}) cannot unlock after "${doc.unlocksAfter}" (position ${target.position}) — it must sit lower`,
       );
     }
   }
@@ -238,13 +262,15 @@ function loadSingleComponent(filePath: string): RawComponent {
   }
   if (!doc.id || !doc.name || !doc.layer || !doc.type || !doc.description) {
     throw new ValidationError(
-      `Component "${doc.id ?? "unknown"}" missing required fields`
+      `Component "${doc.id ?? "unknown"}" missing required fields`,
     );
   }
   return doc;
 }
 
-function loadAllComponents(componentsDir: string): { dir: string; doc: RawComponent }[] {
+function loadAllComponents(
+  componentsDir: string,
+): { dir: string; doc: RawComponent }[] {
   const components: { dir: string; doc: RawComponent }[] = [];
 
   for (const layerDir of readdirSync(componentsDir)) {
@@ -253,7 +279,10 @@ function loadAllComponents(componentsDir: string): { dir: string; doc: RawCompon
 
     for (const file of readdirSync(layerPath)) {
       if (!file.endsWith(".yaml")) continue;
-      components.push({ dir: layerDir, doc: loadSingleComponent(path.join(layerPath, file)) });
+      components.push({
+        dir: layerDir,
+        doc: loadSingleComponent(path.join(layerPath, file)),
+      });
     }
   }
 
@@ -291,11 +320,13 @@ function loadPresets(platformDir: string, platform: PlatformData): Preset[] {
     // the composer silently drops part of it on load - which is how a Hetzner
     // preset shipped with a storage provider Talos excludes.
     const components = raw.components as Preset["components"];
-    const kept = new Set(sanitizeEntries(components, platform, coreIds).map(entryKey));
+    const kept = new Set(
+      sanitizeEntries(components, platform, coreIds).map(entryKey),
+    );
     const dropped = components.filter((e) => !kept.has(entryKey(e)));
     if (dropped.length > 0) {
       errors.push(
-        `Preset ${file} contains entries the composer would drop: ${dropped.map(entryKey).join(", ")}`
+        `Preset ${file} contains entries the composer would drop: ${dropped.map(entryKey).join(", ")}`,
       );
       continue;
     }

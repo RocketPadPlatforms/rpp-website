@@ -49,7 +49,7 @@ To reactivate:
          fontFamily: FONTS.body,
        }}
      />
-   </label>
+   </label>;
    ```
 
    Then point `FRAMING_COPY` back at the description again — it currently only

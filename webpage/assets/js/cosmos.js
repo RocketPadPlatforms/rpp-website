@@ -6,7 +6,9 @@
 // Readers who ask for reduced motion, and browsers without IntersectionObserver,
 // get the finished state immediately rather than an empty page.
 const revealTargets = Array.from(document.querySelectorAll(".cm-root .reveal"));
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
 
 if (prefersReducedMotion || !("IntersectionObserver" in window)) {
   revealTargets.forEach((el) => {
@@ -27,7 +29,7 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
         obs.unobserve(el);
       });
     },
-    { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
+    { rootMargin: "0px 0px -10% 0px", threshold: 0.12 },
   );
 
   revealTargets.forEach((el) => observer.observe(el));
@@ -58,7 +60,7 @@ if (stage && playButton && embedUrl) {
       stage.appendChild(frame);
       stage.classList.add("is-live");
     },
-    { once: true }
+    { once: true },
   );
 }
 

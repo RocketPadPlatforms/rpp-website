@@ -25,7 +25,9 @@ describe("useComposer selection engine", () => {
 
   it("starts with only core components selected", () => {
     const { result } = renderHook(() => useComposer(platform));
-    expect(ids(result.current.selection)).toEqual(ids(new Set(result.current.coreIds)));
+    expect(ids(result.current.selection)).toEqual(
+      ids(new Set(result.current.coreIds)),
+    );
   });
 
   it("selecting compute.google auto-suggests kubernetes.gke", () => {
@@ -335,7 +337,9 @@ describe("workload share/import round trip", () => {
 
     const fresh = renderHook(() => useComposer(p));
     act(() => {
-      fresh.result.current.hydrateFromJSON(JSON.stringify(result.current.output));
+      fresh.result.current.hydrateFromJSON(
+        JSON.stringify(result.current.output),
+      );
     });
 
     expect(fresh.result.current.entries.filter(isWorkload)).toEqual(before);
@@ -399,8 +403,12 @@ describe("removal, suggestions and share links", () => {
 
     act(() => result.current.toggle("compute.google"));
 
-    expect(ids(result.current.selection)).toEqual(ids(new Set(result.current.coreIds)));
-    expect(result.current.output.components.filter((c) => typeof c !== "string")).toEqual([]);
+    expect(ids(result.current.selection)).toEqual(
+      ids(new Set(result.current.coreIds)),
+    );
+    expect(
+      result.current.output.components.filter((c) => typeof c !== "string"),
+    ).toEqual([]);
   });
 
   it("removeEntry cascades the same way as toggling off", () => {

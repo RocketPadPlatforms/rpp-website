@@ -92,15 +92,25 @@ describe("Palette", () => {
 
   it("calls toggle when a component card is clicked", () => {
     let lastId = null as string | null;
-    const composer = makeComposer({ toggle: (id: string) => { lastId = id; } });
+    const composer = makeComposer({
+      toggle: (id: string) => {
+        lastId = id;
+      },
+    });
     render(<Palette composer={composer} />);
-    fireEvent.click(screen.getByText("AWS").closest("[draggable]") as HTMLElement);
+    fireEvent.click(
+      screen.getByText("AWS").closest("[draggable]") as HTMLElement,
+    );
     expect(lastId as string).toBe("compute.aws");
   });
 
   it("cards are keyboard-operable buttons", () => {
     const toggled: string[] = [];
-    render(<Palette composer={makeComposer({ toggle: (id: string) => toggled.push(id) })} />);
+    render(
+      <Palette
+        composer={makeComposer({ toggle: (id: string) => toggled.push(id) })}
+      />,
+    );
     const aws = screen.getByRole("button", { name: /Add AWS/ });
     expect(aws.getAttribute("tabindex")).toBe("0");
     fireEvent.keyDown(aws, { key: "Enter" });
@@ -115,7 +125,9 @@ describe("Palette", () => {
       toggle: (id: string) => toggled.push(id),
     });
     render(<Palette composer={composer} />);
-    const gcp = screen.getByRole("button", { name: "Add GCP (incompatible with AWS)" });
+    const gcp = screen.getByRole("button", {
+      name: "Add GCP (incompatible with AWS)",
+    });
     expect(gcp.getAttribute("aria-disabled")).toBe("true");
     fireEvent.keyDown(gcp, { key: "Enter" });
     fireEvent.click(gcp);

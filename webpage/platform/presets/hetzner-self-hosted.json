@@ -2,5 +2,10 @@
   "schema": "v1",
   "name": "Hetzner Self-Hosted",
   "description": "Hetzner Cloud with Talos and Longhorn",
-  "components": ["compute.hetzner", "kubernetes.talos", "providers.metal-lb", "providers.longhorn"]
+  "components": [
+    "compute.hetzner",
+    "kubernetes.talos",
+    "providers.metal-lb",
+    "providers.longhorn"
+  ]
 }

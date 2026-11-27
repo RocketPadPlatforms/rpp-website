@@ -2,5 +2,10 @@
   "schema": "v1",
   "name": "Proxmox Self-Hosted",
   "description": "Self-hosted Proxmox with Talos and Longhorn",
-  "components": ["compute.proxmox", "kubernetes.talos", "providers.metal-lb", "providers.longhorn"]
+  "components": [
+    "compute.proxmox",
+    "kubernetes.talos",
+    "providers.metal-lb",
+    "providers.longhorn"
+  ]
 }
