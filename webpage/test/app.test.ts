@@ -14,17 +14,17 @@ beforeAll(async () => {
   app = createApp();
 });
 
-describe("health and api", () => {
+describe("health", () => {
   it("GET /healthz returns ok", async () => {
     const res = await request(app).get("/healthz");
     expect(res.status).toBe(200);
     expect(res.body).toEqual({ status: "ok" });
   });
 
-  it("GET /api returns ok", async () => {
+  it("GET /api is not a route", async () => {
     const res = await request(app).get("/api");
-    expect(res.status).toBe(200);
-    expect(res.body).toEqual({ status: "ok" });
+    expect(res.status).toBe(404);
+    expect(res.headers["content-type"]).toMatch(/text\/html/);
   });
 });
 
@@ -240,11 +240,5 @@ describe("regressions", () => {
   it("GET an unknown page returns 404 instead of hanging", async () => {
     const res = await request(app).get("/does-not-exist").timeout(2000);
     expect(res.status).toBe(404);
-  });
-
-  it("unknown /api routes return JSON, not an HTML error page", async () => {
-    const res = await request(app).get("/api/nope");
-    expect(res.status).toBe(404);
-    expect(res.headers["content-type"]).toMatch(/application\/json/);
   });
 });

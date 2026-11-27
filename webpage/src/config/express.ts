@@ -1,18 +1,10 @@
 import compression from "compression";
-import express, {
-  Application,
-  json,
-  NextFunction,
-  Request,
-  Response,
-  urlencoded,
-} from "express";
+import express, { Application, NextFunction, Request, Response } from "express";
 import { create } from "express-handlebars";
 import helmet from "helmet";
 import { Server } from "http";
 import path from "path";
 import { pinoHttp } from "pino-http";
-import routesAPI from "../api/routes";
 import {
   detectLocale,
   Locale,
@@ -170,8 +162,6 @@ export function createApp(): Application {
   );
   app.use(compression());
   app.use(pinoHttp({ logger }));
-  app.use(json({ limit: "64kb" }));
-  app.use(urlencoded({ extended: false, limit: "64kb" }));
   // The composer's HTML must have exactly one public URL.
   app.get("/assets/composer/index.html", (_req: Request, res: Response) =>
     res.redirect(301, "/composer"),
@@ -209,16 +199,8 @@ export function createApp(): Application {
 
   app.use("/", routes);
 
-  // Router V1
-  app.use("/api", routesAPI);
-
   // Anything that reached this point matched no route.
   app.use((req: Request, res: Response) => {
-    if (req.path.startsWith("/api")) {
-      res.status(404).json({ error: "NOT_FOUND" });
-      return;
-    }
-
     res.status(404).render("404", {
       ...viewLocals(errorLocale(req), undefined, "notFound"),
       noindex: true,
@@ -232,12 +214,6 @@ export function createApp(): Application {
     logger.error({ err, url: req.originalUrl }, "unhandled request error");
 
     if (res.headersSent) {
-      return;
-    }
-
-    // API clients get JSON, not a rendered error page.
-    if (req.path.startsWith("/api")) {
-      res.status(500).json({ error: "INTERNAL_ERROR" });
       return;
     }
 

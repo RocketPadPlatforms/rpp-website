@@ -21,7 +21,6 @@ export interface LanguageLink {
 
 export interface ViewLocals {
   lang: Locale;
-  pageId: string;
   title: string;
   description: string;
   homePath: string;
@@ -66,7 +65,6 @@ export function viewLocals(
 
   return {
     lang: locale,
-    pageId: page?.id ?? copyKey,
     title,
     description,
     ...seo,

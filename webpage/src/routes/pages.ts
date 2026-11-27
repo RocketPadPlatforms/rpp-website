@@ -1,4 +1,4 @@
-import { Locale, LOCALES } from "../i18n";
+import { Locale } from "../i18n";
 
 export type PageId = "home" | "faq" | "imprint" | "privacy";
 export type NavSlot = "header" | "footer";
@@ -64,13 +64,6 @@ export function pageById(id: PageId): Page {
 /** Site-relative URL of a page in a locale, e.g. "/en/legal-notice". */
 export function pagePath(page: Page, locale: Locale): string {
   return `/${locale}${page.path[locale]}`;
-}
-
-/** Every localised URL, for the sitemap and the crawl test. */
-export function allPagePaths(): string[] {
-  return PAGES.flatMap((page) =>
-    LOCALES.map((locale) => pagePath(page, locale)),
-  );
 }
 
 /**

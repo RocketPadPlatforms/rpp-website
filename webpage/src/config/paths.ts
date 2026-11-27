@@ -13,6 +13,5 @@ import path from "path";
  */
 const ROOT = path.resolve(process.env.APP_ROOT ?? path.join(__dirname, ".."));
 
-export const ROOT_DIR = ROOT;
 export const VIEWS_DIR = path.join(ROOT, "views");
 export const ASSETS_DIR = path.join(ROOT, "assets");
